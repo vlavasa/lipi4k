@@ -7,6 +7,26 @@
 
   .app-prose {
     @apply prose max-w-none text-base;
+
+    /* Keep Typography defaults in sync with the active theme, including raw HTML. */
+    --tw-prose-body: var(--foreground);
+    --tw-prose-headings: var(--foreground);
+    --tw-prose-lead: var(--muted-foreground);
+    --tw-prose-links: var(--foreground);
+    --tw-prose-bold: var(--foreground);
+    --tw-prose-counters: var(--muted-foreground);
+    --tw-prose-bullets: var(--muted-foreground);
+    --tw-prose-hr: var(--border);
+    --tw-prose-quotes: var(--muted-foreground);
+    --tw-prose-quote-borders: var(--primary);
+    --tw-prose-captions: var(--muted-foreground);
+    --tw-prose-kbd: var(--foreground);
+    --tw-prose-kbd-shadows: var(--border);
+    --tw-prose-code: var(--accent-foreground);
+    --tw-prose-pre-code: var(--accent-foreground);
+    --tw-prose-pre-bg: var(--accent);
+    --tw-prose-th-borders: var(--border);
+    --tw-prose-td-borders: var(--border);
   }
 
   .app-prose :where(p) {

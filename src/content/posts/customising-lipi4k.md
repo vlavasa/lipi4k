@@ -39,6 +39,8 @@ The second layer is the semantic token set: named variables like `--background`,
 
 To change the look of the entire site, change the base scale. To change just one semantic role (say, the background without touching the text colour), change the semantic token directly.
 
+Rich text uses the same semantic tokens. In `src/styles/typography.css`, `.app-prose` maps the Tailwind Typography colour variables to the theme, so Markdown and raw HTML elements such as definition lists follow the active palette automatically. When customising colours, edit the tokens in `theme.css`; individual articles do not need colour classes or separate dark-mode styles.
+
 ## Changing the Accent Colour
 
 The brand colour (`--brand`) drives the primary accent: the link hover colour, the reading progress bar, the featured post CTA, and the initial drop capital on each post. To change the accent, update `--brand` in the `:root` block:
