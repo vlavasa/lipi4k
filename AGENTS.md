@@ -13,6 +13,8 @@ archives, generated Open Graph images, RSS, sitemap, Pagefind search, light/dark
 print-aware styling. Site configuration is assembled in `src/site.config.ts` from user-facing
 settings in `configs/user.config.ts`; content lives under `src/content/`.
 
+A live demo of this template is deployed at [https://vlavasa.github.io/lipi4k](https://vlavasa.github.io/lipi4k).
+
 ## Development
 
 - Requires Node.js 22.12 or newer.
