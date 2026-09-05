@@ -41,6 +41,8 @@ html {
   }
   html {
     scroll-behavior: smooth;
+    /* Keep fragment targets, including footnotes, below the sticky header. */
+    scroll-padding-block-start: 6rem;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
@@ -123,10 +125,6 @@ html {
   transition: width 450ms cubic-bezier(.22,1,.36,1);
 }
 
-:target {
-  scroll-margin-block: 1rem;
-}
-
 @layer components {
 
     /* ── Scroll To Top ───────────────────────────────── */
@@ -195,6 +193,11 @@ html {
 
   .post-content {
     animation: content-enter 300ms ease;
+  }
+
+  /* Do not move the target after the browser positions a fragment link. */
+  .post-content:has(:target) {
+    animation: none;
   }
 
   .post-meta > * + *::before {
