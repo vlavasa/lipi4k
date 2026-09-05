@@ -161,15 +161,9 @@ export function remarkObsidian() {
           node: Image;
         }> = [];
 
-        let match:
-          RegExpExecArray | null;
-
         // Collect image embeds
 
-        while (
-          (match =
-            imageRegex.exec(value)) !== null
-        ) {
+        for (const match of value.matchAll(imageRegex)) {
 
           const imagePath =
             match[1].trim();
@@ -201,22 +195,17 @@ export function remarkObsidian() {
           node: Link;
         }> = [];
 
-        wikilinkRegex.lastIndex = 0;
-
         // Collect wikilinks
 
-        while (
-          (match =
-            wikilinkRegex.exec(value)) !== null
-        ) {
+        for (const match of value.matchAll(wikilinkRegex)) {
 
           // Ignore image embeds
 
           const overlaps =
             imageMatches.some(
               (img) =>
-                match!.index >= img.start &&
-                match!.index < img.end
+                match.index >= img.start &&
+                match.index < img.end
             );
 
           if (overlaps) {

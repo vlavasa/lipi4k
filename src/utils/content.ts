@@ -383,7 +383,8 @@ export function getPostsGroupedByYear(
 ): [string, Post[]][] {
   const grouped = entries.reduce<Record<string, Post[]>>((acc, entry) => {
     const year = entry.data.published.getFullYear().toString();
-    (acc[year] ??= []).push(entry);
+    acc[year] ??= [];
+    acc[year].push(entry);
     return acc;
   }, {});
 

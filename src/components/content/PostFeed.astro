@@ -20,7 +20,8 @@ const {
 // Group posts by year, preserving descending order within each group
 const postsByYear = posts.reduce<Record<number, Post[]>>((acc, post) => {
   const year = (post.data.updated ?? post.data.published).getFullYear();
-  (acc[year] ??= []).push(post);
+  acc[year] ??= [];
+  acc[year].push(post);
   return acc;
 }, {});
 
