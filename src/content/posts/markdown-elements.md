@@ -133,7 +133,22 @@ The syntax in Lipi4k is standard markdown image syntax inside a `<figure>` eleme
 
 ## Definition Lists
 
-Definition lists are a publishing convention that HTML supports natively but markdown largely ignores. In Lipi4k, you can use raw HTML for definitions:
+Definition lists are a publishing convention that HTML supports natively but markdown largely ignores. In Lipi4k, you can use raw HTML for definitions. Write the following directly in your `.md` file, without the surrounding code fences. The `<dl>` element contains the list, `<dt>` marks each term, and `<dd>` provides its definition:
+
+```html
+<dl>
+  <dt>Measure</dt>
+  <dd>The width of a line of type, expressed in characters or physical units. The comfortable reading measure for body text falls between 45 and 75 characters per line.</dd>
+
+  <dt>Leading</dt>
+  <dd>The vertical distance between baselines, named after the strips of lead used to separate lines of type in hand composition. In CSS, this is line-height.</dd>
+
+  <dt>Tracking</dt>
+  <dd>The uniform adjustment of spacing between all letters in a word or passage, as distinct from kerning, which is the adjustment of space between specific letter pairs.</dd>
+</dl>
+```
+
+The HTML above renders as:
 
 <dl>
   <dt>Measure</dt>
