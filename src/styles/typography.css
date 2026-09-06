@@ -258,5 +258,16 @@
       initial-letter: 3;
       margin-inline-end: 0.25em;
     }
+
+    /* Approximate a three-line initial where initial-letter is unsupported. */
+    @supports not (initial-letter: 3) {
+      .post-content > p:first-of-type::first-letter {
+        float: left;
+        font-size: 5.5em;
+        line-height: 0.7;
+        margin-block-start: 0.1em;
+        margin-inline-end: 0.05em;
+      }
+    }
   }
 }

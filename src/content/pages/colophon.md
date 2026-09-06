@@ -42,7 +42,7 @@ Fonts are loaded through **Astro's font API**, which optimises loading, subsets 
 
 **The hairline rules** between sections are generated with a CSS gradient, not a solid border. They fade at both ends. This is a small thing, but it softens what would otherwise be a mechanical cut across the page.
 
-**The drop capital** on the first paragraph of each post is applied with `initial-letter` and scoped to viewports wider than 768px, where the layout has enough room for it to work. On mobile, the first paragraph renders normally. No JavaScript is involved.
+**The drop capital** on the first paragraph of each post is applied with `initial-letter`, with a floated, enlarged first letter as a fallback in browsers that do not support it. It is scoped to viewports at least 768px wide, where the layout has enough room for it to work. On mobile, the first paragraph renders normally. No JavaScript is involved.
 
 **Print continuity** means that Cmd+P produces a result close to the screen layout: the parchment background is preserved, the type scale holds, and the page does not collapse into a plain-text dump. Lipi4k is one of few web templates where printing is considered rather than ignored.
 
