@@ -3,7 +3,7 @@ import type { UserConfig } from "../src/site.config";
 const userConfig: UserConfig = {
   title: "Lipi4k",
   description:
-    "A minimal editorial theme for Astro built for blogs, journals, travel writing, and long-form publishing.",
+    "An actively maintained fork of Lipi, a typography-first Astro template.",
 
   url: "https://vlavasa.github.io",
   author: "John Doe",
