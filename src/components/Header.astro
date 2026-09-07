@@ -1,4 +1,6 @@
 ---
+import Moon from "@/assets/moon.svg";
+import Sun from "@/assets/sun.svg";
 import siteConfig from "@/site.config";
 import { getAssetPath, stripBasePath } from "@/utils/url";
 
@@ -66,9 +68,17 @@ function isActive(url: string) {
             <button
               type="button"
               id="theme-toggle"
-              class="theme-pill"
-              aria-label="Toggle theme"
-            />
+              class="inline-flex h-8 w-8 sm:ml-[calc(10px-1rem)] shrink-0 items-center justify-center rounded bg-transparent text-muted-foreground hover:text-primary transition-colors duration-150"
+            >
+              <span class="hidden dark:block">
+                <Sun width="20" height="20" aria-hidden="true" />
+                <span class="sr-only">Switch to light theme</span>
+              </span>
+              <span class="block dark:hidden">
+                <Moon width="20" height="20" aria-hidden="true" />
+                <span class="sr-only">Switch to dark theme</span>
+              </span>
+            </button>
           )
         }
 
@@ -149,42 +159,6 @@ function isActive(url: string) {
         0 1px 12px 0
         color-mix(in srgb, var(--foreground) 8%, transparent);
     }
-  }
-
-  /* ── Theme pill ────────────────────────────────────── */
-  .theme-pill {
-    width: 36px;
-    height: 20px;
-    border-radius: 10px;
-    border: 0.5px solid var(--border);
-    background: var(--muted);
-    position: relative;
-    flex-shrink: 0;
-    transition: background 0.2s, border-color 0.2s;
-  }
-
-  .theme-pill::after {
-    content: '';
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    background: var(--foreground);
-    border: 0.5px solid var(--muted-foreground);
-    transition: transform 0.18s ease, background 0.18s;
-  }
-
-  [data-theme="dark"] .theme-pill {
-    background: var(--muted-foreground);
-    border-color: var(--muted-foreground);
-  }
-
-  html[data-theme="dark"] .theme-pill::after {
-  /* [data-theme="dark"] .theme-pill::after { */
-    transform: translateX(16px);
-    background: var(--foreground);
   }
 
   /* ── Mobile drawer ─────────────────────────────────── */
