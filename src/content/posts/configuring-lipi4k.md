@@ -45,19 +45,20 @@ Header and planned footer links are configured separately. Header navigation is 
 
 ```ts
   navigation: [
-    { title: "Writing", url: "/posts" },
-    { title: "Archive", url: "/archive" },
+    { title: "Posts", url: "/posts" },
+    { title: "Tags", url: "/tags" },
     { title: "About", url: "/about" },
   ],
 
   footerLinks: [
     { title: "RSS", url: "/rss.xml" },
-    { title: "Archive", url: "/archive" },
     { title: "Source", url: "https://github.com/yourusername/yourrepo" },
   ],
 ```
 
 Each item takes a `title` (the visible label) and a `url`. Navigation links support both internal paths and external URLs.
+
+The default navigation links to **Posts** (`/posts`), the paginated list of all published posts; **Tags** (`/tags`), the topic index with links to posts for each tag; and **About** (`/about`). The **All posts** link on the home page also opens `/posts`.
 
 > **TODO:** Render `footerLinks` in the site footer. The setting is currently accepted but has no visible effect.
 
@@ -92,7 +93,7 @@ This setting is intended for a tagline, copyright notice, or brief attribution a
   relatedPosts: 4,
 ```
 
-`postsPerPage` controls how many posts appear per page in the `/posts` listing and the `/archive` view. `recentPosts` sets the number of posts shown in the "Recent" section on the home page (not counting the featured post). `relatedPosts` sets how many posts appear in the "You might also like" section at the bottom of each post, matched by shared tags.
+`postsPerPage` controls how many posts appear per page in the `/posts` listing. Individual tag pages show all posts for that tag without pagination. `recentPosts` sets the total number of posts shown on the home page, including the featured post: a value of `6` shows one featured post and up to five posts in "Recent". `relatedPosts` limits the number of related posts in the "More like this" section at the bottom of each post.
 
 ## Display Toggles
 

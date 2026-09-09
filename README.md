@@ -31,7 +31,7 @@ The visual design takes its cues from the [Kami](https://kami.tw93.fun) design l
 - **Literata** body type, **Manrope** UI type, **Fira Code** for code, **Caveat** for annotations
 - Light and dark themes via CSS custom properties, no JavaScript required for switching
 - Warm neutral colour scale with a single brand accent — fully customisable in one file
-- Timeline-based archive grouped by year
+- Paginated posts grouped by year
 - Tag pages and tag-driven related posts
 - Reading progress indicator via CSS scroll-driven animations
 - Dynamic per-post OG images generated with Satori — no manual image creation
@@ -85,8 +85,8 @@ const userConfig: UserConfig = {
   author: "Your Name",
 
   navigation: [
-    { title: "Writing", url: "/posts" },
-    { title: "Archive", url: "/archive" },
+    { title: "Posts", url: "/posts" },
+    { title: "Tags", url: "/tags" },
     { title: "About", url: "/about" },
   ],
 

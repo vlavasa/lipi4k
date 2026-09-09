@@ -375,26 +375,3 @@ export function getRelatedPosts(
     .slice(0, limit)
     .map((item) => item.post);
 }
-
-// ── Grouping ───────────────────────────────────────────────────────────────────
-
-export function getPostsGroupedByYear(
-  entries: Post[]
-): [string, Post[]][] {
-  const grouped = entries.reduce<Record<string, Post[]>>((acc, entry) => {
-    const year = entry.data.published.getFullYear().toString();
-    acc[year] ??= [];
-    acc[year].push(entry);
-    return acc;
-  }, {});
-
-  for (const year in grouped) {
-    grouped[year].sort(
-      (a, b) => b.data.published.valueOf() - a.data.published.valueOf()
-    );
-  }
-
-  return Object.entries(grouped).sort(
-    ([a], [b]) => Number(b) - Number(a)
-  );
-}

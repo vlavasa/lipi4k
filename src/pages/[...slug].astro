@@ -8,7 +8,7 @@ import {
 } from "@/utils/content";
 
 export const getStaticPaths = async () => {
-  const RESERVED = new Set([ "archive", "search", "about", "home-intro" ]);
+  const RESERVED = new Set([ "tags", "search", "about", "home-intro" ]);
 
   const allPages = await getCollection(
     "pages",

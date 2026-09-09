@@ -8,8 +8,8 @@ into its `main` branch. Keep work scoped to the currently checked-out branch and
 unrelated changes.
 
 Lipi4k is a typography-first Astro template for long-form publishing, based on Lipi. Its name is
-pronounced like “Lipi fork.” It produces a static site and supports Markdown/MDX content, tags and
-archives, generated Open Graph images, RSS, sitemap, Pagefind search, light/dark themes, and
+pronounced like “Lipi fork.” It produces a static site and supports Markdown/MDX content, paginated
+posts and tag pages, generated Open Graph images, RSS, sitemap, Pagefind search, light/dark themes, and
 print-aware styling. Site configuration is assembled in `src/site.config.ts` from user-facing
 settings in `configs/user.config.ts`; content lives under `src/content/`.
 

@@ -12,14 +12,13 @@ const userConfig: UserConfig = {
   avatar: "/avatar.png",
 
   navigation: [
-    { title: "Writing", url: "/posts" },
-    { title: "Archive", url: "/archive" },
+    { title: "Posts", url: "/posts" },
+    { title: "Tags", url: "/tags" },
     { title: "About", url: "/about" },
   ],
 
   footerLinks: [
     { title: "RSS", url: "/rss.xml" },
-    { title: "Archive", url: "/archive" },
     { title: "Source", url: "https://github.com/vlavasa/lipi4k" },
     
   ],

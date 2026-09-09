@@ -26,7 +26,7 @@ The reading measure is held at 68 characters per line. The paragraph spacing is 
 
 ## Technology
 
-Lipi4k is built with **Astro**, a static site generator with an island architecture. The output is primarily static HTML with JavaScript only where the interface requires it, including the theme toggle, scroll-to-top button, and archive filters.
+Lipi4k is built with **Astro**, a static site generator with an island architecture. The output is primarily static HTML with JavaScript only where the interface requires it, including the theme toggle, scroll-to-top button, and mobile navigation. Posts and tag pages are generated as static HTML at build time.
 
 Styling is handled by **Tailwind CSS v4**, configured without a Tailwind config file. All theme tokens are defined as CSS custom properties and consumed through the Tailwind CSS variable bridge. There are no custom Tailwind plugins.
 
