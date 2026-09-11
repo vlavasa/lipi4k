@@ -5,6 +5,8 @@ import siteConfig from "@/site.config";
 
 type Props = {
   post: Post;
+  class?: string;
+  compact?: boolean;
   showReadingTime?: boolean;
   showLanguage?: boolean;
   accentCategory?: boolean;
@@ -12,6 +14,8 @@ type Props = {
 
 const {
   post,
+  class: className,
+  compact = false,
   showReadingTime = false,
   showLanguage = false,
   accentCategory = false,
@@ -29,38 +33,41 @@ const readingTime =
     ? calculateReadingTime(post.body ?? "").text
     : null;
 ---
-{
-  category && (
-    <span
-      class:list={[
-        "",
-        { "text-primary": accentCategory },
-      ]}
-    >
-      {category}
-    </span>
-  )
-}
-
-<time
-  datetime={published.toISOString()}
-  class="tabular-nums"
+<div
+  class:list={[
+    "metadata flex flex-row",
+    compact ? "shrink-0 gap-3 text-right" : "post-meta items-baseline gap-2",
+    className,
+  ]}
 >
-  {displayDate}
-</time>
+  {
+    category && (
+      <span class:list={{ "text-primary": accentCategory }}>
+        {category}
+      </span>
+    )
+  }
 
-{
-  readingTime && (
-    <span>
-      {readingTime}
-    </span>
-  )
-}
+  <time
+    datetime={published.toISOString()}
+    class="tabular-nums"
+  >
+    {displayDate}
+  </time>
 
-{
-  showLanguage && lang && (
-    <span class="uppercase">
-      {lang}
-    </span>
-  )
-}
+  {
+    readingTime && (
+      <span>
+        {readingTime}
+      </span>
+    )
+  }
+
+  {
+    showLanguage && lang && (
+      <span class="uppercase">
+        {lang}
+      </span>
+    )
+  }
+</div>

@@ -30,9 +30,7 @@ const {
             {post.data.description}
           </p>
         )}
-        <div class="post-meta flex flex-row items-baseline gap-2 text-xs font-ui text-muted-foreground">
-          <PostMeta post={post} showReadingTime />
-        </div>
+        <PostMeta post={post} accentCategory showReadingTime />
       </div>
     ))}
   </div>

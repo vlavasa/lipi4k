@@ -17,7 +17,5 @@ const { post } = Astro.props;
     transition-colors duration-150 hover:text-primary hover:translate-x-2 transition-transform ease-fluid"
   />
 
-  <div class="flex flex-row shrink-0 gap-3 text-xs font-ui text-right">
-    <PostMeta post={post} />
-  </div>
+  <PostMeta post={post} compact />
 </div>

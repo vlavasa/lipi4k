@@ -62,9 +62,7 @@ const years = Object.keys(postsByYear)
                 {post.data.description}
               </p>
             )}
-            <div class="post-meta flex flex-row items-baseline gap-2 text-xs text-muted-foreground">
-              <PostMeta post={post} accentCategory showReadingTime />
-            </div>
+            <PostMeta post={post} accentCategory showReadingTime />
           </div>
         ))}
 

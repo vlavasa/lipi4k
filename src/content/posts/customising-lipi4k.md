@@ -76,6 +76,8 @@ Lipi4k uses four font slots, each mapped to a CSS variable:
 | `--font-lipi4k-mono` | Inline code, code blocks | Fira Code |
 | `--font-lipi4k-hand` | Handwritten annotations | Caveat |
 
+Post metadata and page update dates share the `metadata` utility in `src/styles/global.css`. It uses `font-ui` (Manrope by default), regular weight, and the same small text size throughout the site. `PostMeta` applies it directly, while `PageHeader` applies it to page metadata, so individual layouts do not need their own font settings.
+
 These font variables are loaded via Astro's font API in `astro.config.mjs`. To change a typeface, update the corresponding entry in the `fonts` array:
 
 ```js

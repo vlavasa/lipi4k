@@ -69,9 +69,7 @@ const formattedDate = last?.toLocaleDateString("en-US", {
       showHeader &&
       <PageHeader {title} subheading={description} transitionName={transitionName} >
       {formattedDate && (
-        <div slot="meta" class="">
-          <span class="text-muted-foreground text-xs font-code">Updated {formattedDate}</span>
-        </div>
+        <span slot="meta">Updated {formattedDate}</span>
       )}
     </PageHeader>
     }

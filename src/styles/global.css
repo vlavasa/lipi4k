@@ -112,6 +112,10 @@ html {
   @apply hover:text-primary transition-colors duration-200 ease-fluid;
 }
 
+@utility metadata {
+  @apply font-ui text-xs font-normal text-muted-foreground;
+}
+
 @utility inline-cta {
   @apply inline-flex items-center gap-[0.7rem]
          font-mono text-[0.78rem]

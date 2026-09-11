@@ -1,6 +1,4 @@
 ---
-import { slugify } from '@/utils/text';
-
 interface Props {
   title?: string;
   subheading?: string;
@@ -22,7 +20,7 @@ const { title, subheading, transitionName } = Astro.props;
       {subheading}
     </p>
   )}
-  <div class="mt-2 font-code text-muted-foreground text-[10px]">
+  <div class="metadata mt-2">
     <slot name="meta" />
   </div>
   <div class="divider mb-8" />
