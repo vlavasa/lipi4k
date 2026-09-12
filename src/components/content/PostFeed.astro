@@ -43,11 +43,11 @@ const years = Object.keys(postsByYear)
       <div class="mb-6 last:mb-0">
 
         {/* Year header */}
-        <div class="flex items-baseline justify-between py-2 mb-4 border-border/50 border-b">
-          <span class="text-base tracking-[0.12em] uppercase italic text-muted-foreground">
+        <div class="flex items-baseline justify-between py-2 mb-4 border-border/50 border-b font-code text-sm uppercase tabular-nums text-muted-foreground">
+          <span>
             {year}
           </span>
-          <span class="font-code text-sm tabular-nums text-muted-foreground">
+          <span>
             {yearPosts.length} {yearPosts.length === 1 ? "post" : "posts"}
           </span>
         </div>

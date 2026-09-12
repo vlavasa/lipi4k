@@ -118,7 +118,7 @@ html {
 
 @utility inline-cta {
   @apply inline-flex items-center gap-[0.7rem]
-         font-mono text-[0.78rem]
+         font-code text-[0.78rem]
          uppercase tracking-[0.14em]
          no-underline
          transition-all duration-300 ease-fluid;
