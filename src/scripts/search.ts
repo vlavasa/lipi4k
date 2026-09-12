@@ -33,9 +33,11 @@ class SiteSearch extends HTMLElement {
 	private retry!: HTMLButtonElement;
 	private clear!: HTMLButtonElement;
 	private results: SearchResult[] = [];
+	private lastFocusedResult?: HTMLAnchorElement;
 	private shown = 0;
 	private revision = 0;
 	private timer = 0;
+	private openedWithPointer = false;
 
 	connectedCallback() {
 		this.events = new AbortController();
@@ -50,7 +52,10 @@ class SiteSearch extends HTMLElement {
 		this.clear = this.element("[data-search-clear]");
 		this.trigger.disabled = false;
 
-		this.trigger.addEventListener("click", () => this.open(), { signal });
+		this.trigger.addEventListener("click", (event) => this.open(event.detail > 0), { signal });
+		const clearPointerFocus = () => this.trigger.removeAttribute("data-search-pointer-focus");
+		this.trigger.addEventListener("blur", clearPointerFocus, { signal });
+		this.trigger.addEventListener("keydown", clearPointerFocus, { signal });
 		this.element("[data-search-close]").addEventListener("click", () => this.close(), {
 			signal,
 		});
@@ -58,7 +63,11 @@ class SiteSearch extends HTMLElement {
 			"close",
 			() => {
 				this.trigger.setAttribute("aria-expanded", "false");
-				if (this.isConnected) this.trigger.focus({ preventScroll: true });
+				if (this.isConnected) {
+					// Preserve how search was opened while keeping focus available to the keyboard.
+					this.trigger.toggleAttribute("data-search-pointer-focus", this.openedWithPointer);
+					this.trigger.focus({ preventScroll: true });
+				}
 			},
 			{ signal },
 		);
@@ -119,6 +128,13 @@ class SiteSearch extends HTMLElement {
 			{ signal },
 		);
 		this.list.addEventListener(
+			"focusin",
+			(event) => {
+				if (event.target instanceof HTMLAnchorElement) this.lastFocusedResult = event.target;
+			},
+			{ signal },
+		);
+		this.list.addEventListener(
 			"click",
 			(event) => {
 				if (event.target instanceof Element && event.target.closest("a")) this.close();
@@ -159,8 +175,9 @@ class SiteSearch extends HTMLElement {
 		this.enginePromise = undefined;
 	}
 
-	private open() {
+	private open(withPointer = false) {
 		if (this.dialog.open) return;
+		this.openedWithPointer = withPointer;
 		const menu = document.querySelector<HTMLButtonElement>("#menu-toggle");
 		if (menu?.getAttribute("aria-expanded") === "true") menu.click();
 		this.dialog.showModal();
@@ -211,6 +228,7 @@ class SiteSearch extends HTMLElement {
 		this.list.hidden = true;
 		this.more.hidden = true;
 		this.retry.hidden = true;
+		this.lastFocusedResult = undefined;
 		if (!this.input.value.trim()) {
 			this.results = [];
 			this.list.replaceChildren();
@@ -240,6 +258,7 @@ class SiteSearch extends HTMLElement {
 			this.results = response?.results ?? [];
 			this.shown = 0;
 			this.list.replaceChildren();
+			this.lastFocusedResult = undefined;
 			this.status.textContent = this.results.length
 				? `${this.results.length} ${this.results.length === 1 ? "result" : "results"} for “${query}”`
 				: `No results for “${query}”. Try a different word or a shorter phrase.`;
@@ -249,14 +268,14 @@ class SiteSearch extends HTMLElement {
 		}
 	}
 
-	private async showMore(revision: number, focusFirst = false) {
+	private async showMore(revision: number, restoreResultFocus = false) {
+		const previousResult = restoreResultFocus ? this.lastFocusedResult : undefined;
 		this.more.disabled = true;
 		try {
 			const batch = await Promise.all(
 				this.results.slice(this.shown, this.shown + PAGE_SIZE).map((result) => result.data()),
 			);
 			if (!this.isCurrent(revision)) return;
-			const firstIndex = this.list.childElementCount;
 			for (const result of batch) {
 				const url = new URL(result.url, window.location.origin);
 				if (url.origin !== window.location.origin || !/^https?:$/.test(url.protocol)) continue;
@@ -285,7 +304,7 @@ class SiteSearch extends HTMLElement {
 			this.shown += batch.length;
 			this.list.hidden = !this.shown;
 			this.more.hidden = this.shown >= this.results.length;
-			if (focusFirst) this.list.querySelectorAll("a")[firstIndex]?.focus();
+			previousResult?.focus();
 		} catch {
 			if (this.isCurrent(revision)) this.showError();
 		} finally {
@@ -313,12 +332,13 @@ class SiteSearch extends HTMLElement {
 		if (event.key !== "ArrowDown" && event.key !== "ArrowUp") return;
 		const links = Array.from(this.list.querySelectorAll("a"));
 		if (this.list.hidden || !links.length) return;
-		const current = links.indexOf(document.activeElement as HTMLAnchorElement);
-		if (document.activeElement !== this.input && current < 0) return;
+		const items: HTMLElement[] = [this.input, ...links];
+		if (!this.more.hidden && !this.more.disabled) items.push(this.more);
+		const current = items.indexOf(document.activeElement as HTMLElement);
+		if (current < 0) return;
 		event.preventDefault();
-		const next = event.key === "ArrowDown" ? Math.min(current + 1, links.length - 1) : current - 1;
-		if (next < 0) this.input.focus();
-		else links[next].focus();
+		const next = event.key === "ArrowDown" ? current + 1 : current - 1;
+		items[Math.max(0, Math.min(next, items.length - 1))].focus();
 	}
 }
 

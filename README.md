@@ -142,7 +142,7 @@ Posts go in `src/content/posts/`. Subdirectories are supported. Folders prefixed
 
 The magnifying glass to the left of the theme toggle opens full-text search. You can also use **Ctrl+K** (Windows/Linux) or **Cmd+K** (macOS) when not typing in another field. Search results include titles and matching excerpts. Use the arrow keys to move between results, Enter to follow a link, and Escape to close the dialog. Clicking outside the panel or its close button also closes it.
 
-Search covers the titles, descriptions, and bodies of published posts and public content pages, including About and Colophon. Listing pages, navigation, drafts, and scheduled posts are excluded from the production index. Results are ranked by relevance and load in groups of eight. Closing the dialog preserves the current query; navigating to another page resets it.
+Search covers the titles, descriptions, and bodies of published posts and public content pages, including About and Colophon. Listing pages, navigation, drafts, and scheduled posts are excluded from the production index. Results are ranked by relevance and load in groups of eight. After the last displayed result, the down arrow moves to **Load more results**. Press Enter to load the next group; focus returns to the previously selected result, including when the button is clicked with a mouse. Closing the dialog preserves the current query; navigating to another page resets it.
 
 Set `showSearch: false` in `configs/user.config.ts` to disable search. The Pagefind engine and index are loaded only when search is opened. Search stays on your site and sends no queries to an external service.
 
