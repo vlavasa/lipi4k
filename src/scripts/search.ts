@@ -63,11 +63,15 @@ class SiteSearch extends HTMLElement {
 			"close",
 			() => {
 				this.trigger.setAttribute("aria-expanded", "false");
-				if (this.isConnected) {
-					// Preserve how search was opened while keeping focus available to the keyboard.
-					this.trigger.toggleAttribute("data-search-pointer-focus", this.openedWithPointer);
-					this.trigger.focus({ preventScroll: true });
-				}
+				if (this.isConnected) this.trigger.focus({ preventScroll: true });
+			},
+			{ signal },
+		);
+		this.dialog.addEventListener(
+			"cancel",
+			(event) => {
+				event.preventDefault();
+				this.close();
 			},
 			{ signal },
 		);
@@ -194,6 +198,9 @@ class SiteSearch extends HTMLElement {
 	}
 
 	private close() {
+		if (!this.dialog.open) return;
+		// Set the return style before close() restores focus, not in the later close event.
+		this.trigger.toggleAttribute("data-search-pointer-focus", this.openedWithPointer);
 		this.dialog.close();
 	}
 

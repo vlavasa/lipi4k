@@ -184,7 +184,12 @@ function isActive(url: string) {
     opacity: 0.45;
   }
 
-  .header-action[data-search-pointer-focus]:focus {
+  #search-toggle:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+  }
+
+  #search-toggle[data-search-pointer-focus]:focus {
     outline: none;
   }
 
