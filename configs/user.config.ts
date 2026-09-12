@@ -48,6 +48,7 @@ const userConfig: UserConfig = {
   recentPosts: 6,
   relatedPosts: 4,
 
+  showSearch: true,
   showThemeToggle: true,
   showReadingTime: true,
 

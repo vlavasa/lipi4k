@@ -31,22 +31,6 @@ const {
   nextPost,
 } = Astro.props;
 
-function formatDate(date: Date) {
-  return new Intl.DateTimeFormat("en", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  }).format(date);
-}
-
-function formatMonthYear(date: Date) {
-  return new Intl.DateTimeFormat("en", {
-    year: "numeric",
-    month: "long",
-  })
-    .format(date)
-    .toUpperCase();
-}
 const { title, description, cover, published, tags } = post.data;
 
 const allPosts    = await getAllPosts();
@@ -57,7 +41,7 @@ const coverImage = getCoverImage(cover);
 const galleryImages = getGalleryImages(post.filePath ?? '');
 ---
 
-<BaseLayout schema={structuredData}>
+<BaseLayout schema={structuredData} lang={post.data.lang}>
   <SEO
     slot="seo"
     {title}
@@ -73,6 +57,8 @@ const galleryImages = getGalleryImages(post.filePath ?? '');
     <header class="space-y-4">
       <!-- Title -->
       <h1 
+          data-pagefind-body
+          data-pagefind-meta="title"
           class="text-3xl leading-tight tracking-tight font-medium md:text-4xl mb-2 text-balance"
           transition:name={slugify(post.data.title.replaceAll(".", "-"))}
       >
@@ -82,7 +68,7 @@ const galleryImages = getGalleryImages(post.filePath ?? '');
       <!-- Description -->
       {
         post.data.description && (
-          <p class="max-w-xl text-base text-prettyfont-content italic font-light leading-relaxed text-muted-foreground">
+          <p data-pagefind-body class="max-w-xl text-base text-prettyfont-content italic font-light leading-relaxed text-muted-foreground">
             {post.data.description}
           </p>
         )
@@ -104,12 +90,6 @@ const galleryImages = getGalleryImages(post.filePath ?? '');
 
     <!-- Post Content -->
     <article data-pagefind-body class="post-content flex flex-col space-y-2">
-      <meta data-pagefind-meta="title[content]" content={title} />
-      <meta data-pagefind-sort="date[content]" content={published.toISOString()} />
-	    <meta data-pagefind-filter="collection[content]" content={post.collection} />
-      {tags?.map((tag) => (
-        <meta data-pagefind-filter="tag[content]" content={tag} />
-      ))}
       <!-- Rendered markdown -->
 	    <div class="app-prose post-content">
 	      <slot />

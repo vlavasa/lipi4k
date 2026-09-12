@@ -99,11 +99,22 @@ This setting is intended for a tagline, copyright notice, or brief attribution a
 
 ```ts
   showLogo: false,
+  showSearch: true,
   showThemeToggle: true,
   showReadingTime: true,
 ```
 
-`showLogo` controls whether the logo image is shown in the header. When `false`, the site title text is shown instead. `showThemeToggle` shows or hides the light/dark toggle button. Set it to `false` if you want to commit to one mode. `showReadingTime` shows or hides the estimated reading time that appears in post metadata.
+`showLogo` controls whether the logo image is shown in the header. When `false`, the site title text is shown instead. `showSearch` shows or hides the search button and dialog; it defaults to `true`. `showThemeToggle` shows or hides the light/dark toggle button. `showReadingTime` shows or hides the estimated reading time that appears in post metadata.
+
+## Search
+
+Search opens from the magnifying glass to the left of the theme toggle, or with Ctrl/Cmd+K when focus is outside an editable field. It searches published posts and public content pages by title, description, and body text. Results show matching excerpts and are ordered by relevance. Navigation, post and tag listings, drafts, and scheduled posts are excluded from the production index.
+
+The Pagefind engine and index load on demand from your own site. No API keys, external search service, or additional configuration are needed, including for deployments under `BASE_PATH` such as GitHub Pages.
+
+To test search locally, run `npm run build` followed by `npm run preview`. The development server does not generate a search index, so its dialog displays a notice instead. Rebuild to include content changes in the preview's results.
+
+The `lang` field in post and page frontmatter sets the document language, defaulting to `en`. Pagefind searches only content in that language. Searching without diacritics is supported; matching different word forms depends on the language. For example, Czech stemming is not supported. The surrounding interface labels remain in English, like the rest of the template.
 
 ## Hero Variant
 

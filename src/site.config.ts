@@ -32,6 +32,7 @@ export interface UserConfig {
   relatedPosts?: number;
 
   showLogo?: boolean;
+  showSearch?: boolean;
   showThemeToggle?: boolean;
   showReadingTime?: boolean;
 
@@ -62,6 +63,7 @@ const siteConfig = {
   relatedPosts: userConfig.relatedPosts ?? 4,
 
   showLogo: userConfig.showLogo ?? false,
+  showSearch: userConfig.showSearch ?? true,
   showThemeToggle: userConfig.showThemeToggle ?? true,
   showReadingTime: userConfig.showReadingTime ?? true,
 

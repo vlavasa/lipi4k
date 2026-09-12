@@ -32,9 +32,9 @@ Styling is handled by **Tailwind CSS v4**, configured without a Tailwind config 
 
 Syntax highlighting uses **Shiki**, which is bundled with Astro. It renders code to static HTML with no client-side JavaScript. The colour tokens are mapped to Lipi4k's theme variables so highlighting adapts to light and dark mode.
 
-The full-text index is provided by **Pagefind**, a static search library that runs entirely in the browser against data generated at build time. It adds no external API calls and no tracking.
+Full-text search is provided by **Pagefind**, using data generated at build time. A magnifying glass beside the theme toggle opens a native browser dialog, styled with Lipi4k's colours and typefaces. Search includes the titles, descriptions, and bodies of published posts and public content pages, with matching excerpts in the results.
 
-> **TODO:** Expose the existing Pagefind modal through a visible header trigger or search box. The index and modal are built, but visitors currently have no control that opens them.
+The search engine loads when the dialog is first opened and runs entirely in the browser. It adds no external API calls and no tracking. Keyboard controls include Ctrl/Cmd+K to open, arrow keys to navigate results, and Escape to close. Site owners can disable it with `showSearch: false`.
 
 Fonts are loaded through **Astro's font API**, which optimises loading, subsets the files, and generates the `@font-face` declarations automatically. Font files are bundled into the build output rather than loaded from a third-party CDN.
 

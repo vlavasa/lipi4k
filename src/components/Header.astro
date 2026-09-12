@@ -1,5 +1,6 @@
 ---
 import Moon from "@/assets/moon.svg";
+import Search from "@/assets/search.svg";
 import Sun from "@/assets/sun.svg";
 import siteConfig from "@/site.config";
 import { getAssetPath, stripBasePath } from "@/utils/url";
@@ -40,7 +41,7 @@ function isActive(url: string) {
       }
     </a>
 
-    <div class="nav-right flex flex-row items-center gap-4 ">
+    <div class="nav-right flex items-center gap-4">
       <!-- Desktop Navigation -->
       <nav class="hidden sm:flex items-center gap-6 font-ui text-sm">
         {
@@ -57,18 +58,34 @@ function isActive(url: string) {
       </nav>
       
       <!-- Vertical divider, desktop only -->
-      <div class="hidden sm:block h-3.5 w-px bg-border shrink-0 mx-1" aria-hidden="true"></div>
+      {siteConfig.navigation.length > 0 && (siteConfig.showSearch || siteConfig.showThemeToggle) && (
+        <div class="header-divider hidden sm:block h-3.5 w-px bg-border shrink-0" aria-hidden="true"></div>
+      )}
 
       <!-- Actions -->
-      <div class="flex items-center gap-4 font-ui">
-        <!-- <pagefind-modal-trigger compact hide-shortcut></pagefind-modal-trigger> -->
-        <!-- <pagefind-searchbox></pagefind-searchbox> -->
+      <div class="header-actions flex items-center gap-1 font-ui">
+        {siteConfig.showSearch && (
+          <button
+            type="button"
+            id="search-toggle"
+            class="header-action"
+            aria-label="Search"
+            aria-haspopup="dialog"
+            aria-controls="site-search-dialog"
+            aria-expanded="false"
+            aria-keyshortcuts="Control+k Meta+k"
+            title="Search (Ctrl/⌘ K)"
+            disabled
+          >
+            <Search width="20" height="20" aria-hidden="true" />
+          </button>
+        )}
         {
           siteConfig.showThemeToggle && (
             <button
               type="button"
               id="theme-toggle"
-              class="inline-flex h-8 w-8 sm:ml-[calc(10px-1rem)] shrink-0 items-center justify-center rounded bg-transparent text-muted-foreground hover:text-primary transition-colors duration-150"
+              class="header-action"
             >
               <span class="hidden dark:block">
                 <Sun width="20" height="20" aria-hidden="true" />
@@ -86,7 +103,7 @@ function isActive(url: string) {
         <button
           id="menu-toggle"
           type="button"
-          class="sm:hidden inline-flex h-8 w-8 items-center justify-center rounded border border-border bg-transparent text-muted-foreground hover:text-primary transition-colors duration-150"
+          class="header-action mobile-menu-toggle sm:hidden"
           aria-label="Toggle navigation"
           aria-expanded="false"
           aria-controls="mobile-drawer"
@@ -144,6 +161,42 @@ function isActive(url: string) {
 </script>
 
 <style>
+  .header-action {
+    display: inline-flex;
+    width: 2rem;
+    height: 2rem;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border-radius: 0.25rem;
+    background: transparent;
+    color: var(--muted-foreground);
+    transition: color 150ms;
+  }
+
+  .header-action:hover,
+  .header-action:focus-visible {
+    color: var(--primary);
+  }
+
+  .header-action:disabled {
+    opacity: 0.45;
+  }
+
+  @media (min-width: 40rem) {
+    .mobile-menu-toggle {
+      display: none;
+    }
+  }
+
+  @media print {
+    .header-actions,
+    .header-divider {
+      display: none;
+    }
+  }
+
   .site-header {
     position: sticky;
 
@@ -168,7 +221,6 @@ function isActive(url: string) {
     box-shadow:
       0 4pt 24pt
       color-mix(in srgb, var(--foreground) 5%, transparent);
-    /* box-shadow: 0 4pt 24pt rgba(0,0,0,0.05); */
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.25s ease;

@@ -48,6 +48,7 @@ const description =
   entryDescription;
 
 const last = updated ? updated : published;
+const searchable = Boolean(entry && !entry.data.draft && !noindex);
 
 const formattedDate = last?.toLocaleDateString("en-US", {
   year: "numeric",
@@ -55,7 +56,7 @@ const formattedDate = last?.toLocaleDateString("en-US", {
 });
 
 ---
-<BaseLayout schema={schema}>
+<BaseLayout schema={schema} lang={entry?.data.lang}>
   <SEO
     slot="seo"
     title={title}
@@ -67,14 +68,15 @@ const formattedDate = last?.toLocaleDateString("en-US", {
 
     {
       showHeader &&
-      <PageHeader {title} subheading={description} transitionName={transitionName} >
+      <PageHeader {title} subheading={description} transitionName={transitionName} {searchable}>
       {formattedDate && (
         <span slot="meta">Updated {formattedDate}</span>
       )}
     </PageHeader>
     }
   </Fragment>
-  <section>
+  <section data-pagefind-body={searchable || undefined}>
+    {searchable && !showHeader && <meta data-pagefind-meta="title[content]" content={title} />}
     <slot />
   </section>
   <Fragment slot="footer">

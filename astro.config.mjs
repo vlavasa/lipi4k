@@ -144,6 +144,7 @@ export default defineConfig({
           {
             behavior: "append",
             properties: {
+              dataPagefindIgnore: true,
               className: [
                 "heading-anchor",
               ],
