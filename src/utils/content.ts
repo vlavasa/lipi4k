@@ -185,12 +185,20 @@ export function getPostSlugSegment(id: string): string {
  * Example:
  * travel/japan/tokyo.md
  * -> "travel/japan/tokyo"
+ *
+ * adding-images/index.md
+ * -> "adding-images"
  */
 export function getPostSlugPath(
   id: string,
   filePath?: string
 ): string {
   const segments = getPostPathSegments(filePath);
+
+  // Astro already uses the parent folder as the ID for index.md / index.mdx.
+  if (segments.length > 0 && /\/index\.mdx?$/.test(filePath ?? "")) {
+    return segments.join("/");
+  }
 
   const slug =
     slugify(getPostSlugSegment(id));
@@ -234,6 +242,12 @@ export function getPageSlugPath(
   filePath?: string
 ): string {
   const segments = getPagePathSegments(filePath);
+
+  // Folder-based pages follow the same index convention as posts.
+  if (segments.length > 0 && /\/index\.mdx?$/.test(filePath ?? "")) {
+    return segments.join("/");
+  }
+
   const slug = slugify(getPostSlugSegment(id));
 
   return segments.length > 0
