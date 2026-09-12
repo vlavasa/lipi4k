@@ -28,7 +28,7 @@ The visual design takes its cues from the [Kami](https://kami.tw93.fun) design l
 
 ## Features
 
-- **Literata** body type, **Manrope** UI type, **Fira Code** for code, **Caveat** for annotations
+- **Literata** body type, **Manrope** for UI and counts, **Fira Code** for code and small labels, **Caveat** for annotations
 - Light and dark themes via CSS custom properties, no JavaScript required for switching
 - Warm neutral colour scale with a single brand accent — fully customisable in one file
 - Paginated posts grouped by year
@@ -171,6 +171,15 @@ To create a named colour scheme, add a `[data-theme="name"]` block and set the `
 ### Typefaces
 
 Fonts are configured in `astro.config.mjs` under the `fonts` array. Swap the `name` field to any typeface available on Fontsource.
+
+The font utilities in `src/styles/theme.css` assign each typeface a role:
+
+- `font-content` — **Literata** for body text and headings.
+- `font-ui` — **Manrope** for navigation, metadata, archive years, article counts on `/posts`, `/tags`, and `/tags/*`, and gallery photo counts.
+- `font-code` — **Fira Code** for inline code, code blocks, small section headings, action labels, and the footer description.
+- `font-annotation` — **Caveat** for handwritten annotations.
+
+Archive years and counts use tabular figures to keep digits aligned. Article counts are displayed as `1 POST` or `7 POSTS`; gallery counts use `1 photo` or `3 photos`.
 
 ---
 

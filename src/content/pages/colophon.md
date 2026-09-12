@@ -10,11 +10,11 @@ A colophon records how a book was made: who set the type, which press printed it
 
 The body typeface is **Literata**, designed by Veronika Burian and José Scaglione at TypeTogether and expanded by Google Fonts. It is a contemporary serif intended for sustained on-screen reading: optically sized for text use, warm enough to feel literary, and technically precise enough to hold its weight at a wide range of sizes. It is the closest thing to a book face that loads well from a web font.
 
-The interface typeface is **Manrope**, a geometric sans-serif that works at small sizes without losing clarity. It carries post metadata, navigation labels, and other elements where the type needs to function rather than to be read.
+The interface typeface is **Manrope**, a geometric sans-serif that works at small sizes without losing clarity. It carries post metadata, navigation labels, archive years, article counts in post and tag listings, and gallery photo counts. Years and counts use tabular figures for aligned digits, with an unslashed zero.
 
-The monospaced typeface is **Fira Code**, used for inline code and code blocks. It includes ligatures for common programming symbols, but these are not forced: if you prefer to disable them, set `font-variant-ligatures: none` on `code` elements.
+The monospaced typeface is **Fira Code**, used for inline code, code blocks, small section headings, action labels, and the footer description. It includes ligatures for common programming symbols, but these are not forced: if you prefer to disable them, set `font-variant-ligatures: none` on `code` elements.
 
-The annotation typeface is **Caveat**, a handwritten face used for the single flourish on the home page. It appears in one place, rotated two degrees, in the primary accent colour. Using it more widely would undercut the effect.
+The annotation typeface is **Caveat**, a handwritten face used for optional notes in the home-page and content-page footers, and beneath individual posts. These annotations use the primary accent colour and a slight rotation.
 
 ## Design Language
 
