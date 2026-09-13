@@ -31,13 +31,10 @@ const userConfig: UserConfig = {
 
 ```ts
   logo: "/logo.svg",
-  avatar: "/avatar.png",
   defaultOGImage: "/custom-og.jpg",
 ```
 
 `logo` is the path to the site logo, served from the `public/` directory. It is only shown when `showLogo` is set to `true`. `defaultOGImage` optionally replaces the generated `/og.png` used by the home page and other pages without their own image. Place a custom file such as `custom-og.jpg` in `public/`; individual posts continue to use their automatically generated OG images.
-
-> **TODO:** `avatar` is accepted by the configuration schema but is not currently rendered by either home-page hero variant.
 
 ## Navigation
 

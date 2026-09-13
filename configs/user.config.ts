@@ -9,7 +9,6 @@ const userConfig: UserConfig = {
   author: "John Doe",
 
   logo: "/logo.svg",
-  avatar: "/avatar.png",
 
   navigation: [
     { title: "Posts", url: "/posts" },

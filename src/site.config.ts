@@ -17,7 +17,6 @@ export interface UserConfig {
   url: string;
   author: string;
 
-  avatar?: string;
   logo?: string;
   defaultOGImage?: string;
 
@@ -48,7 +47,6 @@ const siteConfig = {
   url: userConfig.url,
   author: userConfig.author,
 
-  avatar: userConfig.avatar,
   logo: userConfig.logo,
   ogImage: userConfig.defaultOGImage ?? "/og.png",
 
