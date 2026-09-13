@@ -37,7 +37,6 @@ class SiteSearch extends HTMLElement {
 	private shown = 0;
 	private revision = 0;
 	private timer = 0;
-	private openedWithPointer = false;
 
 	connectedCallback() {
 		this.events = new AbortController();
@@ -52,10 +51,7 @@ class SiteSearch extends HTMLElement {
 		this.clear = this.element("[data-search-clear]");
 		this.trigger.disabled = false;
 
-		this.trigger.addEventListener("click", (event) => this.open(event.detail > 0), { signal });
-		const clearPointerFocus = () => this.trigger.removeAttribute("data-search-pointer-focus");
-		this.trigger.addEventListener("blur", clearPointerFocus, { signal });
-		this.trigger.addEventListener("keydown", clearPointerFocus, { signal });
+		this.trigger.addEventListener("click", () => this.open(), { signal });
 		this.element("[data-search-close]").addEventListener("click", () => this.close(), {
 			signal,
 		});
@@ -64,14 +60,6 @@ class SiteSearch extends HTMLElement {
 			() => {
 				this.trigger.setAttribute("aria-expanded", "false");
 				if (this.isConnected) this.trigger.focus({ preventScroll: true });
-			},
-			{ signal },
-		);
-		this.dialog.addEventListener(
-			"cancel",
-			(event) => {
-				event.preventDefault();
-				this.close();
 			},
 			{ signal },
 		);
@@ -179,9 +167,8 @@ class SiteSearch extends HTMLElement {
 		this.enginePromise = undefined;
 	}
 
-	private open(withPointer = false) {
+	private open() {
 		if (this.dialog.open) return;
-		this.openedWithPointer = withPointer;
 		const menu = document.querySelector<HTMLButtonElement>("#menu-toggle");
 		if (menu?.getAttribute("aria-expanded") === "true") menu.click();
 		this.dialog.showModal();
@@ -198,9 +185,6 @@ class SiteSearch extends HTMLElement {
 	}
 
 	private close() {
-		if (!this.dialog.open) return;
-		// Set the return style before close() restores focus, not in the later close event.
-		this.trigger.toggleAttribute("data-search-pointer-focus", this.openedWithPointer);
 		this.dialog.close();
 	}
 
