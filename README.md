@@ -172,6 +172,8 @@ To create a named colour scheme, add a `[data-theme="name"]` block and set the `
 
 Fonts are configured in `astro.config.mjs` under the `fonts` array. Swap the `name` field to any typeface available on Fontsource.
 
+All four typefaces load both `latin` and `latin-ext` subsets, including Czech diacritics and extended Latin characters used by other European languages. When replacing a font, keep both subsets and choose a typeface that supports the languages you write in.
+
 The font utilities in `src/styles/theme.css` assign each typeface a role:
 
 - `font-content` — **Literata** for body text and headings.
@@ -197,7 +199,8 @@ Archive years and counts use tabular figures to keep digits aligned. Article cou
 | `tags` | string[] | No | Drives related posts |
 | `cover` | image / string | No | Overrides the auto-generated OG image |
 | `draft` | boolean | No | Excluded from production builds |
-| `lang` | string | No | Per-post language override |
+| `lang` | string | No | Document language, e.g. `cs`; defaults to `en` |
+| `annotation` | string | No | Handwritten note below the article content; no global fallback |
 
 ### Pages (`src/content/pages/`)
 
@@ -207,6 +210,18 @@ Archive years and counts use tabular figures to keep digits aligned. Article cou
 | `description` | string | No |
 | `updated` | date | Yes |
 | `draft` | boolean | No |
+| `lang` | string | No |
+| `annotation` | string | No |
+
+For posts and content pages, `lang` sets the document's HTML language. Use a language tag such as `cs` for Czech, `en` for English, or `de` for German. When omitted, it defaults to `en`. Browsers and assistive technology use this value to interpret the text, and Pagefind searches content in the current document's language. The template's interface labels remain in English.
+
+To mark a post or page as Czech, add this to its frontmatter:
+
+```yaml
+lang: cs
+```
+
+On content pages, `annotation` sets the handwritten note in the footer. When omitted, it uses `annotation` from `configs/user.config.ts`; an empty string hides the note on that page. The home page uses the global annotation directly. Post annotations appear below the article content and are set only through post frontmatter.
 
 ---
 

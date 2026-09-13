@@ -55,7 +55,9 @@ Every post needs a frontmatter block at the top of the file, delimited by `---`.
 
 `draft` is optional and defaults to `false`. Set it to `true` to prevent the post from appearing in the feed or being built to a public URL. Draft posts are excluded from production builds. During development (`astro dev`), draft posts are built and accessible by navigating to their URL directly.
 
-`lang` is optional. Overrides the document language for this specific post. Useful for multilingual publications where most posts are in one language but occasional posts appear in another.
+`lang` is optional and defaults to `en`. Sets the document's HTML language for this post, for example `cs` for Czech, `en` for English, or `de` for German. The same field is supported in content page frontmatter. Browsers and assistive technology use it to interpret the text, and Pagefind searches content in that language. The template's interface labels remain in English.
+
+`annotation` is optional. A short, handwritten-style note displayed below the article content, before the tags and sharing links. It uses the `font-annotation` typeface (Caveat by default) and is rendered as plain text. Omit it or set it to an empty string to hide the note. Posts use only their own frontmatter annotation; they do not inherit the global footer annotation from `configs/user.config.ts`.
 
 A complete frontmatter block looks like this:
 
@@ -72,6 +74,8 @@ tags:
   - travel
 cover: ./cover.jpg
 draft: false
+lang: en
+annotation: Written between rain showers and the last train home.
 ---
 ```
 
@@ -84,6 +88,28 @@ The post at the top of the home page is simply the most recently published non-d
 Below the closing `---` of the frontmatter block, write the post body in standard markdown. Lipi4k supports GitHub-Flavored Markdown (tables, footnotes, strikethrough, fenced code blocks with language identifiers) and MDX if your file uses the `.mdx` extension.
 
 The first paragraph of the post receives a drop capital in the published layout on larger screens. This is applied automatically. You do not need to mark it up differently.
+
+### Czech and Other European Languages
+
+Save Markdown and MDX files as UTF-8 and write accented characters directly, including in titles, descriptions, categories, and tags. The default fonts include extended Latin characters for Czech and other European languages that use the Latin alphabet.
+
+Set `lang: cs` in the frontmatter for a Czech article (or page). This identifies the document language for browsers, assistive technology, and search; it does not translate the template's interface labels. For example, save this as `src/content/posts/cesky-clanek.md`:
+
+```markdown
+---
+title: Příliš žluťoučký kůň
+description: České háčky a čárky v titulku i běžném textu.
+published: 2026-05-20
+lang: cs
+category: Zápisky
+annotation: Příliš žluťoučký kůň úpěl ďábelské ódy.
+tags:
+  - čeština
+  - příroda
+---
+
+Příliš žluťoučký kůň úpěl ďábelské ódy.
+```
 
 ## Draft Workflow
 

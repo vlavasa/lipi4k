@@ -91,6 +91,7 @@ fonts: [
     name: "Lora",                       // replace Literata with Lora
     cssVariable: "--font-lipi4k-serif",
     provider: fontProviders.fontsource(),
+    subsets: ["latin", "latin-ext"],
     weights: [400, 500, 700],
     fallbacks: ["serif"],
   },
@@ -99,6 +100,10 @@ fonts: [
 ```
 
 Any font available on Fontsource can be swapped in this way. The rest of the typography system (measure, scale, spacing) stays unchanged.
+
+All four default typefaces include `latin` and `latin-ext` subsets for Czech and other European languages written in the Latin alphabet. Keep both subsets when changing fonts, and check that the replacement supports your language. Other scripts, such as Greek or Cyrillic, require their own subsets and a compatible typeface.
+
+Individual fonts can still lack a character: Caveat does not include the German capital `ẞ`, so handwritten annotations use a browser fallback for that character.
 
 ## Creating a Named Colour Scheme
 

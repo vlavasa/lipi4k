@@ -123,3 +123,19 @@ The `lang` field in post and page frontmatter sets the document language, defaul
 ```
 
 The home page hero comes in two variants: `"default"` renders the Markdown content from `src/content/pages/home-intro.md`, while `"studio"` displays the site description as a large typographic statement followed by a divider. The global annotation is rendered separately in the home-page footer.
+
+## Handwritten Annotation
+
+Set `annotation` in `configs/user.config.ts` to add a short handwritten note to the footer of the home page and pages using `PageLayout`:
+
+```ts
+  annotation: "Writing between filter coffees and terminal windows.",
+```
+
+The note is rendered as plain text using the `font-annotation` typeface (Caveat by default). A content page can override it with `annotation` in its frontmatter. Setting `annotation: ""` in that page hides the note; omitting the field uses the global value.
+
+Posts have their own optional `annotation` frontmatter field, displayed below the article content before the tags and sharing links. Posts do not inherit the global annotation. For example:
+
+```yaml
+annotation: Příliš žluťoučký kůň úpěl ďábelské ódy.
+```
