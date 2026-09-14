@@ -30,7 +30,7 @@ const userConfig: UserConfig = {
 ## Branding
 
 ```ts
-  logo: "/logo.svg",
+  logo: "/logo.webp",
   defaultOGImage: "/custom-og.jpg",
 ```
 

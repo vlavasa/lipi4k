@@ -8,7 +8,7 @@ const userConfig: UserConfig = {
   url: "https://vlavasa.github.io",
   author: "John Doe",
 
-  logo: "/logo.svg",
+  logo: "/logo.webp",
 
   navigation: [
     { title: "Posts", url: "/posts" },
@@ -47,6 +47,7 @@ const userConfig: UserConfig = {
   recentPosts: 6,
   relatedPosts: 4,
 
+  showLogo: true,
   showSearch: true,
   showThemeToggle: true,
   showReadingTime: true,
