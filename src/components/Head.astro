@@ -18,7 +18,8 @@ const { schema } = Astro.props;
   <!-- Filled at runtime by theme.ts to match the current background colour -->
   <meta name="theme-color" content="" />
 
-  <link rel="icon" href={getAssetPath("/favicon.ico")} type="image/svg+xml" />
+  <link rel="icon" href={getAssetPath("/favicon.ico")} type="image/vnd.microsoft.icon" sizes="16x16 32x32 48x48" />
+  <link rel="icon" href={getAssetPath("/favicon.png")} type="image/png" sizes="32x32" />
   <link rel="sitemap" href={getAssetPath("/sitemap-index.xml")} />
   <link rel="alternate" type="application/rss+xml" title="RSS Feed" href={getAssetPath("/rss.xml")} />
 

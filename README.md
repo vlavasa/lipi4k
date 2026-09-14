@@ -108,7 +108,8 @@ lipi4k/
 ├── configs/
 │   └── user.config.ts        # All site settings live here
 ├── public/
-│   └── favicon.svg
+│   ├── favicon.ico
+│   └── favicon.png
 ├── src/
 │   ├── content/
 │   │   ├── posts/            # Markdown and MDX posts
