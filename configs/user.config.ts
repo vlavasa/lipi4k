@@ -52,7 +52,7 @@ const userConfig: UserConfig = {
   showThemeToggle: true,
   showReadingTime: true,
 
-  heroVariant: "studio",
+  heroVariant: "description", // "markdown" | "description" | "none"
 
   annotation: "Writing between filter coffees and terminal windows.",
 };

@@ -93,7 +93,7 @@ const userConfig: UserConfig = {
   showSearch: true,
   showThemeToggle: true,
   showReadingTime: true,
-  heroVariant: "default",   // "default" | "studio"
+  heroVariant: "markdown",  // "markdown" | "description" | "none"
 };
 ```
 

@@ -116,10 +116,18 @@ The `lang` field in post and page frontmatter sets the document language, defaul
 ## Hero Variant
 
 ```ts
-  heroVariant: "studio",
+  heroVariant: "description",
 ```
 
-The home page hero comes in two variants: `"default"` renders the Markdown content from `src/content/pages/home-intro.md`, while `"studio"` displays the site description as a large typographic statement followed by a divider. The global annotation is rendered separately in the home-page footer.
+The home page hero supports three variants:
+
+- `"markdown"` renders the Markdown content from `src/content/pages/home-intro.md`, followed by the same divider and spacing as `"description"`. This is the default when `heroVariant` is omitted.
+- `"description"` displays the site description as a large typographic statement followed by a divider.
+- `"none"` omits the entire hero section, including its divider and spacing.
+
+If you are updating an existing configuration, rename `"default"` to `"markdown"` and `"studio"` to `"description"`.
+
+The global annotation is rendered separately in the home-page footer and is unaffected by `heroVariant`.
 
 ## Handwritten Annotation
 

@@ -4,18 +4,20 @@ import siteConfig from "@/site.config";
 
 const variant = siteConfig.heroVariant;
 
-const homeEntry = await getEntry("pages", "home-intro");
+const homeEntry = variant === "markdown" ? await getEntry("pages", "home-intro") : null;
 const Content = homeEntry ? (await render(homeEntry)).Content : null;
 ---
-<section class="home-hero flex flex-col pt-8 sm:pt-12" data-pagefind-ignore>
-  {variant === "studio" ? (
-    <p class="font-content italic text-3xl sm:text-4xl max-w-xl leading-snug tracking-tight wrap-break-word text-foreground">
-      {siteConfig.description}
-    </p>
+{variant !== "none" && (
+  <section class="home-hero flex flex-col pt-8 sm:pt-12" data-pagefind-ignore>
+    {variant === "description" ? (
+      <p class="font-content italic text-3xl sm:text-4xl max-w-xl leading-snug tracking-tight wrap-break-word text-foreground">
+        {siteConfig.description}
+      </p>
+    ) : (
+      <div class="app-prose home-intro-content [&>:last-child]:mb-0">
+        {Content ? <Content /> : null}
+      </div>
+    )}
     <div class="h-px bg-border mt-8" />
-  ) : (
-    <div class="app-prose home-intro-content">
-      {Content ? <Content /> : null}
-    </div>
-  )}
-</section>
+  </section>
+)}
