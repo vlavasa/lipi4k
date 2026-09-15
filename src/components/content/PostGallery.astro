@@ -2,20 +2,20 @@
 /**
  * PostGallery.astro
  *
- * Gallery section rendered at the end of a post via the `after` slot in BlogLayout.
+ * Gallery section rendered at the end of a post in PostLayout.
  * Only rendered when the post has images in its gallery/ subdirectory.
  *
- * GLightbox is loaded from CDN — injected via the `scripts` slot in BaseLayout.
+ * The shared gallery script in PostLayout handles GLightbox initialization.
  * The galleryId ties all images in this post to one lightbox group.
  *
- * Usage in BlogLayout.astro:
- *   import { getGalleryImages } from '@/utils/image.utils';
- *   import PostGallery from '@/components/PostGallery.astro';
+ * Usage in PostLayout.astro:
+ *   import { getGalleryImages } from '@/utils/image';
+ *   import PostGallery from '@/components/content/PostGallery.astro';
  *
  *   const galleryImages = getGalleryImages(entry.filePath);
  *
  *   {galleryImages.length > 0 && (
- *     <PostGallery slot="after" images={galleryImages} galleryId={entry.id} />
+ *     <PostGallery images={galleryImages} galleryId={entry.id} />
  *   )}
  */
 import GalleryImage from '@/components/content/PostGalleryImage.astro';
@@ -43,18 +43,3 @@ const { images, galleryId, title = 'Gallery' } = Astro.props;
     ))}
   </div>
 </section>
-
-<!-- GLightbox init — scoped to this component's gallery only -->
-<script>
-  import GLightbox from 'glightbox';
-
-  // Initialise after DOM is ready — Astro handles this via module scripts
-  const lightbox = GLightbox({
-    selector: '.glightbox',
-    touchNavigation: true,
-    loop: true,
-    autoplayVideos: false,
-    keyboardNavigation: true,
-    closeButton: true,
-  });
-</script>

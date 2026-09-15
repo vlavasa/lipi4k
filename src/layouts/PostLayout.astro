@@ -16,7 +16,6 @@ import Footer from "@/components/Footer.astro";
 import SectionHeader from "@/components/SectionHeader.astro";
 import ImageWrapper from "@/components/ImageWrapper.astro";
 import PostGallery from "@/components/content/PostGallery.astro";
-import GalleryInit from "@/components/GalleryInit.astro";
 import { getAssetPath } from "@/utils/url";
 
 type Props = {
@@ -149,7 +148,9 @@ const galleryImages = getGalleryImages(post.filePath ?? '');
   </Fragment>
   <Fragment slot="scripts">
     <ReadingProgress />
-    <GalleryInit />
+    <script>
+      import "@/scripts/gallery";
+    </script>
   </Fragment>
 
   <Fragment slot="footer">
