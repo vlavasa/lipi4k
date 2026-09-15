@@ -63,69 +63,21 @@ export function filenameToAlt(filename: string): string {
   );
 }
 
-/**
- * Resolve a vault-absolute image path to a glob key.
- *
- * Handles:
- *   posts/2011-03-21-bhuleshwar/attachments/image.jpg
- *   → ../content/posts/2011-03-21-bhuleshwar/attachments/image.jpg
- */
-function vaultPathToGlobKey(vaultPath: string): string {
-  const normalized = vaultPath.replace(/\\/g, '/').replace(/^\.\//, '');
-  const contentPath = normalized.replace(/^\/?src\/content\//, '');
-
-  return `../content/${contentPath}`;
-}
-
 // ============================================================================
 // COVER IMAGE
 // ============================================================================
 
-export function normalizeCoverPath(
-  raw: string | undefined
-): string | undefined {
-
-  if (!raw) return undefined;
-
-  const value = raw.trim();
-
-  // Obsidian wiki-link
-  // [[image.jpg]]
-
-  const obsidian = value.match(/^\[\[(.+?)\]\]$/);
-
-  if (obsidian) {
-    return obsidian[1].trim();
-  }
-
-  // Markdown link
-  // [Label](path/image.jpg)
-
-  const markdown = value.match(/^\[.*?\]\((.+?)\)$/);
-
-  if (markdown) {
-    return markdown[1].trim();
-  }
-
-  // Raw path fallback
-
-  return value;
-}
-
 /**
- * Resolve a raw, Obsidian, or Markdown cover path to ImageMetadata.
+ * Resolve a plain cover path relative to src/content/ to ImageMetadata.
  * Returns undefined if the path cannot be resolved.
  */
 export function getCoverImage(
   raw: string | undefined
 ): ImageMetadata | undefined {
+  const path = raw?.trim();
+  if (!path) return undefined;
 
-  const normalized = normalizeCoverPath(raw);
-
-  if (!normalized) return undefined;
-  const globKey = vaultPathToGlobKey(normalized);
-  const mod = allAttachmentImages[globKey];
-  return mod?.default;
+  return allAttachmentImages[`../content/${path}`]?.default;
 }
 
 // ============================================================================
@@ -134,7 +86,7 @@ export function getCoverImage(
 
 /**
  * Get gallery images for a post, sorted by filename.
- * Reads from src/content/travels/{postDir}/gallery/
+ * Reads from src/content/posts/{postDir}/gallery/
  */
 export function getGalleryImages(filePath: string): GalleryImage[] {
   const postDir = extractPostDir(filePath);

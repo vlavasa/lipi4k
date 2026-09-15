@@ -51,7 +51,7 @@ Every post needs a frontmatter block at the top of the file, delimited by `---`.
 
 `tags` is optional. An array of lowercase strings used to group related posts. Tags drive the "Related posts" section at the bottom of each article. They are lowercased and deduplicated automatically.
 
-`cover` is optional. A path to a cover image, either relative to the post file (`./cover.jpg`) or a URL. When present, the image is used as the OG image for the post. When absent, Lipi4k generates an OG image from the post title automatically.
+`cover` is optional. A plain path relative to `src/content/`, such as `posts/my-post/attachments/cover.jpg`. Store the image in an `attachments/` directory. It appears above the article content; the Open Graph card is generated separately from the post title. See the [image guide](../adding-images/) for the folder structure.
 
 `draft` is optional and defaults to `false`. Set it to `true` to prevent the post from appearing in the feed or being built to a public URL. Draft posts are excluded from production builds. During development (`astro dev`), draft posts are built and accessible by navigating to their URL directly.
 
@@ -72,7 +72,7 @@ tags:
   - japan
   - kyoto
   - travel
-cover: ./cover.jpg
+cover: posts/november-in-kyoto/attachments/cover.jpg
 draft: false
 lang: en
 annotation: Written between rain showers and the last train home.
@@ -86,6 +86,10 @@ The post at the top of the home page is simply the most recently published non-d
 ## Writing the Post
 
 Below the closing `---` of the frontmatter block, write the post body in standard markdown. Lipi4k supports GitHub-Flavored Markdown (tables, footnotes, strikethrough, fenced code blocks with language identifiers) and MDX if your file uses the `.mdx` extension.
+
+Use ordinary links such as `[Another post](../another-post/)` and `[Section](#section)`, and images such as `![Description](./attachments/photo.jpg)`. Links between articles point to their published URLs, while local image paths are relative to the Markdown file. Image filenames are not automatically searched for in other folders.
+
+Editor-specific wiki links (`[[Page]]`), embeds (`![[photo.jpg]]`), comments (`%%hidden%%`), highlights (`==text==`), and callouts (`> [!note]`) have no special meaning. Use standard links, images, emphasis, and blockquotes instead. Text inside these comment markers remains visible.
 
 The first paragraph of the post receives a drop capital in the published layout on larger screens. This is applied automatically. You do not need to mark it up differently.
 

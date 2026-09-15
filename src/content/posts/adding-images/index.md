@@ -45,7 +45,7 @@ Inside the post body, images use standard markdown syntax with paths relative to
 ![A view of the fort from the valley floor](./attachments/fort-valley.jpg)
 ```
 
-The `./attachments/` prefix is the convention Lipi4k expects. Place the image file in the post's `attachments/` directory, and reference it from there.
+The examples keep inline images in the post's `attachments/` directory. Use the actual path relative to the Markdown file: `./attachments/photo.jpg` references that directory, while `./photo.jpg` references a file beside the post. Paths are not rewritten and filenames are not automatically searched for in `attachments/`.
 
 Inline images render as full-width figures within the article's reading column. Captions are supported through the standard `<figure>` and `<figcaption>` elements in MDX, or directly in markdown with the image `alt` text.
 
@@ -77,7 +77,7 @@ When the inline images added without any extra line in-between, the images will 
 
 ## Cover images
 
-A post's cover image is set in frontmatter. It appears above the article content on the post page and is used as the Open Graph image in place of the auto-generated OG card.
+A post's cover image is set in frontmatter. It appears above the article content on the post page. The Open Graph card is generated separately from the post title.
 
 ```yaml
 ---
@@ -86,9 +86,9 @@ cover: posts/my-post/attachments/cover.jpg
 ---
 ```
 
-The path is vault-absolute from `src/content/` — not a relative path. This is different from inline image references, which use `./attachments/` relative paths.
+Set `cover` to a plain path relative to `src/content/`, pointing to an image in an `attachments/` directory. Do not wrap the path in link syntax. Inline image references in the article body are relative to the Markdown file instead.
 
-When `cover` is omitted, Lipi4k generates an OG image automatically from the post title using Satori. No cover file is required.
+When `cover` is omitted, the article has no cover image. Lipi4k generates the Open Graph card using Satori whether or not a cover is provided.
 
 ## Galleries
 

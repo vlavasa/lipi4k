@@ -10,10 +10,8 @@ import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import { rawFonts } from "./src/plugins/rawFonts";
 import { unified } from '@astrojs/markdown-remark';
-import remarkCallouts from './src/plugins/remark-callouts';
 import { remarkImageProcessing } from './src/plugins/remark-image-processing';
 import { remarkExternalLinks } from './src/plugins/remark-external-links.ts';
-import { remarkObsidian } from './src/plugins/remark-obsidian.ts';
 
 const base = process.env.BASE_PATH ?? "/";
 
@@ -83,12 +81,6 @@ export default defineConfig({
   ],
   
   vite: {
-    // server: {
-    //   watch: {
-    //     ignored: ['**/.obsidian/**', '**/_bases/**', '**/bases/**', '**/_home/**', '**/home/**', '**/_base/**', '**/base/**']
-    //   }
-    // },
-    // assetsInclude: ['**/*.base', '**/.obsidian/**', '**/_bases/**'],
     build: {
       // Per-page CSS splitting. Caches better than one giant bundle for
       // return visitors who navigate between pages.
@@ -133,12 +125,8 @@ export default defineConfig({
       gfm: true,
       smartypants: true,
       remarkPlugins: [
-        // remarkObsidianCore,
-        // remarkGfm,
-        remarkObsidian,
         remarkExternalLinks,
         remarkImageProcessing,
-        remarkCallouts,
       ],
       rehypePlugins: [
         rehypeSlug,

@@ -43,6 +43,8 @@ The visual design takes its cues from the [Kami](https://kami.tw93.fun) design l
 - Single configuration file: `configs/user.config.ts`
 - Minimal client-side JavaScript
 
+Write content using standard Markdown links and images. Editor-specific syntax such as wiki links, embeds, and callouts is not processed. See the [writing guide](./src/content/posts/adding-new-posts.md) and [image guide](./src/content/posts/adding-images/index.md) for examples.
+
 ---
 
 ## Getting Started
@@ -198,7 +200,7 @@ Archive years and counts use tabular figures to keep digits aligned. Article cou
 | `updated` | date | No | Shows "Updated on" in post metadata |
 | `category` | string | No | Defaults to `Travels` |
 | `tags` | string[] | No | Drives related posts |
-| `cover` | image / string | No | Overrides the auto-generated OG image |
+| `cover` | string | No | Article cover in an `attachments/` directory; plain path relative to `src/content/` |
 | `draft` | boolean | No | Excluded from production builds |
 | `lang` | string | No | Document language, e.g. `cs`; defaults to `en` |
 | `annotation` | string | No | Handwritten note below the article content; no global fallback |

@@ -3,82 +3,13 @@ import type { Plugin } from 'unified';
 import type { Root, Image, Paragraph } from 'mdast';
 
 /**
- * Consolidated image processing plugin for Astro Base
+ * Markdown image presentation for Lipi4k
  *
  * Handles:
- * - Image path resolution for posts/ and pages/ collections
  * - Image captions from title attribute
  * - Image grid class assignment for consecutive images
  * - loading="lazy" and decoding="async" on all images
  */
-
-// ── Path Resolution ──────────────────────────────────────────────────────────
-
-function resolveImagePaths(tree: Root, file: any) {
-  visit(tree, 'image', (node: Image) => {
-    if (!node.url) return;
-
-    // Skip remote URLs
-    if (node.url.startsWith('http://') || node.url.startsWith('https://')) return;
-
-    // Skip absolute paths served from public/
-    if (node.url.startsWith('/')) return;
-
-    // Already correctly relative
-    if (node.url.startsWith('./') || node.url.startsWith('../')) return;
-
-    const url = node.url;
-
-    // Bare filename — no path separators
-    if (!url.includes('/')) {
-      node.url = `./attachments/${url}`;
-      return;
-    }
-
-    // Relative path with attachments/ or images/ prefix
-    if (url.startsWith('attachments/') || url.startsWith('images/')) {
-      node.url = `./${url}`;
-      return;
-    }
-
-    // Obsidian absolute vault path e.g. posts/forts-of-sahyadri/rajgad/attachments/image.jpg
-    // or pages/attachments/me-wide.jpg
-    // Derive content root from file path and strip it
-    if (file?.path) {
-      const normalizedPath = file.path.replace(/\\/g, '/');
-      const contentIndex = normalizedPath.indexOf('/src/content/');
-
-      if (contentIndex !== -1) {
-        const contentRoot = normalizedPath
-          .slice(contentIndex + '/src/content/'.length)
-          .replace(/\/[^/]+\.md$/, '');
-
-        // contentRoot = posts/forts-of-sahyadri/rajgad  or  pages/about
-
-        // Case 1: url is under this specific content entry's path
-        // posts/my-post/attachments/image.jpg from posts/my-post/index.md
-        if (url.startsWith(`${contentRoot}/`)) {
-          node.url = `./${url.slice(contentRoot.length + 1)}`;
-          return;
-        }
-
-        // Case 2: vault-absolute path within the same collection
-        // pages/attachments/me-wide.jpg from pages/about.md
-        // Strip the collection name prefix — file is already inside that collection dir
-        const collectionName = contentRoot.split('/')[0]; // 'pages' or 'posts'
-        if (url.startsWith(`${collectionName}/`)) {
-          // pages/attachments/me-wide.jpg → attachments/me-wide.jpg → ./attachments/me-wide.jpg
-          const pathWithinCollection = url.slice(collectionName.length + 1);
-          node.url = `./${pathWithinCollection}`;
-          return;
-        }
-      }
-    }
-
-    // Fallback — prefix with ./
-    node.url = `./${url}`;
-  });
-}
 
 // ── Image Attributes ─────────────────────────────────────────────────────────
 
@@ -212,8 +143,7 @@ function processImageGrids(tree: Root) {
 // ── Main Plugin ───────────────────────────────────────────────────────────────
 
 export const remarkImageProcessing: Plugin<[], Root> = () => {
-  return (tree, file) => {
-    resolveImagePaths(tree, file);
+  return (tree) => {
     addImageAttributes(tree);
     processImageCaptions(tree);
     mergeConsecutiveImageParagraphs(tree);
