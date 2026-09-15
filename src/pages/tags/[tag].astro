@@ -3,7 +3,7 @@ import type { GetStaticPaths } from "astro";
 import PageLayout from "@/layouts/PageLayout.astro";
 import PostFeed from "@/components/content/PostFeed.astro";
 import { getAllTagArchives, type TagArchive } from "@/utils/content";
-import { titleify, slugify } from "@/utils/text";
+import { titleify, getTagTransitionName } from "@/utils/text";
 
 export const getStaticPaths = (async () => {
   const tagArchives = await getAllTagArchives();
@@ -22,13 +22,6 @@ type Props = {
   archive: TagArchive;
 };
 
-export function getTagTransitionName(
-  tag: string
-) {
-  return `tag-${slugify(
-    tag.replaceAll(".", "-")
-  )}`;
-}
 const { archive } = Astro.props;
 const title = `Tag: ${titleify(archive.tag)}`;
 const description = `Posts tagged "${titleify(archive.tag)}".`;

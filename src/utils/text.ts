@@ -18,6 +18,10 @@ export function slugify(str?: string): string {
     .replace(/^-+|-+$/g, "");
 }
 
+export function getTagTransitionName(tag: string): string {
+  return `tag-${slugify(tag.replaceAll(".", "-"))}`;
+}
+
 /**
  * Humanize a string (convert slugs/underscores to readable text)
  */

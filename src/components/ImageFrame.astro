@@ -1,0 +1,19 @@
+---
+interface Props {
+  bare?: boolean;
+  caption?: string;
+}
+
+const { bare = false, caption } = Astro.props;
+---
+
+{bare ? (
+  <slot />
+) : (
+  <figure class="border border-border rounded-sm overflow-hidden">
+    <slot />
+    {caption && (
+      <figcaption class="mt-2 text-sm text-center text-muted-foreground leading-snug">{caption}</figcaption>
+    )}
+  </figure>
+)}

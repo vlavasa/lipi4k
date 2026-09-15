@@ -150,7 +150,8 @@ export async function getAllTagArchives(): Promise<TagArchive[]> {
  * posts/travel/Japan/Tokyo.md
  * -> ["travel", "japan"]
  */
-export function getPostPathSegments(
+function getContentPathSegments(
+  contentPath: string,
   filePath?: string
 ): string[] {
   if (!filePath) {
@@ -158,12 +159,18 @@ export function getPostPathSegments(
   }
 
   return filePath
-    .replace(POSTS_PATH, "")
+    .replace(contentPath, "")
     .split("/")
     .filter(Boolean)
     .filter((segment) => !segment.startsWith("_"))
     .slice(0, -1)
     .map(slugify);
+}
+
+export function getPostPathSegments(
+  filePath?: string
+): string[] {
+  return getContentPathSegments(POSTS_PATH, filePath);
 }
 
 /**
@@ -189,11 +196,12 @@ export function getPostSlugSegment(id: string): string {
  * adding-images/index.md
  * -> "adding-images"
  */
-export function getPostSlugPath(
+function getContentSlugPath(
+  contentPath: string,
   id: string,
   filePath?: string
 ): string {
-  const segments = getPostPathSegments(filePath);
+  const segments = getContentPathSegments(contentPath, filePath);
 
   // Astro already uses the parent folder as the ID for index.md / index.mdx.
   if (segments.length > 0 && /\/index\.mdx?$/.test(filePath ?? "")) {
@@ -206,6 +214,13 @@ export function getPostSlugPath(
   return segments.length > 0
     ? [...segments, slug].join("/")
     : slug;
+}
+
+export function getPostSlugPath(
+  id: string,
+  filePath?: string
+): string {
+  return getContentSlugPath(POSTS_PATH, id, filePath);
 }
 
 /**
@@ -224,35 +239,14 @@ export function getPostSlug(
 export function getPagePathSegments(
   filePath?: string
 ): string[] {
-  if (!filePath) {
-    return [];
-  }
-
-  return filePath
-    .replace(PAGES_PATH, "")
-    .split("/")
-    .filter(Boolean)
-    .filter((segment) => !segment.startsWith("_"))
-    .slice(0, -1)
-    .map(slugify);
+  return getContentPathSegments(PAGES_PATH, filePath);
 }
 
 export function getPageSlugPath(
   id: string,
   filePath?: string
 ): string {
-  const segments = getPagePathSegments(filePath);
-
-  // Folder-based pages follow the same index convention as posts.
-  if (segments.length > 0 && /\/index\.mdx?$/.test(filePath ?? "")) {
-    return segments.join("/");
-  }
-
-  const slug = slugify(getPostSlugSegment(id));
-
-  return segments.length > 0
-    ? [...segments, slug].join("/")
-    : slug;
+  return getContentSlugPath(PAGES_PATH, id, filePath);
 }
 
 export function getPageSlug(
