@@ -2,8 +2,7 @@
 // PostFeed.astro
 import { type Post } from "@/utils/content";
 import SectionHeader from "@/components/SectionHeader.astro";
-import PostTitle from "./PostTitle.astro";
-import PostMeta from "./PostMeta.astro";
+import PostPreview from "./PostPreview.astro";
 
 type Props = {
   posts: Post[];
@@ -54,16 +53,7 @@ const years = Object.keys(postsByYear)
 
         {/* Posts in this year */}
         {yearPosts.map((post) => (
-          <div class="flex flex-col space-y-3 py-4 group hover:translate-x-2 transition-transform ease-fluid">
-            <PostTitle post={post} 
-              class="text-lg md:text-xl font-medium text-balance leading-snug link-hover"/>
-            {post.data.description && (
-              <p class="text-sm italic leading-normal text-muted-foreground md:max-w-xl">
-                {post.data.description}
-              </p>
-            )}
-            <PostMeta post={post} accentCategory showReadingTime />
-          </div>
+          <PostPreview post={post} />
         ))}
 
       </div>
