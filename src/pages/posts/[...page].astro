@@ -17,7 +17,6 @@ export const getStaticPaths = (async ({
 }) satisfies GetStaticPaths;
 
 const { page } = Astro.props;
-const allPosts = await getAllPosts();
 const isFirstPage = page.currentPage === 1;
 const title = isFirstPage
   ? "Posts"

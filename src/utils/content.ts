@@ -14,7 +14,6 @@ export type TagArchive = {
 };
 
 let postsCache: Post[] | null = null;
-let pagesCache: Page[] | null = null;
 
 function isVisiblePost(post: Post): boolean {
   // Show everything in development
@@ -29,19 +28,6 @@ function isVisiblePost(post: Post): boolean {
     Date.now();
 
   return !isDraft && !isFuturePost;
-}
-
-function isVisiblePage(page: Page): boolean {
-  // Show drafts in development
-  if (import.meta.env.DEV) {
-    return true;
-  }
-
-  return !page.data.draft;
-}
-
-function isPublicPage(page: Page): boolean {
-  return page.id !== "home-intro";
 }
 
 function sortPosts(posts: Post[]): Post[] {
@@ -71,23 +57,6 @@ export async function getAllPosts(): Promise<Post[]> {
   postsCache = sortPosts(posts);
 
   return postsCache;
-}
-
-export async function getAllPages(): Promise<Page[]> {
-  if (pagesCache) {
-    return pagesCache;
-  }
-
-  const pages = await getCollection(
-    "pages",
-    (page) =>
-      isVisiblePage(page) &&
-      isPublicPage(page)
-  );
-
-  pagesCache = pages;
-
-  return pagesCache;
 }
 
 export async function getAllTagArchives(): Promise<TagArchive[]> {

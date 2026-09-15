@@ -64,18 +64,6 @@ export function filenameToAlt(filename: string): string {
 }
 
 /**
- * Shuffle array — Fisher-Yates
- */
-export function shuffleArray<T>(array: T[]): T[] {
-  const shuffled = [...array];
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-  }
-  return shuffled;
-}
-
-/**
  * Resolve a vault-absolute image path to a glob key.
  *
  * Handles:
@@ -92,27 +80,6 @@ function vaultPathToGlobKey(vaultPath: string): string {
 // ============================================================================
 // COVER IMAGE
 // ============================================================================
-
-/**
- * Resolve a post's cover frontmatter value to ImageMetadata.
- *
- * Accepts vault-absolute Obsidian paths with or without [[ ]] brackets:
- *   [[travels/2011-03-21-bhuleshwar/attachments/image.jpg]]
- *   travels/2011-03-21-bhuleshwar/attachments/image.jpg
- *
- * Returns undefined if the path cannot be resolved (allows graceful fallback).
- */
-// export function getCoverImage(raw: string | undefined): ImageMetadata | undefined {
-//   if (!raw) return undefined;
-
-//   const stripped = stripObsidianBrackets(raw).trim();
-//   if (!stripped) return undefined;
-
-//   const globKey = vaultPathToGlobKey(stripped);
-
-//   const mod = allAttachmentImages[globKey];
-//   return mod?.default;
-// }
 
 export function normalizeCoverPath(
   raw: string | undefined
@@ -145,6 +112,10 @@ export function normalizeCoverPath(
   return value;
 }
 
+/**
+ * Resolve a raw, Obsidian, or Markdown cover path to ImageMetadata.
+ * Returns undefined if the path cannot be resolved.
+ */
 export function getCoverImage(
   raw: string | undefined
 ): ImageMetadata | undefined {
@@ -180,11 +151,4 @@ export function getGalleryImages(filePath: string): GalleryImage[] {
         filename,
       };
     });
-}
-
-/**
- * Check if a post has a gallery — use for conditional rendering decisions.
- */
-export function hasGallery(filePath: string): boolean {
-  return getGalleryImages(filePath).length > 0;
 }
