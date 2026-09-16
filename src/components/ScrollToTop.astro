@@ -3,6 +3,7 @@ import ChevronUp from "@/assets/chevron-up.svg"
 ---
 <button
   id="scroll-to-top" class="scroll-to-top"
+  type="button"
   aria-label="Scroll to top"
   hidden
 >
@@ -10,24 +11,47 @@ import ChevronUp from "@/assets/chevron-up.svg"
 </button>
 
 <script>
-  const btn = document.getElementById('scroll-to-top');
-  if (!btn) throw new Error('scroll-to-top button not found');
+  let cleanup: (() => void) | undefined;
 
-  // Use IntersectionObserver on a sentinel at page top
-  const sentinel = document.createElement('div');
-  sentinel.style.cssText = 'position:absolute;top:0;left:0;height:1px;width:1px;pointer-events:none;';
-  document.body.prepend(sentinel);
+  function destroyScrollToTop() {
+    cleanup?.();
+    cleanup = undefined;
+  }
 
-  const observer = new IntersectionObserver(
-    ([entry]) => {
-      btn.hidden = entry.isIntersecting;
-    },
-    { threshold: 0, rootMargin: '400px 0px 0px 0px' }
-  );
+  function initScrollToTop() {
+    destroyScrollToTop();
 
-  observer.observe(sentinel);
+    const btn = document.getElementById('scroll-to-top');
+    if (!btn) return;
 
-  btn.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
+    // Use IntersectionObserver on a sentinel at page top.
+    const sentinel = document.createElement('div');
+    sentinel.style.cssText = 'position:absolute;top:0;left:0;height:1px;width:1px;pointer-events:none;';
+    document.body.prepend(sentinel);
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        btn.hidden = entry.isIntersecting;
+      },
+      { threshold: 0, rootMargin: '400px 0px 0px 0px' }
+    );
+
+    observer.observe(sentinel);
+
+    function scrollToTop() {
+      // Inherit CSS scroll behavior, including the reduced-motion preference.
+      window.scrollTo({ top: 0, behavior: 'auto' });
+    }
+
+    btn.addEventListener('click', scrollToTop);
+
+    cleanup = () => {
+      observer.disconnect();
+      sentinel.remove();
+      btn.removeEventListener('click', scrollToTop);
+    };
+  }
+
+  document.addEventListener('astro:page-load', initScrollToTop);
+  document.addEventListener('astro:before-swap', destroyScrollToTop);
 </script>
