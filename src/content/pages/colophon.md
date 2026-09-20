@@ -46,7 +46,7 @@ Fonts are loaded through **Astro's font API**, which optimises loading, subsets 
 
 **Print continuity** means that Cmd+P produces a result close to the screen layout: the parchment background is preserved, the type scale holds, and the page does not collapse into a plain-text dump. Lipi4k is one of few web templates where printing is considered rather than ignored.
 
-**The reading progress bar** at the top of each post is powered by CSS scroll-driven animations, with no JavaScript fallback needed for modern browsers.
+**The reading progress bar** along the left edge of each post page follows your progress through the page. It uses CSS scroll-driven animations where supported, with a small JavaScript fallback for other browsers. It is hidden when reduced motion is preferred.
 
 ## Source
 
