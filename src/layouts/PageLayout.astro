@@ -6,6 +6,7 @@ import Breadcrumb from "@/components/Breadcrumb.astro";
 import Footer from "@/components/Footer.astro";
 import siteConfig from "@/site.config";
 import { type Page, type Post } from "@/utils/content";
+import { formatDate } from "@/utils/date";
 
 interface Props {
   entry?: Page | Post;
@@ -50,10 +51,8 @@ const description =
 const last = updated ? updated : published;
 const searchable = Boolean(entry && !entry.data.draft && !noindex);
 
-const formattedDate = last?.toLocaleDateString("en-US", {
-  year: "numeric",
-  month: "long",
-});
+const dateLocale = entry?.data.lang ?? "en";
+const formattedDate = last ? formatDate(last, dateLocale, "long") : undefined;
 
 ---
 <BaseLayout schema={schema} lang={entry?.data.lang}>
@@ -69,8 +68,10 @@ const formattedDate = last?.toLocaleDateString("en-US", {
     {
       showHeader &&
       <PageHeader {title} subheading={description} transitionName={transitionName} {searchable}>
-      {formattedDate && (
-        <span slot="meta">Updated {formattedDate}</span>
+      {last && (
+        <span slot="meta">
+          Updated <time datetime={last.toISOString()} lang={dateLocale}>{formattedDate}</time>
+        </span>
       )}
     </PageHeader>
     }

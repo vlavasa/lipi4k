@@ -46,6 +46,8 @@ export const GET: APIRoute =
         category:
           post.data.category,
 
+        lang: post.data.lang,
+
         published:
           post.data.updated ??
           post.data.published,

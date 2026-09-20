@@ -5,6 +5,7 @@ import { html } from "satori-html";
 import { Resvg } from "@resvg/resvg-js";
 import siteConfig from "@/site.config";
 import { absoluteUrl } from "@/utils/url";
+import { formatDate } from "@/utils/date";
 import notoSansRegular from "@/assets/fonts/NotoSans-Regular.ttf";
 import notoSerifRegular from "@/assets/fonts/NotoSerif-Regular.ttf";
 import notoSerifBold from "@/assets/fonts/NotoSerif-Bold.ttf";
@@ -14,26 +15,19 @@ export type OgImageOptions = {
   description?: string;
   category?: string;
   published?: Date;
+  lang?: string;
   site?: string;
 };
 
 const WIDTH = 1200;
 const HEIGHT = 630;
 
-function formatDate(date?: Date) {
-  if (!date) return "";
-
-  return new Intl.DateTimeFormat("en", {
-    month: "short",
-    year: "numeric",
-  }).format(date);
-}
-
 export async function generateOgImage({
   title,
   description,
   category,
   published,
+  lang,
   site = absoluteUrl("/", siteConfig.url),
   }: OgImageOptions) {
   const markup = html(`
@@ -81,7 +75,7 @@ export async function generateOgImage({
           ${
             published
               ? `<span>${formatDate(
-                  published
+                  published, lang
                 )}</span>`
               : ""
           }
