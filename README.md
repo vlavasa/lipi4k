@@ -181,7 +181,7 @@ The font utilities in `src/styles/theme.css` assign each typeface a role:
 
 - `font-content` — **Literata** for body text and headings.
 - `font-ui` — **Manrope** for navigation, metadata, archive years, article counts on `/posts`, `/tags`, and `/tags/*`, and gallery photo counts.
-- `font-code` — **Fira Code** for inline code, code blocks, small section headings, action labels, and the footer description.
+- `font-code` — **Fira Code** for inline code, code blocks, small section headings, action labels, and the optional footer note.
 - `font-annotation` — **Caveat** for handwritten annotations.
 
 Archive years and counts use tabular figures to keep digits aligned. Article counts are displayed as `1 POST` or `7 POSTS`; gallery counts use `1 photo` or `3 photos`.
@@ -214,7 +214,6 @@ Archive years and counts use tabular figures to keep digits aligned. Article cou
 | `updated` | date | Yes |
 | `draft` | boolean | No |
 | `lang` | string | No |
-| `annotation` | string | No |
 
 For posts and content pages, `lang` sets the document's HTML language. Use a language tag such as `cs` for Czech, `en` for English, or `de` for German. When omitted, it defaults to `en`. Browsers and assistive technology use this value to interpret the text, and Pagefind searches content in the current document's language. The template's interface labels remain in English.
 
@@ -224,7 +223,11 @@ To mark a post or page as Czech, add this to its frontmatter:
 lang: cs
 ```
 
-On content pages, `annotation` sets the handwritten note in the footer. When omitted, it uses `annotation` from `configs/user.config.ts`; an empty string hides the note on that page. The home page uses the global annotation directly. Post annotations appear below the article content and are set only through post frontmatter.
+The same footer appears on every page. Configure `footerLinks` (RSS, Colophon, and the template source by default), the global handwritten `annotation`, and the optional `footerNote` in `configs/user.config.ts`. The note supports Markdown links and appears below the annotation; it is empty by default and can hold a copyright or content-licence notice. Empty optional fields leave no extra space.
+
+Page frontmatter no longer overrides the footer annotation; move any existing page-specific note into the page's Markdown content. Post annotations remain below the article content and are independent of the global footer annotation.
+
+The unused `footerCredits` setting has been replaced by `footerNote`, and the `social` setting has been removed. Add social profiles to `footerLinks` or write them directly into `src/content/pages/about.md`.
 
 ---
 

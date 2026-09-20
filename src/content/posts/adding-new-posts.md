@@ -57,7 +57,7 @@ Every post needs a frontmatter block at the top of the file, delimited by `---`.
 
 `lang` is optional and defaults to `en`. Sets the document's HTML language for this post, for example `cs` for Czech, `en` for English, or `de` for German. It also formats the post's date in that language, both in the article and in listings on the home page, posts archive, and tag pages, as well as in generated Open Graph images. The same field is supported in content page frontmatter for setting the document language and formatting the update date. Browsers and assistive technology use it to interpret the text, and Pagefind searches content in that language. The template's interface labels remain in English.
 
-`annotation` is optional. A short, handwritten-style note displayed below the article content, before the tags and sharing links. It uses the `font-annotation` typeface (Caveat by default) and is rendered as plain text. Omit it or set it to an empty string to hide the note. Posts use only their own frontmatter annotation; they do not inherit the global footer annotation from `configs/user.config.ts`.
+`annotation` is optional. A short, handwritten-style note displayed below the article content, before the tags and sharing links. It uses the `font-annotation` typeface (Caveat by default) and is rendered as plain text. Omit it or set it to an empty string to hide the article note. This note has no global fallback. The shared footer separately displays the global annotation from `configs/user.config.ts`, just as it does on every other page.
 
 A complete frontmatter block looks like this:
 

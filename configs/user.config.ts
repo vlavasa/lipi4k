@@ -18,30 +18,12 @@ const userConfig: UserConfig = {
 
   footerLinks: [
     { title: "RSS", url: "/rss.xml" },
+    { title: "Colophon", url: "/colophon" },
     { title: "Source", url: "https://github.com/vlavasa/lipi4k" },
-    
   ],
 
-  social: [
-    {
-      title: "GitHub",
-      url: "https://github.com/vlavasa/lipi4k",
-      icon: "github",
-    },
-    {
-      title: "X",
-      url: "https://x.com/",
-      icon: "x",
-    },
-    {
-      title: "LinkedIn",
-      url: "https://linkedin.com/",
-      icon: "linkedin",
-    },
-    
-  ],
-
-  footerCredits: "Designed for reading. Built with Astro & Lipi4k",
+  // Optional short note below the annotation. Supports Markdown links.
+  footerNote: "",
 
   postsPerPage: 8,
   recentPosts: 6,

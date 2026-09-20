@@ -36,7 +36,6 @@ const pagesCollection = defineCollection({
     updated: z.coerce.date(),
     draft: z.boolean().default(false),
     lang: z.string().optional(),
-    annotation: z.string().optional(),
   })
 });
 

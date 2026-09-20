@@ -3,8 +3,6 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import PageHeader from "@/components/PageHeader.astro";
 import SEO from "@/components/SEO.astro";
 import Breadcrumb from "@/components/Breadcrumb.astro";
-import Footer from "@/components/Footer.astro";
-import siteConfig from "@/site.config";
 import { type Page, type Post } from "@/utils/content";
 import { formatDate } from "@/utils/date";
 
@@ -29,9 +27,6 @@ const {
   schema,
   showHeader = true,
 } = Astro.props;
-
-// Pages: entry annotation takes precedence over the global fallback.
-const footerAnnotation = entry?.data.annotation ?? siteConfig.annotation;
 
 const {
   title: entryTitle,
@@ -80,7 +75,4 @@ const formattedDate = last ? formatDate(last, dateLocale, "long") : undefined;
     {searchable && !showHeader && <meta data-pagefind-meta="title[content]" content={title} />}
     <slot />
   </section>
-  <Fragment slot="footer">
-    <Footer annotation={footerAnnotation} />
-  </Fragment>
 </BaseLayout>

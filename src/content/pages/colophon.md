@@ -12,9 +12,9 @@ The body typeface is **Literata**, designed by Veronika Burian and José Scaglio
 
 The interface typeface is **Manrope**, a geometric sans-serif that works at small sizes without losing clarity. It carries post metadata, navigation labels, archive years, article counts in post and tag listings, and gallery photo counts. Years and counts use tabular figures for aligned digits, with an unslashed zero.
 
-The monospaced typeface is **Fira Code**, used for inline code, code blocks, small section headings, action labels, and the footer description. It includes ligatures for common programming symbols, but these are not forced: if you prefer to disable them, set `font-variant-ligatures: none` on `code` elements.
+The monospaced typeface is **Fira Code**, used for inline code, code blocks, small section headings, action labels, and the optional footer note. It includes ligatures for common programming symbols, but these are not forced: if you prefer to disable them, set `font-variant-ligatures: none` on `code` elements.
 
-The annotation typeface is **Caveat**, a handwritten face used for optional notes in the home-page and content-page footers, and beneath individual posts. These annotations use the primary accent colour and a slight rotation.
+The annotation typeface is **Caveat**, a handwritten face used for the optional shared footer annotation on every page and for separate notes beneath individual posts. These annotations use the primary accent colour and a slight rotation.
 
 ## Design Language
 

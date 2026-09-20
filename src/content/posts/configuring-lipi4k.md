@@ -38,7 +38,7 @@ const userConfig: UserConfig = {
 
 ## Navigation
 
-Header and planned footer links are configured separately. Header navigation is currently rendered; footer-link rendering is not implemented yet.
+Header and footer links are configured separately. The same footer appears on every page, including posts, archives, and the 404 page.
 
 ```ts
   navigation: [
@@ -49,38 +49,30 @@ Header and planned footer links are configured separately. Header navigation is 
 
   footerLinks: [
     { title: "RSS", url: "/rss.xml" },
-    { title: "Source", url: "https://github.com/yourusername/yourrepo" },
+    { title: "Colophon", url: "/colophon" },
+    { title: "Source", url: "https://github.com/vlavasa/lipi4k" },
   ],
 ```
 
-Each item takes a `title` (the visible label) and a `url`. Navigation links support both internal paths and external URLs.
+Each item takes a `title` (the visible label) and a `url`. Navigation links support both internal paths and external URLs. Internal paths respect the configured `BASE_PATH`.
 
 The default navigation links to **Posts** (`/posts`), the paginated list of all published posts; **Tags** (`/tags`), the topic index with links to posts for each tag; and **About** (`/about`). The **All posts** link on the home page also opens `/posts`.
 
-> **TODO:** Render `footerLinks` in the site footer. The setting is currently accepted but has no visible effect.
+The footer shows the author, a compact row of links, the optional handwritten annotation, and an optional note. Its default links lead to **RSS**, **Colophon** (the site's typefaces, tools, and credits), and the template's **Source** repository. Omit `footerLinks` or set it to `[]` to hide the link row.
 
-## Social Links
+There is no separate social-link setting. Add a profile to `footerLinks` if you want it in the footer, or write links and any additional content directly in `src/content/pages/about.md`.
 
-```ts
-  social: [
-    { title: "GitHub", url: "https://github.com/yourusername", icon: "github" },
-    { title: "X", url: "https://x.com/yourhandle", icon: "x" },
-  ],
-```
-
-The `icon` field is intended to accept `"github"`, `"x"`, or `"linkedin"`. Remove the `social` array if you do not plan to expose social links.
-
-> **TODO:** Render configured `social` links in the header. The setting is currently accepted but has no visible effect.
-
-## Footer Credits
+## Footer Note
 
 ```ts
-  footerCredits: "Designed for reading. Built with Astro & Lipi4k",
+  footerNote: "Read about this site's [typefaces and tools](/colophon).",
 ```
 
-This setting is intended for a tagline, copyright notice, or brief attribution at the bottom of every page.
+`footerNote` is a short, optional note at the very bottom of every page, below the handwritten annotation. Without an annotation, it follows the links. Omit it or use an empty string to hide it without leaving a gap; the default configuration leaves it empty.
 
-> **TODO:** Render `footerCredits` in the site footer. The setting is currently accepted but has no visible effect.
+Use it for a copyright notice, a link to your content's licence, or a brief attribution. Markdown links and emphasis are supported; raw HTML is not rendered. Internal links respect `BASE_PATH`. Keep the note to a short paragraph. The licence of your published content is separate from the template's licence.
+
+When updating an older configuration, replace the unused `footerCredits` setting with `footerNote`. Move any links from the removed `social` setting into `footerLinks` or the About page.
 
 ## Pagination and Feed Depth
 
@@ -127,19 +119,19 @@ The home page hero supports three variants:
 
 If you are updating an existing configuration, rename `"default"` to `"markdown"` and `"studio"` to `"description"`.
 
-The global annotation is rendered separately in the home-page footer and is unaffected by `heroVariant`.
+The global annotation is rendered in the shared footer and is unaffected by `heroVariant`.
 
 ## Handwritten Annotation
 
-Set `annotation` in `configs/user.config.ts` to add a short handwritten note to the footer of the home page and pages using `PageLayout`:
+Set `annotation` in `configs/user.config.ts` to add a short handwritten note to the footer of every page:
 
 ```ts
   annotation: "Writing between filter coffees and terminal windows.",
 ```
 
-The note is rendered as plain text using the `font-annotation` typeface (Caveat by default). A content page can override it with `annotation` in its frontmatter. Setting `annotation: ""` in that page hides the note; omitting the field uses the global value.
+The annotation is rendered as plain text using the `font-annotation` typeface (Caveat by default). Omit it or set it to an empty string to hide it across the site. Page frontmatter no longer overrides the footer; move any existing page-specific note into that page's Markdown content.
 
-Posts have their own optional `annotation` frontmatter field, displayed below the article content before the tags and sharing links. Posts do not inherit the global annotation. For example:
+Posts also have their own optional `annotation` frontmatter field, displayed below the article content before the tags and sharing links. This article note is independent of the shared footer annotation: it has no global fallback and does not replace or hide the footer annotation. For example:
 
 ```yaml
 annotation: Příliš žluťoučký kůň úpěl ďábelské ódy.

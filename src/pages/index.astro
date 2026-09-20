@@ -7,7 +7,6 @@ import HomeHero from "@/components/content/HomeHero.astro";
 import { generateWebsiteSchema } from "@/utils/schema";
 import FeaturedPost from '@/components/content/FeaturedPost.astro';
 import RecentPosts from '@/components/content/RecentPosts.astro';
-import Footer from '@/components/Footer.astro';
 
 const allPosts = await getAllPosts();
 const structuredData = generateWebsiteSchema();
@@ -28,10 +27,4 @@ const structuredData = generateWebsiteSchema();
 			The first posts are in the works.
 		</p>
 	)}
-	<Fragment slot="footer">
-    <Footer
-			meta='Built for readers, writers, and unfinished drafts.'
-			annotation={siteConfig.annotation}
-		/>
-  </Fragment>
 </BaseLayout>

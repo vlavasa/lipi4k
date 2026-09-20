@@ -5,12 +5,6 @@ export interface NavItem {
   url: string;
 }
 
-export interface SocialItem {
-  title: string;
-  url: string;
-  icon?: string;
-}
-
 export interface UserConfig {
   title: string;
   description: string;
@@ -22,9 +16,8 @@ export interface UserConfig {
 
   navigation?: NavItem[];
   footerLinks?: NavItem[];
-  social?: SocialItem[];
 
-  footerCredits?: string;
+  footerNote?: string;
 
   postsPerPage?: number;
   recentPosts?: number;
@@ -52,9 +45,8 @@ const siteConfig = {
 
   navigation: userConfig.navigation ?? [],
   footerLinks: userConfig.footerLinks ?? [],
-  social: userConfig.social ?? [],
 
-  footerCredits: userConfig.footerCredits,
+  footerNote: userConfig.footerNote,
 
   postsPerPage: userConfig.postsPerPage ?? 8,
   recentPosts: userConfig.recentPosts ?? 6,

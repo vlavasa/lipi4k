@@ -12,7 +12,6 @@ import PostNavigation from "@/components/content/PostNavigation.astro";
 import { generatePostSchema } from "@/utils/schema";
 import PostMeta from "@/components/content/PostMeta.astro";
 import RelatedPosts from "@/components/content/RelatedPosts.astro";
-import Footer from "@/components/Footer.astro";
 import SectionHeader from "@/components/SectionHeader.astro";
 import ImageWrapper from "@/components/ImageWrapper.astro";
 import PostGallery from "@/components/content/PostGallery.astro";
@@ -153,8 +152,4 @@ const galleryImages = getGalleryImages(post.filePath ?? '');
     </script>
   </Fragment>
 
-  <Fragment slot="footer">
-    <Footer />
-  </Fragment>
-  
 </BaseLayout>
