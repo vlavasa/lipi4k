@@ -43,9 +43,9 @@ Every post needs a frontmatter block at the top of the file, delimited by `---`.
 
 `description` is required. It appears as the deck beneath the title on the featured post, in the feed listing, and in search engine previews. Write it as a complete sentence. It represents the article.
 
-`published` is required. The date the post was (or will be) published, in `YYYY-MM-DD` format. Posts are sorted by this date, newest first.
+`published` is required. The date the post was (or will be) published, in `YYYY-MM-DD` format. Posts with a future publication date are excluded from production builds. Posts are sorted newest first, using `updated` when present and `published` otherwise.
 
-`updated` is optional. When present, Lipi4k shows an "Updated on" note in the post metadata. Use it when you revise a post substantially enough that existing readers should know the text has changed.
+`updated` is optional. When present, Lipi4k shows an "Updated on" note in the post metadata and uses this date instead of `published` to sort the post. Use it when you revise a post substantially enough that existing readers should know the text has changed. An update can move an older post to the top of the home page.
 
 `category` is optional. A single string that classifies the post. The default value is `Travels`, which reflects the template's origins in travel writing. Change it to whatever suits your publication: `Essays`, `Notes`, `Code`, `Journal`.
 
@@ -53,7 +53,7 @@ Every post needs a frontmatter block at the top of the file, delimited by `---`.
 
 `cover` is optional. A plain path relative to `src/content/`, such as `posts/my-post/attachments/cover.jpg`. Store the image in an `attachments/` directory. It appears above the article content; the Open Graph card is generated separately from the post title. See the [image guide](../adding-images/) for the folder structure.
 
-`draft` is optional and defaults to `false`. Set it to `true` to prevent the post from appearing in the feed or being built to a public URL. Draft posts are excluded from production builds. During development (`astro dev`), draft posts are built and accessible by navigating to their URL directly.
+`draft` is optional and defaults to `false`. Set it to `true` to exclude the post from production builds, including listings and its public URL. During development (`npm run dev`), drafts and posts with future publication dates are included in listings and have accessible post pages.
 
 `lang` is optional and defaults to `en`. Sets the document's HTML language for this post, for example `cs` for Czech, `en` for English, or `de` for German. It also formats the post's date in that language, both in the article and in listings on the home page, posts archive, and tag pages, as well as in generated Open Graph images. The same field is supported in content page frontmatter for setting the document language and formatting the update date. Browsers and assistive technology use it to interpret the text, and Pagefind searches content in that language. The template's interface labels remain in English.
 
@@ -81,7 +81,9 @@ annotation: Written between rain showers and the last train home.
 
 ## The Featured Post
 
-The post at the top of the home page is simply the most recently published non-draft post. There is no `featured: true` flag. To change which post is featured, change its `published` date to be the most recent among all your posts.
+The featured post is the first post in the sorted list: the one with the most recent `updated` date, or `published` date if `updated` is absent. There is no `featured: true` flag. Updating an older post can therefore make it the featured post, even if another post was published more recently.
+
+In production builds, only non-draft posts whose `published` date is not in the future are eligible. During development (`npm run dev`), drafts and future-dated posts are included too, so the featured post may differ from the production site. The remaining posts appear in the "Recent" section, up to the home page's configured limit. Selection happens when the site is built; reaching a scheduled publication date requires a new build to publish the post.
 
 ## Writing the Post
 
