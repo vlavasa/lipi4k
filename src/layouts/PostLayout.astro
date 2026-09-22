@@ -16,17 +16,22 @@ import SectionHeader from "@/components/SectionHeader.astro";
 import ImageWrapper from "@/components/ImageWrapper.astro";
 import PostGallery from "@/components/content/PostGallery.astro";
 import { getAssetPath } from "@/utils/url";
+import type { MarkdownHeading } from "astro";
+import { getArticleContents } from "@/utils/contents";
+import ContentsSidebar from "@/components/content/ContentsSidebar.astro";
 
 type Props = {
   post: Post;
   prevPost?: Post | null;
   nextPost?: Post | null;
+  headings?: MarkdownHeading[];
 };
 
 const {
   post,
   prevPost,
   nextPost,
+  headings = [],
 } = Astro.props;
 
 const { title, description, cover, published, tags } = post.data;
@@ -37,9 +42,10 @@ const ogImage = `${getPostUrl(post.id, post.filePath)}/index.png`;
 const structuredData = generatePostSchema(post);
 const coverImage = getCoverImage(cover);
 const galleryImages = getGalleryImages(post.filePath ?? '');
+const contents = getArticleContents(headings, post.data.lang, siteConfig.tableOfContentsLabels);
 ---
 
-<BaseLayout schema={structuredData} lang={post.data.lang}>
+<BaseLayout schema={structuredData} lang={post.data.lang} {contents}>
   <SEO
     slot="seo"
     {title}
@@ -87,9 +93,11 @@ const galleryImages = getGalleryImages(post.filePath ?? '');
     )}
 
     <!-- Post Content -->
+    <div class="article-with-contents">
+    {contents && <ContentsSidebar {contents} />}
     <article data-pagefind-body class="post-content flex flex-col space-y-2">
       <!-- Rendered markdown -->
-	    <div class="app-prose post-content">
+	    <div class="app-prose post-content" data-contents-article>
 	      <slot />
         <hr />
 	    </div>
@@ -98,6 +106,7 @@ const galleryImages = getGalleryImages(post.filePath ?? '');
         <PostGallery images={galleryImages} galleryId={post.id} />
       )}
 	  </article>
+    </div>
 
     {/* Post annotation — document-level context, posts only, no footer fallback */}
     {post.data.annotation && (

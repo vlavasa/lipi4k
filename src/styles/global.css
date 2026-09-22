@@ -179,6 +179,10 @@ html {
     @apply text-muted-foreground w-4 inline-block text-center ms-2 no-underline opacity-0 transition-opacity duration-200;
   }
 
+  .heading-anchor:empty::before {
+    content: "↗";
+  }
+
   :is(h2, h3, h4):hover .heading-anchor {
     @apply opacity-100;
   }

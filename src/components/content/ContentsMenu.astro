@@ -1,0 +1,79 @@
+---
+import type { ArticleContents } from "@/utils/contents";
+import ContentsList from "./ContentsList.astro";
+import "@/styles/contents.css";
+
+interface Props {
+  contents: ArticleContents;
+}
+
+const { contents } = Astro.props;
+---
+
+<article-contents data-pagefind-ignore>
+  <button
+    id="contents-toggle"
+    type="button"
+    class="contents-toggle"
+    aria-label={contents.labels.navigation}
+    lang={contents.labelLang}
+    aria-controls="contents-panel"
+    aria-expanded="false"
+    disabled
+  >
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M4 4v14h4M4 8h4M12 4h8M12 10h8M12 16h8"></path>
+    </svg>
+    <span class="contents-toggle-label">{contents.labels.button}</span>
+  </button>
+  <nav
+    id="contents-panel"
+    class="contents-panel"
+    aria-labelledby="contents-panel-title"
+    hidden
+  >
+    <div class="contents-panel-header">
+      <h2
+        id="contents-panel-title"
+        class="contents-title"
+        lang={contents.labelLang}
+      >
+        {contents.labels.title}
+      </h2>
+      <button
+        type="button"
+        class="contents-close"
+        aria-label={contents.labels.close}
+        lang={contents.labelLang}
+      >
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          aria-hidden="true"
+        >
+          <path d="m6 6 12 12M6 18 18 6"></path>
+        </svg>
+      </button>
+    </div>
+    <ContentsList {contents} />
+  </nav>
+</article-contents>
+
+<script>
+  import "@/scripts/contents";
+</script>

@@ -95,11 +95,13 @@ Editor-specific wiki links (`[[Page]]`), embeds (`![[photo.jpg]]`), comments (`%
 
 The first paragraph of the post receives a drop capital in the published layout on larger screens. This is applied automatically. You do not need to mark it up differently.
 
+Articles with at least two H2 or H3 headings automatically get a table of contents. It stays in the left margin on wide screens and opens from the header's Contents button on smaller screens. The article title and H4–H6 headings are omitted. Links use the headings' generated anchors, including accents and repeated heading names.
+
 ### Czech and Other European Languages
 
 Save Markdown and MDX files as UTF-8 and write accented characters directly, including in titles, descriptions, categories, and tags. The default fonts include extended Latin characters for Czech and other European languages that use the Latin alphabet.
 
-Set `lang: cs` in the frontmatter for a Czech article (or page). This identifies the document language for browsers, assistive technology, and search. Dates follow this language too: a May 2026 date displays as `květen 2026` in articles, their listings and generated Open Graph images, and content page update dates. Interface labels remain in English. For example, save this as `src/content/posts/cesky-clanek.md`:
+Set `lang: cs` in the frontmatter for a Czech article (or page). This identifies the document language for browsers, assistive technology, and search. Dates follow this language too: a May 2026 date displays as `květen 2026` in articles, their listings and generated Open Graph images, and content page update dates. Article contents labels also follow `lang`, with English and Czech included. Other interface labels remain in English. Add translations or change the contents labels through `tableOfContentsLabels` in `configs/user.config.ts`; see the [configuration guide](../configuring-lipi4k/#article-contents). For example, save this as `src/content/posts/cesky-clanek.md`:
 
 ```markdown
 ---

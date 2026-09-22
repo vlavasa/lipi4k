@@ -1,0 +1,24 @@
+---
+import type { ArticleContents } from "@/utils/contents";
+import ContentsList from "./ContentsList.astro";
+import "@/styles/contents.css";
+
+interface Props {
+  contents: ArticleContents;
+}
+
+const { contents } = Astro.props;
+---
+
+<aside class="contents-rail" data-pagefind-ignore>
+  <nav class="contents-sidebar" aria-labelledby="contents-sidebar-title">
+    <h2
+      id="contents-sidebar-title"
+      class="contents-title"
+      lang={contents.labelLang}
+    >
+      {contents.labels.title}
+    </h2>
+    <ContentsList {contents} />
+  </nav>
+</aside>

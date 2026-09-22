@@ -103,7 +103,28 @@ The Pagefind engine and index load on demand from your own site. No API keys, ex
 
 To test search locally, run `npm run build` followed by `npm run preview`. The development server does not generate a search index, so its dialog displays a notice instead. Rebuild to include content changes in the preview's results.
 
-The `lang` field in post and page frontmatter sets the document language, defaulting to `en`. Pagefind searches only content in that language. Searching without diacritics is supported; matching different word forms depends on the language. For example, Czech stemming is not supported. The surrounding interface labels remain in English, like the rest of the template.
+The `lang` field in post and page frontmatter sets the document language, defaulting to `en`. Pagefind searches only content in that language. Searching without diacritics is supported; matching different word forms depends on the language. For example, Czech stemming is not supported. Search interface labels remain in English.
+
+## Article Contents
+
+Posts with at least two H2 or H3 headings get an automatic table of contents. At wide viewport sizes it stays in the left margin; at smaller sizes the header's Contents button opens a panel no wider than the article text. The contents are hidden when printing and omitted for posts with fewer headings.
+
+Contents labels use the article's `lang` frontmatter. English and Czech are built in. A regional language such as `cs-CZ` uses the base language's labels unless an exact regional translation is configured. Missing or unsupported languages fall back to English.
+
+Add another language, or replace the built-in wording, in `configs/user.config.ts`:
+
+```ts
+  tableOfContentsLabels: {
+    de: {
+      title: "In diesem Artikel",
+      button: "Inhalt",
+      navigation: "Artikelinhalt",
+      close: "Inhalt schließen",
+    },
+  },
+```
+
+Supply all four labels for each language. `navigation` names the header button for assistive technology; `close` names the panel's close button. Section names always come from the article itself.
 
 ## Hero Variant
 

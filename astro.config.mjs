@@ -143,10 +143,8 @@ export default defineConfig({
               ariaLabel:
                 "Copy heading link",
             },
-            content: {
-              type: "text",
-              value: "↗",
-            },
+            // The decorative arrow is CSS so it is not part of Astro's heading text.
+            content: [],
           },
         ],
       ],

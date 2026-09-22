@@ -1,0 +1,38 @@
+---
+import type { ArticleContents } from "@/utils/contents";
+
+interface Props {
+  contents: ArticleContents;
+}
+
+const { contents } = Astro.props;
+---
+
+<ul class="contents-list">
+  {
+    contents.items.map((item) => (
+      <li>
+        <a
+          href={`#${encodeURIComponent(item.slug)}`}
+          data-contents-id={item.slug}
+        >
+          {item.text}
+        </a>
+        {item.children.length > 0 && (
+          <ul>
+            {item.children.map((child) => (
+              <li>
+                <a
+                  href={`#${encodeURIComponent(child.slug)}`}
+                  data-contents-id={child.slug}
+                >
+                  {child.text}
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
+      </li>
+    ))
+  }
+</ul>

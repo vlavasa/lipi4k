@@ -20,7 +20,7 @@ Lipi4k retains the original project's design and purpose while providing ongoing
 
 ## What Lipi4k is for
 
-Lipi4k is a publishing template, not a general-purpose blog theme. It is designed for writers who publish chronologically and want their site to feel like a considered publication rather than a web application. It is not a good fit for sites that need sidebars, comment sections, newsletter embeds, or dashboards.
+Lipi4k is a publishing template, not a general-purpose blog theme. It is designed for writers who publish chronologically and want their site to feel like a considered publication rather than a web application. It is not a good fit for sites that need general-purpose sidebars, comment sections, newsletter embeds, or dashboards.
 
 The visual design takes its cues from the [Kami](https://kami.tw93.fun) design language: warm parchment ground, a constrained reading measure (68 ch), generous line-height, and a single terracotta accent. The output is static HTML. The typography holds under Cmd+P.
 
@@ -34,6 +34,7 @@ The visual design takes its cues from the [Kami](https://kami.tw93.fun) design l
 - Paginated posts grouped by year
 - Tag pages and tag-driven related posts
 - Reading progress indicator via CSS scroll-driven animations
+- Automatic article contents: a sticky left margin on wide screens and a compact menu on smaller screens, with labels in the article's language
 - Dynamic per-post OG images generated with Satori — no manual image creation
 - Full-text search via Pagefind — a keyboard-accessible dialog, with no external API or tracking
 - RSS feed and sitemap included

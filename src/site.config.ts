@@ -1,4 +1,5 @@
 import userConfig from "../configs/user.config";
+import type { ContentsLabels } from "./utils/contents";
 
 export interface NavItem {
   title: string;
@@ -27,6 +28,7 @@ export interface UserConfig {
   showSearch?: boolean;
   showThemeToggle?: boolean;
   showReadingTime?: boolean;
+  tableOfContentsLabels?: Record<string, ContentsLabels>;
 
   heroVariant?: "markdown" | "description" | "none";
 
@@ -56,6 +58,7 @@ const siteConfig = {
   showSearch: userConfig.showSearch ?? true,
   showThemeToggle: userConfig.showThemeToggle ?? true,
   showReadingTime: userConfig.showReadingTime ?? true,
+  tableOfContentsLabels: userConfig.tableOfContentsLabels ?? {},
 
   heroVariant: userConfig.heroVariant ?? "markdown",
 

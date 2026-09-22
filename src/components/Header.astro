@@ -4,6 +4,14 @@ import Search from "@/assets/search.svg";
 import Sun from "@/assets/sun.svg";
 import siteConfig from "@/site.config";
 import { getAssetPath, stripBasePath } from "@/utils/url";
+import ContentsMenu from "@/components/content/ContentsMenu.astro";
+import type { ArticleContents } from "@/utils/contents";
+
+interface Props {
+  contents?: ArticleContents;
+}
+
+const { contents } = Astro.props;
 
 const pathname = stripBasePath(Astro.url.pathname);
 
@@ -64,6 +72,7 @@ function isActive(url: string) {
 
       <!-- Actions -->
       <div class="header-actions flex items-center gap-1 font-ui">
+        {contents && <ContentsMenu {contents} />}
         {siteConfig.showSearch && (
           <button
             type="button"

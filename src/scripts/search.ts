@@ -169,6 +169,7 @@ class SiteSearch extends HTMLElement {
 
 	private open() {
 		if (this.dialog.open) return;
+		document.dispatchEvent(new Event("site-search:open"));
 		const menu = document.querySelector<HTMLButtonElement>("#menu-toggle");
 		if (menu?.getAttribute("aria-expanded") === "true") menu.click();
 		this.dialog.showModal();
