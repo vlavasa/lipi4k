@@ -18,7 +18,6 @@ import PostGallery from "@/components/content/PostGallery.astro";
 import { getAssetPath } from "@/utils/url";
 import type { MarkdownHeading } from "astro";
 import { getArticleContents } from "@/utils/contents";
-import ContentsSidebar from "@/components/content/ContentsSidebar.astro";
 
 type Props = {
   post: Post;
@@ -93,8 +92,6 @@ const contents = getArticleContents(headings, post.data.lang, siteConfig.tableOf
     )}
 
     <!-- Post Content -->
-    <div class="article-with-contents">
-    {contents && <ContentsSidebar {contents} />}
     <article data-pagefind-body class="post-content flex flex-col space-y-2">
       <!-- Rendered markdown -->
 	    <div class="app-prose post-content" data-contents-article>
@@ -106,7 +103,6 @@ const contents = getArticleContents(headings, post.data.lang, siteConfig.tableOf
         <PostGallery images={galleryImages} galleryId={post.id} />
       )}
 	  </article>
-    </div>
 
     {/* Post annotation — document-level context, posts only, no footer fallback */}
     {post.data.annotation && (

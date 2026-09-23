@@ -7,6 +7,7 @@ import siteConfig from "@/site.config";
 import ScrollToTop from "@/components/ScrollToTop.astro";
 import HeadingAnchors from '@/scripts/HeadingAnchors.astro';
 import type { ArticleContents } from '@/utils/contents';
+import ContentsSidebar from '@/components/content/ContentsSidebar.astro';
 
 interface Props {
   lang?: string;
@@ -25,6 +26,7 @@ const { lang = "en", schema, contents } = Astro.props;
   <body class="font-content bg-background text-foreground selection:bg-selection">
 
     <Header {contents} />
+    {contents && <ContentsSidebar {contents} />}
     <!-- Main content -->
     <main class="app-layout flex flex-col space-y-8 sm:space-y-10">
       

@@ -1,20 +1,17 @@
-/* Keep the article centred; the contents occupy its existing outer margin. */
-.article-with-contents {
-  position: relative;
-}
-
+/* Align with the breadcrumb and stay available beyond the end of the article. */
 .contents-rail {
   display: none;
-  position: absolute;
-  inset-block: 0;
-  right: calc(100% + 2rem);
+  position: fixed;
+  z-index: 10;
+  top: var(--contents-top, 6rem);
+  /* Half the layout width, minus its padding, plus the gap beside the text. */
+  right: calc(50% + var(--container-2xl) / 2 + 1rem);
   width: 12rem;
+  background: var(--background);
 }
 
 .contents-sidebar {
-  position: sticky;
-  top: var(--contents-top, 6rem);
-  max-height: min(100%, calc(100dvh - var(--contents-top, 6rem) - 1.5rem));
+  max-height: calc(100dvh - var(--contents-top, 6rem) - 1.5rem);
   overflow-y: auto;
   overscroll-behavior: contain;
   scrollbar-width: thin;
