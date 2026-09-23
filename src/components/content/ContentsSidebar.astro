@@ -1,5 +1,6 @@
 ---
 import type { ArticleContents } from "@/utils/contents";
+import SectionHeader from "@/components/SectionHeader.astro";
 import ContentsList from "./ContentsList.astro";
 import "@/styles/contents.css";
 
@@ -12,13 +13,13 @@ const { contents } = Astro.props;
 
 <aside class="contents-rail" data-pagefind-ignore>
   <nav class="contents-sidebar" aria-labelledby="contents-sidebar-title">
-    <h2
-      id="contents-sidebar-title"
+    <SectionHeader
+      as="h2"
+      titleId="contents-sidebar-title"
+      title={contents.labels.title}
       class="contents-title"
       lang={contents.labelLang}
-    >
-      {contents.labels.title}
-    </h2>
+    />
     <ContentsList {contents} />
   </nav>
 </aside>

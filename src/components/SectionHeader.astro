@@ -3,16 +3,19 @@ interface Props {
   title?: string;
   subheading?: string;
   class?: string;
+  as?: "span" | "h2" | "h3";
+  titleId?: string;
+  lang?: string;
 }
 
-const { title, subheading, class: className = "" } = Astro.props;
+const { title, subheading, class: className = "", as: Title = "span", titleId, lang } = Astro.props;
 ---
 
-<div class:list={["flex flex-col gap-2", {className}]}>
+<div class:list={["flex flex-col gap-2", className]} lang={lang}>
   {title && (
-    <span class="font-code text-sm font-medium uppercase tracking-[0.15em] text-muted-foreground">
+    <Title id={titleId} class="font-code text-sm font-medium uppercase tracking-[0.15em] text-muted-foreground">
       {title}
-    </span>
+    </Title>
   )}
   {subheading && (
     <p class="max-w-xl text-sm leading-relaxed text-muted-foreground">

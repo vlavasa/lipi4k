@@ -1,5 +1,6 @@
 ---
 import type { ArticleContents } from "@/utils/contents";
+import SectionHeader from "@/components/SectionHeader.astro";
 import ContentsList from "./ContentsList.astro";
 import "@/styles/contents.css";
 
@@ -43,13 +44,13 @@ const { contents } = Astro.props;
     hidden
   >
     <div class="contents-panel-header">
-      <h2
-        id="contents-panel-title"
+      <SectionHeader
+        as="h2"
+        titleId="contents-panel-title"
+        title={contents.labels.title}
         class="contents-title"
         lang={contents.labelLang}
-      >
-        {contents.labels.title}
-      </h2>
+      />
       <button
         type="button"
         class="contents-close"

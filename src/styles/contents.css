@@ -3,7 +3,7 @@
   display: none;
   position: fixed;
   z-index: 10;
-  top: var(--contents-top, 6rem);
+  top: calc(var(--contents-top, 6rem) + 1px);
   /* Half the layout width, minus its padding, plus the gap beside the text. */
   right: calc(50% + var(--container-2xl) / 2 + 1rem);
   width: 12rem;
@@ -26,15 +26,12 @@
 
 .contents-title {
   margin: 0 0 0.6rem;
-  font-size: 0.65rem;
-  font-weight: 500;
-  line-height: 1.5;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: color-mix(in srgb, var(--foreground) 65%, var(--background));
 }
 
 .contents-sidebar .contents-title {
+  /* Match the breadcrumb baseline with the shared heading's taller line box. */
+  position: relative;
+  top: -0.125rem;
   padding-right: 0.75rem;
 }
 
