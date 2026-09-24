@@ -105,7 +105,7 @@ export async function getAllTagArchives(): Promise<TagArchive[]> {
       posts,
     }))
     .sort((a, b) =>
-      a.tag.localeCompare(b.tag)
+      a.tag.localeCompare(b.tag, "en")
     );
 }
 

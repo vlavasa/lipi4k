@@ -19,7 +19,6 @@ const postsCollection = defineCollection({
     description: z.string(),
     published: z.coerce.date(),
     updated: z.coerce.date().optional(),
-    category: z.string().optional().default("Travels"),
     tags: z.array(z.string()).transform(removeDupsAndLowerCase).optional(),
     cover: z.string().optional(),
     draft: z.boolean().default(false),

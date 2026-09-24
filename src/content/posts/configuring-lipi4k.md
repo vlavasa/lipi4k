@@ -2,7 +2,6 @@
 title: Configuring Lipi4k
 description: A field-by-field guide to user.config.ts and what each setting changes in the published site.
 published: 2026-05-24
-category: Guide
 tags:
   - configuration
   - guide
@@ -93,7 +92,7 @@ When updating an older configuration, replace the unused `footerCredits` setting
   showReadingTime: true,
 ```
 
-`showLogo` controls whether the logo image is shown in the header. When `false`, the site title text is shown instead. `showSearch` shows or hides the search button and dialog; it defaults to `true`. `showThemeToggle` shows or hides the light/dark toggle button. `showReadingTime` shows or hides the estimated reading time that appears in post metadata.
+`showLogo` controls whether the logo image is shown in the header. When `false`, the site title text is shown instead. `showSearch` shows or hides the search button and dialog; it defaults to `true`. `showThemeToggle` shows or hides the light/dark toggle button. `showReadingTime` shows or hides the estimated reading time in post listings, article headers, and article OG images.
 
 ## Search
 
@@ -152,7 +151,7 @@ Set `annotation` in `configs/user.config.ts` to add a short handwritten note to 
 
 The annotation is rendered as plain text using the `font-annotation` typeface (Caveat by default). Omit it or set it to an empty string to hide it across the site. Page frontmatter no longer overrides the footer; move any existing page-specific note into that page's Markdown content.
 
-Posts also have their own optional `annotation` frontmatter field, displayed below the article content before the tags and sharing links. This article note is independent of the shared footer annotation: it has no global fallback and does not replace or hide the footer annotation. For example:
+Posts also have their own optional `annotation` frontmatter field, centered below the article content and any gallery, immediately before previous/next article navigation. This article note is independent of the shared footer annotation: it has no global fallback and does not replace or hide the footer annotation. For example:
 
 ```yaml
 annotation: Příliš žluťoučký kůň úpěl ďábelské ódy.

@@ -1,74 +1,38 @@
 ---
-import { type Post } from "@/utils/content";
-import { formatDate } from "@/utils/date";
-import { calculateReadingTime } from "@/utils/text";
-import siteConfig from "@/site.config";
+import type { Post } from "@/utils/content";
+import { getPostMetadata } from "@/utils/post-meta";
+import { slugify } from "@/utils/text";
+import { getAssetPath } from "@/utils/url";
 
 type Props = {
   post: Post;
   class?: string;
-  compact?: boolean;
-  showReadingTime?: boolean;
-  showLanguage?: boolean;
-  accentCategory?: boolean;
+  activeTag?: string;
 };
 
-const {
-  post,
-  class: className,
-  compact = false,
-  showReadingTime = false,
-  showLanguage = false,
-  accentCategory = false,
-} = Astro.props;
-
-const { category, published, updated, lang } = post.data;
-const date = updated ?? published;
-const dateLocale = lang ?? "en";
-
-const displayDate = formatDate(date, dateLocale);
-
-const readingTime =
-  siteConfig.showReadingTime && showReadingTime
-    ? calculateReadingTime(post.body ?? "").text
-    : null;
+const { post, class: className, activeTag } = Astro.props;
+const { date, lang, displayDate, readingTime, tags } = getPostMetadata(post);
 ---
-<div
-  class:list={[
-    "metadata flex flex-row",
-    compact ? "shrink-0 gap-3 text-right" : "post-meta items-baseline gap-2",
-    className,
-  ]}
->
-  {
-    category && (
-      <span class:list={{ "text-primary": accentCategory }}>
-        {category}
-      </span>
-    )
-  }
-
-  <time
-    datetime={date.toISOString()}
-    lang={dateLocale}
-    class="tabular-nums"
-  >
+<div class:list={["metadata post-meta min-w-0", className]}>
+  <time datetime={date.toISOString()} lang={lang} class="whitespace-nowrap tabular-nums">
     {displayDate}
   </time>
-
-  {
-    readingTime && (
-      <span>
-        {readingTime}
-      </span>
-    )
-  }
-
-  {
-    showLanguage && lang && (
-      <span class="uppercase">
-        {lang}
-      </span>
-    )
-  }
+  {readingTime && <span class="whitespace-nowrap">{readingTime}</span>}
+  {tags.length > 0 && (
+    <span class="wrap-anywhere">
+      {tags.map((tag, index) => (
+        <Fragment>
+          {index > 0 && ", "}
+          <a
+            href={getAssetPath(`/tags/${slugify(tag)}`)}
+            class:list={[
+              "hover:underline focus-visible:underline underline-offset-2",
+              { "text-primary": slugify(tag) === activeTag },
+            ]}
+            aria-current={slugify(tag) === activeTag ? "page" : undefined}
+          >{tag}</a>
+        </Fragment>
+      ))}
+    </span>
+  )}
 </div>

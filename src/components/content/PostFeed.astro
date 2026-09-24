@@ -8,12 +8,14 @@ type Props = {
   posts: Post[];
   sectionTitle?: string;
   sectionDesc?: string;
+  activeTag?: string;
 };
 
 const {
   posts,
   sectionTitle,
   sectionDesc,
+  activeTag,
 } = Astro.props;
 
 // Group posts by year, preserving descending order within each group
@@ -53,7 +55,7 @@ const years = Object.keys(postsByYear)
 
         {/* Posts in this year */}
         {yearPosts.map((post) => (
-          <PostPreview post={post} />
+          <PostPreview post={post} {activeTag} />
         ))}
 
       </div>

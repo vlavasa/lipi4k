@@ -2,7 +2,6 @@
 title: Introducing Lipi4k
 description: A typography-first Astro template built for writers who care about how their words look on the page.
 published: 2026-05-26
-category: Meta
 tags:
   - astro
   - publishing

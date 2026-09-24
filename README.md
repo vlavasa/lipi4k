@@ -198,13 +198,14 @@ Archive years and counts use tabular figures to keep digits aligned. Article cou
 | `title` | string | Yes | |
 | `description` | string | Yes | Shown as deck on featured post and in feeds |
 | `published` | date | Yes | `YYYY-MM-DD` |
-| `updated` | date | No | Shows "Updated on" in post metadata |
-| `category` | string | No | Defaults to `Travels` |
-| `tags` | string[] | No | Drives related posts |
+| `updated` | date | No | Replaces the publication date in metadata and post ordering |
+| `tags` | string[] | No | Links to tag archives and helps select related posts |
 | `cover` | string | No | Article cover in an `attachments/` directory; plain path relative to `src/content/` |
 | `draft` | boolean | No | Excluded from production builds |
 | `lang` | string | No | Document language, e.g. `cs`; defaults to `en` |
-| `annotation` | string | No | Handwritten note below the article content; no global fallback |
+| `annotation` | string | No | Centered handwritten note below the article content, before previous/next navigation; no global fallback |
+
+Post listings and article headers show metadata in the order **date · reading time · tags**. The date uses `updated` when available, otherwise `published`. Tags are links sorted using English alphabetical order; only the current tag on a tag archive uses the accent color. Missing tags or disabled reading time leave no empty separators. Article OG images use the same metadata at the bottom, above the site address.
 
 ### Pages (`src/content/pages/`)
 
@@ -226,7 +227,7 @@ lang: cs
 
 The same footer appears on every page. Configure `footerLinks` (RSS, Colophon, and the template source by default), the global handwritten `annotation`, and the optional `footerNote` in `configs/user.config.ts`. The note supports Markdown links and appears below the annotation; it is empty by default and can hold a copyright or content-licence notice. Empty optional fields leave no extra space.
 
-Page frontmatter no longer overrides the footer annotation; move any existing page-specific note into the page's Markdown content. Post annotations remain below the article content and are independent of the global footer annotation.
+Page frontmatter no longer overrides the footer annotation; move any existing page-specific note into the page's Markdown content. Post annotations are centered below the article content (and gallery, when present), immediately before previous/next navigation, and are independent of the global footer annotation.
 
 The unused `footerCredits` setting has been replaced by `footerNote`, and the `social` setting has been removed. Add social profiles to `footerLinks` or write them directly into `src/content/pages/about.md`.
 

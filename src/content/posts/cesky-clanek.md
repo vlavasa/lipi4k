@@ -3,7 +3,6 @@ title: Příliš žluťoučký kůň
 description: Háčky, čárky a evropská písmena v běžném textu, kurzívě, nadpisech i drobných poznámkách.
 published: 2026-05-18
 lang: cs
-category: Ukázky
 tags:
   - čeština
   - diakritika
@@ -75,6 +74,6 @@ const zpráva = "Příliš žluťoučký kůň úpěl ďábelské ódy.";
 console.log(zpráva);
 ```
 
-Článek má v úvodních metadatech nastavené `lang: cs` a je uložený jako UTF-8. Diakritika je součástí titulku, popisu, kategorie i štítků. Rukopisná poznámka pod článkem pak ukazuje stejnou českou větu ještě jedním písmem.
+Článek má v úvodních metadatech nastavené `lang: cs` a je uložený jako UTF-8. Diakritika je součástí titulku, popisu i štítků. Rukopisná poznámka pod článkem pak ukazuje stejnou českou větu ještě jedním písmem.
 
 Až se příště vydáme podél řeky, možná si zapíšeme jen pár slov. Třeba *ticho, déšť a vůně višní*. I tak krátký zápis si zaslouží správné háčky a čárky.

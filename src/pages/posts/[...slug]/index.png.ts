@@ -13,6 +13,7 @@ import {
 import {
   generateOgImage,
 } from "@/utils/og";
+import { getPostMetadata } from "@/utils/post-meta";
 
 export async function getStaticPaths() {
   const posts =
@@ -43,14 +44,7 @@ export const GET: APIRoute =
         description:
           post.data.description,
 
-        category:
-          post.data.category,
-
-        lang: post.data.lang,
-
-        published:
-          post.data.updated ??
-          post.data.published,
+        metadata: getPostMetadata(post),
       });
 
     return new Response(png, {

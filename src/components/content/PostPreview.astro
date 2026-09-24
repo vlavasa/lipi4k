@@ -7,12 +7,14 @@ type Props = {
   post: Post;
   class?: string;
   titleClass?: string;
+  activeTag?: string;
 };
 
 const {
   post,
   class: className,
   titleClass = "text-lg",
+  activeTag,
 } = Astro.props;
 ---
 
@@ -29,5 +31,5 @@ const {
       {post.data.description}
     </p>
   )}
-  <PostMeta post={post} accentCategory showReadingTime />
+  <PostMeta post={post} {activeTag} />
 </div>

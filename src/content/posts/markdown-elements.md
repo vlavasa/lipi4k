@@ -2,7 +2,6 @@
 title: The Elements of the Page
 description: A typographic inventory of every markdown element Lipi4k renders, written as an essay worth reading.
 published: 2026-05-16
-category: Guide
 tags:
   - markdown
   - typography

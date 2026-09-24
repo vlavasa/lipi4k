@@ -2,7 +2,6 @@
 title: Colour Schemes
 description: Lipi4k's default colour system, its light and dark expressions, and how to build your own named scheme on top of it.
 published: 2026-05-18
-category: Guide
 tags:
   - design
   - customisation

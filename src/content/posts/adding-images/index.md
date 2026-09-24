@@ -2,7 +2,6 @@
 title: Images and Galleries
 description: How Lipi4k handles inline images, cover images, and post galleries — and the folder structure that makes it work.
 published: 2026-05-14
-category: Guide
 cover: posts/adding-images/attachments/cover.png
 tags:
   - guide
@@ -106,7 +105,7 @@ gallery/
 
 Lipi4k derives alt text from the filename automatically. Hyphens and underscores become spaces, the leading number is stripped, and each word is capitalised. `03-north-rampart-at-dusk.jpg` becomes `North Rampart At Dusk`. You can rely on this convention or override alt text by renaming the files descriptively.
 
-The gallery renders below the post body and above the tags and navigation. It includes a photo count and a section heading that defaults to `Gallery`. GLightbox handles the lightbox on click — each image opens full-screen with keyboard and swipe navigation, and all images in the post's gallery group together into a single browsable set.
+The gallery renders below the post body, followed by the optional centered article annotation and previous/next navigation. It includes a photo count and a section heading that defaults to `Gallery`. GLightbox handles the lightbox on click — each image opens full-screen with keyboard and swipe navigation, and all images in the post's gallery group together into a single browsable set.
 
 ## Supported formats
 

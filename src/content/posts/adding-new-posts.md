@@ -2,7 +2,6 @@
 title: Adding New Posts
 description: Everything a new Lipi4k author needs to know before writing the first word, from file location to frontmatter to the draft workflow.
 published: 2026-05-20
-category: Guide
 tags:
   - writing
   - guide
@@ -45,11 +44,9 @@ Every post needs a frontmatter block at the top of the file, delimited by `---`.
 
 `published` is required. The date the post was (or will be) published, in `YYYY-MM-DD` format. Posts with a future publication date are excluded from production builds. Posts are sorted newest first, using `updated` when present and `published` otherwise.
 
-`updated` is optional. When present, Lipi4k shows an "Updated on" note in the post metadata and uses this date instead of `published` to sort the post. Use it when you revise a post substantially enough that existing readers should know the text has changed. An update can move an older post to the top of the home page.
+`updated` is optional. When present, Lipi4k uses this date instead of `published` in post metadata, article OG images, and post ordering. Use it when you revise a post substantially enough that existing readers should know the text has changed. An update can move an older post to the top of the home page.
 
-`category` is optional. A single string that classifies the post. The default value is `Travels`, which reflects the template's origins in travel writing. Change it to whatever suits your publication: `Essays`, `Notes`, `Code`, `Journal`.
-
-`tags` is optional. An array of lowercase strings used to group related posts. Tags drive the "Related posts" section at the bottom of each article. They are lowercased and deduplicated automatically.
+`tags` is optional. An array of strings used to group related posts and help select related reading. Tags are lowercased and deduplicated automatically, then displayed in English alphabetical order. They link to tag archives from post listings and the article header. On a tag archive, only the matching tag is highlighted in the accent color.
 
 `cover` is optional. A plain path relative to `src/content/`, such as `posts/my-post/attachments/cover.jpg`. Store the image in an `attachments/` directory. It appears above the article content; the Open Graph card is generated separately from the post title. See the [image guide](../adding-images/) for the folder structure.
 
@@ -57,7 +54,7 @@ Every post needs a frontmatter block at the top of the file, delimited by `---`.
 
 `lang` is optional and defaults to `en`. Sets the document's HTML language for this post, for example `cs` for Czech, `en` for English, or `de` for German. It also formats the post's date in that language, both in the article and in listings on the home page, posts archive, and tag pages, as well as in generated Open Graph images. The same field is supported in content page frontmatter for setting the document language and formatting the update date. Browsers and assistive technology use it to interpret the text, and Pagefind searches content in that language. The template's interface labels remain in English.
 
-`annotation` is optional. A short, handwritten-style note displayed below the article content, before the tags and sharing links. It uses the `font-annotation` typeface (Caveat by default) and is rendered as plain text. Omit it or set it to an empty string to hide the article note. This note has no global fallback. The shared footer separately displays the global annotation from `configs/user.config.ts`, just as it does on every other page.
+`annotation` is optional. A short, handwritten-style note centered below the article content and any gallery, immediately before previous/next article navigation. It uses the `font-annotation` typeface (Caveat by default) and is rendered as plain text. Omit it or set it to an empty string to hide the article note. This note has no global fallback. The shared footer separately displays the global annotation from `configs/user.config.ts`, just as it does on every other page.
 
 A complete frontmatter block looks like this:
 
@@ -67,7 +64,6 @@ title: November in Kyoto
 description: The maple season arrives without warning and is over before you adjust your plans to it.
 published: 2026-11-12
 updated: 2026-11-18
-category: Travel
 tags:
   - japan
   - kyoto
@@ -99,7 +95,7 @@ Articles with at least two H2 or H3 headings automatically get a table of conten
 
 ### Czech and Other European Languages
 
-Save Markdown and MDX files as UTF-8 and write accented characters directly, including in titles, descriptions, categories, and tags. The default fonts include extended Latin characters for Czech and other European languages that use the Latin alphabet.
+Save Markdown and MDX files as UTF-8 and write accented characters directly, including in titles, descriptions, and tags. The default fonts include extended Latin characters for Czech and other European languages that use the Latin alphabet.
 
 Set `lang: cs` in the frontmatter for a Czech article (or page). This identifies the document language for browsers, assistive technology, and search. Dates follow this language too: a May 2026 date displays as `květen 2026` in articles, their listings and generated Open Graph images, and content page update dates. Article contents labels also follow `lang`, with English and Czech included. Other interface labels remain in English. Add translations or change the contents labels through `tableOfContentsLabels` in `configs/user.config.ts`; see the [configuration guide](../configuring-lipi4k/#article-contents). For example, save this as `src/content/posts/cesky-clanek.md`:
 
@@ -109,7 +105,6 @@ title: Příliš žluťoučký kůň
 description: České háčky a čárky v titulku i běžném textu.
 published: 2026-05-20
 lang: cs
-category: Zápisky
 annotation: Příliš žluťoučký kůň úpěl ďábelské ódy.
 tags:
   - čeština

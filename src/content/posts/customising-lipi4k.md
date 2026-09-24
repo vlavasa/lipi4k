@@ -2,7 +2,6 @@
 title: Customising Lipi4k
 description: How to change Lipi4k's colours, typefaces, and visual character without touching a single component file.
 published: 2026-05-22
-category: Guide
 tags:
   - customisation
   - design
@@ -78,9 +77,12 @@ Lipi4k uses four font slots, each mapped to a CSS variable:
 
 Post metadata and page update dates share the `metadata` utility in `src/styles/global.css`. It uses `font-ui` (Manrope by default), regular weight, and the same small text size throughout the site. `PostMeta` applies it directly, while `PageHeader` applies it to page metadata, so individual layouts do not need their own font settings.
 
+Post listings and article headers show metadata in the order **date · reading time · tags**. The date uses `updated` when available, otherwise `published`. Tags are links sorted using English alphabetical order; only the current tag on a tag archive uses the accent color. Missing tags or disabled reading time leave no empty separators. Article OG images use the same metadata at the bottom, above the site address.
+
+
 Archive year labels and article counts on `/posts` and `/tags/*`, article counts in the `/tags` index, and gallery photo counts also use `font-ui`. These use `text-sm` and `tabular-nums`, giving the year and counts the same size and aligning their digits. Article counts are displayed in uppercase (`1 POST`, `7 POSTS`); photo counts use lowercase (`1 photo`, `3 photos`).
 
-The `font-code` utility applies Fira Code to inline code and code blocks, small section headings such as `FEATURED` and `GALLERY`, action labels such as `Continue reading` and `Copy Link`, and the optional footer note. The shared `inline-cta` utility uses `font-code` for these actions. Use `font-code` for monospaced text that should follow the configured typeface; Tailwind's default `font-mono` uses a separate system font stack.
+The `font-code` utility applies Fira Code to inline code and code blocks, small section headings such as `FEATURED` and `GALLERY`, action labels such as `Continue reading` and `All posts`, and the optional footer note. The shared `inline-cta` utility uses `font-code` for these actions. Use `font-code` for monospaced text that should follow the configured typeface; Tailwind's default `font-mono` uses a separate system font stack.
 
 These font variables are loaded via Astro's font API in `astro.config.mjs`. To change a typeface, update the corresponding entry in the `fonts` array:
 

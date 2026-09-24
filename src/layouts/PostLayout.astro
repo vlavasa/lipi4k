@@ -6,16 +6,13 @@ import { slugify } from "@/utils/text";
 import { getCoverImage, getGalleryImages } from "@/utils/image";
 import Breadcrumb from "@/components/Breadcrumb.astro";
 import ReadingProgress from "@/components/ReadingProgress.astro";
-import SharePost from "@/components/content/SharePost.astro";
 import SEO from "@/components/SEO.astro";
 import PostNavigation from "@/components/content/PostNavigation.astro";
 import { generatePostSchema } from "@/utils/schema";
 import PostMeta from "@/components/content/PostMeta.astro";
 import RelatedPosts from "@/components/content/RelatedPosts.astro";
-import SectionHeader from "@/components/SectionHeader.astro";
 import ImageWrapper from "@/components/ImageWrapper.astro";
 import PostGallery from "@/components/content/PostGallery.astro";
-import { getAssetPath } from "@/utils/url";
 import type { MarkdownHeading } from "astro";
 import { getArticleContents } from "@/utils/contents";
 
@@ -34,6 +31,7 @@ const {
 } = Astro.props;
 
 const { title, description, cover, published, tags } = post.data;
+const annotation = post.data.annotation?.trim();
 
 const allPosts    = await getAllPosts();
 const relatedPosts = getRelatedPosts(post, allPosts, siteConfig.relatedPosts);
@@ -78,7 +76,7 @@ const contents = getArticleContents(headings, post.data.lang, siteConfig.tableOf
       }
       
       <!-- Metadata -->
-      <PostMeta post={post} accentCategory showReadingTime class="mb-3" />
+      <PostMeta post={post} class="mb-3" />
       <div class="divider" />
     </header>
   </Fragment>
@@ -96,42 +94,20 @@ const contents = getArticleContents(headings, post.data.lang, siteConfig.tableOf
       <!-- Rendered markdown -->
 	    <div class="app-prose post-content" data-contents-article>
 	      <slot />
-        <hr />
 	    </div>
-      <!-- Galley -->
+      <!-- Gallery -->
       {galleryImages.length > 0 && (
         <PostGallery images={galleryImages} galleryId={post.id} />
       )}
 	  </article>
 
     {/* Post annotation — document-level context, posts only, no footer fallback */}
-    {post.data.annotation && (
-      <span class="font-annotation block text-primary max-w-70 md:max-w-80 mt-4 text-xl md:text-2xl -rotate-1 leading-snug">
-        {post.data.annotation}
+    {annotation && (
+      <span class="font-annotation block text-primary max-w-70 md:max-w-80 mx-auto mt-4 text-center text-xl md:text-2xl -rotate-1 leading-snug">
+        {annotation}
       </span>
     )}
 
-    <!-- Tags -->
-    {
-      post.data.tags &&
-        post.data.tags.length > 0 && (
-          <div class="flex flex-wrap items-baseline gap-3">
-            <SectionHeader title="filed under" />
-            {post.data.tags.map(
-              (tag) => (
-                <a
-                  href={getAssetPath(`/tags/${slugify(tag)}`)}
-                  class="text-sm underline font-ui text-muted-foreground link-hover"
-                >
-                  {tag}
-                </a>
-              )
-            )}
-          </div>
-        )
-    }
-    <SharePost title={post.data.title} />
-    <div class="divider" />
   </section>
   
   <Fragment slot="navigation">
@@ -142,11 +118,6 @@ const contents = getArticleContents(headings, post.data.lang, siteConfig.tableOf
   </Fragment>
   <Fragment slot="after">
     {relatedPosts.length > 0 && (
-      // <PostFeed
-      //   posts={relatedPosts}
-      //   variant="timeline"
-      //   sectionTitle="Related Reading"
-      // />
       <RelatedPosts posts={relatedPosts} sectionTitle="More like this"/>
     )}
   </Fragment>
