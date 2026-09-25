@@ -46,7 +46,7 @@ Every post needs a frontmatter block at the top of the file, delimited by `---`.
 
 `updated` is optional. When present, Lipi4k uses this date instead of `published` in post metadata, article OG images, and post ordering. Use it when you revise a post substantially enough that existing readers should know the text has changed. An update can move an older post to the top of the home page.
 
-`tags` is optional. An array of strings used to group related posts and help select related reading. Tags are lowercased and deduplicated automatically, then displayed in English alphabetical order. They link to tag archives from post listings and the article header. On a tag archive, only the matching tag is highlighted in the accent color.
+`tags` is optional. An array of strings used to group related posts and help select related reading. Tags are lowercased and deduplicated automatically, then displayed in English alphabetical order. They link to tag archives from post listings and the article header. On a tag archive, the matching tag is non-clickable text in the accent color. Other tags brighten on hover without underlining, like breadcrumbs.
 
 `cover` is optional. A plain path relative to `src/content/`, such as `posts/my-post/attachments/cover.jpg`. Store the image in an `attachments/` directory. It appears above the article content; the Open Graph card is generated separately from the post title. See the [image guide](../adding-images/) for the folder structure.
 
@@ -54,7 +54,7 @@ Every post needs a frontmatter block at the top of the file, delimited by `---`.
 
 `lang` is optional and defaults to `en`. Sets the document's HTML language for this post, for example `cs` for Czech, `en` for English, or `de` for German. It also formats the post's date in that language, both in the article and in listings on the home page, posts archive, and tag pages, as well as in generated Open Graph images. The same field is supported in content page frontmatter for setting the document language and formatting the update date. Browsers and assistive technology use it to interpret the text, and Pagefind searches content in that language. The template's interface labels remain in English.
 
-`annotation` is optional. A short, handwritten-style note centered below the article content and any gallery, immediately before previous/next article navigation. It uses the `font-annotation` typeface (Caveat by default) and is rendered as plain text. Omit it or set it to an empty string to hide the article note. This note has no global fallback. The shared footer separately displays the global annotation from `configs/user.config.ts`, just as it does on every other page.
+`annotation` is optional. A short, handwritten-style note centered below the article content and any gallery, immediately before previous/next article navigation. It uses the `font-annotation` typeface (Caveat by default) and is rendered as plain text. Omit it or set it to an empty string to show a horizontal divider that fades at the sides instead of the article note. This note has no global fallback. The shared footer separately displays the global annotation from `configs/user.config.ts`, just as it does on every other page.
 
 A complete frontmatter block looks like this:
 

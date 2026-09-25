@@ -98,9 +98,18 @@
      Horizontal Rule
      ========================================= */
 
-  .app-prose :where(hr) {
-    @apply h-px border-0 m-12;
+  .app-prose :where(hr),
+  .article-divider {
+    @apply h-px border-0 mx-12;
     background: linear-gradient(90deg,transparent,var(--color-accent) 20%,var(--color-accent) 80%,transparent);
+  }
+
+  .app-prose :where(hr) {
+    @apply my-12;
+  }
+
+  .article-divider {
+    @apply mt-8 mb-4;
   }
 
   /* =========================================

@@ -20,19 +20,22 @@ const { date, lang, displayDate, readingTime, tags } = getPostMetadata(post);
   {readingTime && <span class="whitespace-nowrap">{readingTime}</span>}
   {tags.length > 0 && (
     <span class="wrap-anywhere">
-      {tags.map((tag, index) => (
-        <Fragment>
-          {index > 0 && ", "}
-          <a
-            href={getAssetPath(`/tags/${slugify(tag)}`)}
-            class:list={[
-              "hover:underline focus-visible:underline underline-offset-2",
-              { "text-primary": slugify(tag) === activeTag },
-            ]}
-            aria-current={slugify(tag) === activeTag ? "page" : undefined}
-          >{tag}</a>
-        </Fragment>
-      ))}
+      {tags.map((tag, index) => {
+        const tagSlug = slugify(tag);
+        return (
+          <Fragment>
+            {index > 0 && ", "}
+            {tagSlug === activeTag ? (
+              <span class="text-primary" aria-current="page">{tag}</span>
+            ) : (
+              <a
+                href={getAssetPath(`/tags/${tagSlug}`)}
+                class="hover:text-foreground focus-visible:text-foreground transition-colors"
+              >{tag}</a>
+            )}
+          </Fragment>
+        );
+      })}
     </span>
   )}
 </div>

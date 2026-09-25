@@ -102,10 +102,12 @@ const contents = getArticleContents(headings, post.data.lang, siteConfig.tableOf
 	  </article>
 
     {/* Post annotation — document-level context, posts only, no footer fallback */}
-    {annotation && (
+    {annotation ? (
       <span class="font-annotation block text-primary max-w-70 md:max-w-80 mx-auto mt-4 text-center text-xl md:text-2xl -rotate-1 leading-snug">
         {annotation}
       </span>
+    ) : (
+      <hr class="article-divider" />
     )}
 
   </section>
