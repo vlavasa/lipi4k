@@ -82,7 +82,7 @@ Post listings and article headers show metadata in the order **date · reading t
 
 Archive year labels and article counts on `/posts` and `/tags/*`, article counts in the `/tags` index, and gallery photo counts also use `font-ui`. These use `text-sm` and `tabular-nums`, giving the year and counts the same size and aligning their digits. Article counts are displayed in uppercase (`1 POST`, `7 POSTS`); photo counts use lowercase (`1 photo`, `3 photos`).
 
-The `font-code` utility applies Fira Code to inline code and code blocks, small section headings such as `FEATURED` and `GALLERY`, action labels such as `Continue reading` and `All posts`, and the optional footer note. The shared `inline-cta` utility uses `font-code` for these actions. Use `font-code` for monospaced text that should follow the configured typeface; Tailwind's default `font-mono` uses a separate system font stack.
+The `font-code` utility applies Fira Code to inline code and code blocks, small section headings such as `FEATURED` and `GALLERY`, action labels such as `All posts`, and the optional footer note. The shared `inline-cta` utility uses `font-code` for these actions. Use `font-code` for monospaced text that should follow the configured typeface; Tailwind's default `font-mono` uses a separate system font stack.
 
 These font variables are loaded via Astro's font API in `astro.config.mjs`. To change a typeface, update the corresponding entry in the `fonts` array:
 

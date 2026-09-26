@@ -18,10 +18,10 @@ const structuredData = generateWebsiteSchema();
 	<HomeHero />
 	<!-- <MastHead /> -->
 	{allPosts.length > 0 ? (
-		<>
+		<div class="flex flex-col gap-12">
 			<FeaturedPost post={allPosts[0]} />
 			<RecentPosts posts={allPosts.slice(1, siteConfig.recentPosts)} sectionTitle="Recent" />
-		</>
+		</div>
 	) : (
 		<p class="font-content italic text-muted-foreground">
 			The first posts are in the works.
