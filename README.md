@@ -2,7 +2,7 @@
 
 A maintained fork of [Lipi](https://github.com/thelocalhoststudio/lipi), a typography-first Astro template for long-form writing. Built for essays, travel notes, developer journals, and personal archives — publishing environments where the words come first.
 
-**[Demo](https://vlavasa.github.io/lipi4k/)** · **[Source](https://github.com/vlavasa/lipi4k)** · **[Original Lipi project](https://github.com/thelocalhoststudio/lipi)** · **[Original Lipi demo](https://astro-lipi.pages.dev)**
+**[Demo](https://vlavasa.github.io/lipi4k/)** · **[Source](https://github.com/vlavasa/lipi4k)**
 
 > **Lipi** (लिपि) is the Sanskrit word for script, the written form of a language. **Lipi4k** is pronounced like “Lipi fork.”
 
