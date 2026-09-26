@@ -205,7 +205,7 @@ Archive years and counts use tabular figures to keep digits aligned. Article cou
 | `lang` | string | No | Document language, e.g. `cs`; defaults to `en` |
 | `annotation` | string | No | Centered handwritten note below the article content, before previous/next navigation; no global fallback |
 
-Post listings and article headers show metadata in the order **date · reading time · tags**. The date uses `updated` when available, otherwise `published`. Tags are sorted using English alphabetical order. Links brighten on hover like breadcrumbs, without underlining; the current tag on a tag archive is non-clickable text in the accent color. Missing tags or disabled reading time leave no empty separators. Article OG images use the same metadata at the bottom, above the site address.
+Post listings and article headers show metadata in the order **date · reading time · tags**. The date uses `updated` when available, otherwise `published`. Tags are sorted using English alphabetical order. Links brighten on hover like breadcrumbs, without underlining; the current tag on a tag archive is non-clickable text in the accent color. Missing tags or disabled reading time leave no empty separators. Article OG images use the same metadata at the bottom, above the site address. The compact "More like this" list shows article titles on the left and **date · reading time** on the right, without tags. Its bottom spacing matches the space below the previous/next article titles.
 
 ### Pages (`src/content/pages/`)
 
