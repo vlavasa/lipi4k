@@ -6,12 +6,16 @@ import { calculateReadingTime } from "./text";
 export function getPostMetadata(post: Post) {
 	const date = post.data.updated ?? post.data.published;
 	const lang = post.data.lang ?? "en";
+	const readingTimeLang = lang.trim().toLowerCase().split("-")[0] === "cs" ? "cs" : "en";
 
 	return {
 		date,
 		lang,
 		displayDate: formatDate(date, lang),
-		readingTime: siteConfig.showReadingTime ? calculateReadingTime(post.body ?? "").text : null,
+		readingTimeLang,
+		readingTime: siteConfig.showReadingTime
+			? `${calculateReadingTime(post.body ?? "").minutes} min ${readingTimeLang === "cs" ? "čtení" : "read"}`
+			: null,
 		tags: [...(post.data.tags ?? [])].sort((a, b) => a.localeCompare(b, "en")),
 	};
 }

@@ -12,13 +12,13 @@ type Props = {
 };
 
 const { post, class: className, activeTag, showTags = true } = Astro.props;
-const { date, lang, displayDate, readingTime, tags } = getPostMetadata(post);
+const { date, lang, displayDate, readingTime, readingTimeLang, tags } = getPostMetadata(post);
 ---
 <div class:list={["metadata post-meta min-w-0", className]}>
   <time datetime={date.toISOString()} lang={lang} class="whitespace-nowrap tabular-nums">
     {displayDate}
   </time>
-  {readingTime && <span class="whitespace-nowrap">{readingTime}</span>}
+  {readingTime && <span lang={readingTimeLang} class="whitespace-nowrap">{readingTime}</span>}
   {showTags && tags.length > 0 && (
     <span class="wrap-anywhere">
       {tags.map((tag, index) => {
