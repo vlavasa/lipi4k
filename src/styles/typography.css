@@ -33,6 +33,11 @@
     @apply mt-6;
   }
 
+  /* The shared footer supplies the space after a content page. */
+  .page-content > :last-child {
+    margin-bottom: 0;
+  }
+
   /* =========================================
      Headings
      ========================================= */

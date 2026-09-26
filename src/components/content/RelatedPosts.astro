@@ -16,7 +16,7 @@ const {
 } = Astro.props;
 
 ---
-<section class="related-posts mt-2 pt-2">
+<section class="mt-2 pt-2">
   <SectionHeader title={sectionTitle} subheading={sectionDesc} />
   <div class="flex flex-col space-y-2 mt-4">
     {posts.map((post) => (
@@ -24,10 +24,3 @@ const {
     ))}
   </div>
 </section>
-
-<style>
-  /* Match the space below the previous/next article titles (mb-2 + mt-8). */
-  :global(main:has(.related-posts) + footer) {
-    margin-top: calc(var(--spacing) * 10);
-  }
-</style>
