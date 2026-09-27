@@ -31,7 +31,7 @@ const { prevPost, nextPost } = Astro.props;
               <div class="flex items-center justify-start gap-2 group inline-cta text-muted-foreground">
                 Previous Article
               </div>
-              <span class="text-base md:text-lg font font-medium font-content leading-snug text-foreground link-hover">
+              <span class="text-base md:text-lg font font-medium font-content leading-snug text-foreground link-underline link-hover group-hover:text-primary">
                 {prevPost.data.title}
               </span>
             </a>
@@ -48,7 +48,7 @@ const { prevPost, nextPost } = Astro.props;
               <div class="flex items-center justify-end gap-2 group inline-cta text-muted-foreground">
                 Next Article
               </div>  
-              <span class="text-base md:text-lg font-medium font-content leading-snug text-foreground link-hover">
+              <span class="text-base md:text-lg font-medium font-content leading-snug text-foreground link-underline link-hover group-hover:text-primary">
                 {nextPost.data.title}
               </span>
             </a>
