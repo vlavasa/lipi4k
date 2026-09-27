@@ -131,7 +131,7 @@ const isActive = (url: string) => isActiveNavUrl(url, Astro.url.pathname);
             <Tag
               href={active ? undefined : getAssetPath(item.url)}
               class="flex items-center justify-between px-4 py-3.5 border-b border-border
-                font-ui text-base text-muted-foreground link-hover-muted aria-[current=page]:text-primary
+                font-ui text-base text-muted-foreground link-underline link-hover-muted aria-[current=page]:text-primary aria-[current=page]:no-underline
                 last:border-b-0"
               aria-current={active ? "page" : undefined}
             >

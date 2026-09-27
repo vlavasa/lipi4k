@@ -14,6 +14,7 @@ const { contents } = Astro.props;
       <li>
         <a
           href={`#${encodeURIComponent(item.slug)}`}
+          class="link-underline"
           data-contents-id={item.slug}
         >
           {item.text}
@@ -24,6 +25,7 @@ const { contents } = Astro.props;
               <li>
                 <a
                   href={`#${encodeURIComponent(child.slug)}`}
+                  class="link-underline"
                   data-contents-id={child.slug}
                 >
                   {child.text}

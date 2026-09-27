@@ -171,9 +171,9 @@ html {
   }
 
   .nav-link {
-    @apply inline-flex min-h-10 items-center no-underline text-muted-foreground;
+    @apply inline-flex min-h-10 items-center link-underline text-muted-foreground;
     @apply link-hover-muted;
-    @apply aria-[current=page]:text-primary;
+    @apply aria-[current=page]:text-primary aria-[current=page]:no-underline;
   }
 
   .footer-nav-link {

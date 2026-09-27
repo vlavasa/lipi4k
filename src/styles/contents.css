@@ -48,7 +48,6 @@
   padding: 0.4rem 0.75rem 0.4rem 0;
   font-size: 0.75rem;
   line-height: 1.5;
-  text-decoration: none;
   overflow-wrap: anywhere;
   color: color-mix(in srgb, var(--foreground) 65%, var(--background));
 }
@@ -57,23 +56,14 @@
   font-size: 0.7rem;
 }
 
-.contents-list a:hover,
-.contents-list a[aria-current="location"] {
+.contents-list a:hover {
   color: var(--foreground);
 }
 
 .contents-list a[aria-current="location"] {
+  color: var(--primary);
   font-weight: 500;
-}
-
-.contents-list a[aria-current="location"]::after {
-  content: "";
-  position: absolute;
-  right: 0;
-  top: 0.6rem;
-  bottom: 0.6rem;
-  width: 2px;
-  background: var(--primary);
+  text-decoration: none;
 }
 
 .contents-list a:focus-visible,
@@ -149,11 +139,6 @@
 .contents-panel .contents-list ul a {
   padding-left: 1.5rem;
   font-size: 0.8rem;
-}
-
-.contents-panel .contents-list a[aria-current="location"]::after {
-  right: auto;
-  left: 0;
 }
 
 @media (max-width: 25rem) {
