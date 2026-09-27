@@ -56,7 +56,7 @@ function isActive(url: string) {
           siteConfig.navigation.map((item) => (
             <a
               href={getAssetPath(item.url)}
-              class="nav-link link-hover tracking-wide"
+              class="nav-link tracking-wide"
               aria-current={isActive(item.url) ? "page" : undefined}
             >
               {item.title}
@@ -138,7 +138,7 @@ function isActive(url: string) {
           <a
             href={getAssetPath(item.url)}
             class="flex items-center justify-between px-4 py-3.5 border-b border-border 
-              font-ui text-base text-muted-foreground link-hover aria-[current=page]:text-primary
+              font-ui text-base text-muted-foreground link-hover-muted aria-[current=page]:text-primary
               last:border-b-0"
             aria-current={isActive(item.url) ? "page" : undefined}
           >

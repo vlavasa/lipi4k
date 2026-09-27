@@ -112,6 +112,14 @@ html {
   @apply hover:text-primary transition-colors duration-200 ease-fluid;
 }
 
+@utility link-hover-muted {
+  @apply transition-colors duration-200 ease-fluid;
+
+  &:not([aria-current="page"]) {
+    @apply hover:text-foreground;
+  }
+}
+
 @utility metadata {
   @apply font-ui text-xs font-normal text-muted-foreground;
 }
@@ -157,7 +165,7 @@ html {
 
   .nav-link {
     @apply relative inline-flex min-h-10 items-center no-underline text-muted-foreground transition-colors duration-200;
-    @apply hover:text-primary;
+    @apply link-hover-muted;
     @apply aria-[current=page]:text-primary;
 
     @apply after:absolute after:-bottom-0.5 after:left-1/2 after:h-0.5 after:w-0 after:-translate-x-1/2 after:rounded-full after:bg-accent;
@@ -176,7 +184,7 @@ html {
   }
 
   .heading-anchor {
-    @apply text-muted-foreground w-4 inline-block text-center ms-2 no-underline opacity-0 transition-opacity duration-200;
+    @apply text-muted-foreground hover:text-foreground w-4 inline-block text-center ms-2 no-underline opacity-0 transition-opacity duration-200;
   }
 
   .heading-anchor:empty::before {

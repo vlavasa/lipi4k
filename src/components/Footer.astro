@@ -18,7 +18,7 @@ const note = await renderFooterNote(siteConfig.footerNote);
           <ul class="flex flex-wrap items-center justify-center gap-x-6 font-ui text-sm text-muted-foreground">
             {siteConfig.footerLinks.map((item) => (
               <li>
-                <a href={getAssetPath(item.url)} class="inline-flex min-h-11 items-center link-hover">
+                <a href={getAssetPath(item.url)} class="inline-flex min-h-11 items-center link-hover-muted">
                   {item.title}
                 </a>
               </li>
@@ -53,6 +53,6 @@ const note = await renderFooterNote(siteConfig.footerNote);
   }
 
   .footer-note :global(a:hover) {
-    color: var(--primary);
+    color: var(--foreground);
   }
 </style>
