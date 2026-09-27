@@ -1,6 +1,6 @@
 ---
-import { type Post } from "@/utils/content";
-import PostTitle from "./PostTitle.astro";
+import { getPostUrl, type Post } from "@/utils/content";
+import { slugify } from "@/utils/text";
 import PostMeta from "./PostMeta.astro";
 
 type Props = {
@@ -8,14 +8,20 @@ type Props = {
 };
 
 const { post } = Astro.props;
+const titleSlug = slugify(post.data.title.replaceAll(".", "-"));
 ---
 
-<div class="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-x-3 py-1 first:pt-0 last:pb-0 text-muted-foreground">
-  <PostTitle 
-    post={post} 
-    class="text-base md:text-lg font-medium text-balance leading-snug text-foreground 
-    transition-colors duration-150 hover:text-primary ease-fluid"
-  />
+<a
+  href={getPostUrl(post.id, post.filePath)}
+  class="group grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-x-3 py-1 first:pt-0 last:pb-0 text-muted-foreground no-underline"
+>
+  <h2
+    class="text-base md:text-lg font-medium text-balance leading-snug text-foreground link-underline
+    transition-colors duration-150 group-hover:text-primary group-focus-visible:text-primary ease-fluid"
+    transition:name={titleSlug}
+  >
+    {post.data.title}
+  </h2>
 
   <PostMeta post={post} showTags={false} class="text-right whitespace-nowrap" />
-</div>
+</a>
