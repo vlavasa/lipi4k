@@ -157,6 +157,7 @@ html:has(.search-dialog[open]) {
 }
 
 .search-result-title {
+  @apply link-underline;
   font-family: var(--font-content);
   font-size: 1.1rem;
   font-weight: 500;
