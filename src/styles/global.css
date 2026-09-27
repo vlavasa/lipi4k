@@ -164,15 +164,17 @@ html {
   }
 
   .nav-link {
-    @apply relative inline-flex min-h-10 items-center no-underline text-muted-foreground transition-colors duration-200;
+    @apply inline-flex min-h-10 items-center no-underline text-muted-foreground;
     @apply link-hover-muted;
     @apply aria-[current=page]:text-primary;
+  }
 
-    @apply after:absolute after:-bottom-0.5 after:left-1/2 after:h-0.5 after:w-0 after:-translate-x-1/2 after:rounded-full after:bg-accent;
-    @apply after:transition-[width] after:duration-200;
-    @apply after:content-[''];
-
-    @apply hover:after:w-full;
+  .footer-nav-link {
+    @apply inline-flex min-h-11 items-center link-hover-muted underline decoration-1;
+    @apply aria-[current=page]:text-primary aria-[current=page]:no-underline;
+    text-decoration-color: color-mix(in srgb, currentColor 45%, transparent);
+    text-underline-offset: 0.24em;
+    text-decoration-skip-ink: auto;
   }
 
   .divider {

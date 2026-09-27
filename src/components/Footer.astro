@@ -1,7 +1,7 @@
 ---
 import siteConfig from "@/site.config";
 import { renderFooterNote } from "@/utils/footer-note";
-import { getAssetPath } from "@/utils/url";
+import { getAssetPath, isActiveNavUrl } from "@/utils/url";
 
 const annotation = siteConfig.annotation?.trim();
 const note = await renderFooterNote(siteConfig.footerNote);
@@ -16,13 +16,21 @@ const note = await renderFooterNote(siteConfig.footerNote);
       {siteConfig.footerLinks.length > 0 && (
         <nav aria-label="Footer" class="mt-2">
           <ul class="flex flex-wrap items-center justify-center gap-x-6 font-ui text-sm text-muted-foreground">
-            {siteConfig.footerLinks.map((item) => (
-              <li>
-                <a href={getAssetPath(item.url)} class="inline-flex min-h-11 items-center link-hover-muted">
-                  {item.title}
-                </a>
-              </li>
-            ))}
+            {siteConfig.footerLinks.map((item) => {
+              const active = isActiveNavUrl(item.url, Astro.url.pathname);
+              const Tag = active ? "span" : "a";
+              return (
+                <li>
+                  <Tag
+                    href={active ? undefined : getAssetPath(item.url)}
+                    class="footer-nav-link"
+                    aria-current={active ? "page" : undefined}
+                  >
+                    {item.title}
+                  </Tag>
+                </li>
+              );
+            })}
           </ul>
         </nav>
       )}

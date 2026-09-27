@@ -3,7 +3,7 @@ import Moon from "@/assets/moon.svg";
 import Search from "@/assets/search.svg";
 import Sun from "@/assets/sun.svg";
 import siteConfig from "@/site.config";
-import { getAssetPath, stripBasePath } from "@/utils/url";
+import { getAssetPath, isActiveNavUrl } from "@/utils/url";
 import ContentsMenu from "@/components/content/ContentsMenu.astro";
 import type { ArticleContents } from "@/utils/contents";
 
@@ -13,21 +13,7 @@ interface Props {
 
 const { contents } = Astro.props;
 
-const pathname = stripBasePath(Astro.url.pathname);
-
-function isActive(url: string) {
-  if (/^(?:[a-z][a-z\d+.-]*:|\/\/)/i.test(url)) {
-    return false;
-  }
-
-  const target = `/${url.replace(/^\/+|\/+$/g, "")}`;
-
-  if (target === "/") {
-    return pathname === "/";
-  }
-
-  return pathname === target || pathname.startsWith(`${target}/`);
-}
+const isActive = (url: string) => isActiveNavUrl(url, Astro.url.pathname);
 ---
 
 <header class="site-header sticky overflow-visible top-0 z-40 border-b border-border bg-background/85 backdrop-blur">
@@ -53,15 +39,19 @@ function isActive(url: string) {
       <!-- Desktop Navigation -->
       <nav class="hidden sm:flex items-center gap-6 font-ui text-sm">
         {
-          siteConfig.navigation.map((item) => (
-            <a
-              href={getAssetPath(item.url)}
-              class="nav-link tracking-wide"
-              aria-current={isActive(item.url) ? "page" : undefined}
-            >
-              {item.title}
-            </a>
-          ))
+          siteConfig.navigation.map((item) => {
+            const active = isActive(item.url);
+            const Tag = active ? "span" : "a";
+            return (
+              <Tag
+                href={active ? undefined : getAssetPath(item.url)}
+                class="nav-link tracking-wide"
+                aria-current={active ? "page" : undefined}
+              >
+                {item.title}
+              </Tag>
+            );
+          })
         }
       </nav>
       
@@ -134,17 +124,21 @@ function isActive(url: string) {
   >
     <div class="border-t border-border">
       {
-        siteConfig.navigation.map((item) => (
-          <a
-            href={getAssetPath(item.url)}
-            class="flex items-center justify-between px-4 py-3.5 border-b border-border 
-              font-ui text-base text-muted-foreground link-hover-muted aria-[current=page]:text-primary
-              last:border-b-0"
-            aria-current={isActive(item.url) ? "page" : undefined}
-          >
-            <span>{item.title}</span>
-          </a>
-        ))
+        siteConfig.navigation.map((item) => {
+          const active = isActive(item.url);
+          const Tag = active ? "span" : "a";
+          return (
+            <Tag
+              href={active ? undefined : getAssetPath(item.url)}
+              class="flex items-center justify-between px-4 py-3.5 border-b border-border
+                font-ui text-base text-muted-foreground link-hover-muted aria-[current=page]:text-primary
+                last:border-b-0"
+              aria-current={active ? "page" : undefined}
+            >
+              <span>{item.title}</span>
+            </Tag>
+          );
+        })
       }
     </div>
   </div>
