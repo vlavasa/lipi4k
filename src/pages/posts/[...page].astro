@@ -1,5 +1,7 @@
 ---
 import type { GetStaticPaths } from "astro";
+import ArrowLeft from "@/assets/arrow-left.svg";
+import ArrowRight from "@/assets/arrow-right.svg";
 import { getAllPosts } from "@/utils/content";
 import PageLayout from "@/layouts/PageLayout.astro";
 import PostFeed from "@/components/content/PostFeed.astro";
@@ -45,7 +47,8 @@ const description =
             href={page.url.prev}
             class="text-muted-foreground link-underline link-hover-muted font-ui inline-flex min-h-10 items-center"
           >
-            ← Previous
+            <ArrowLeft class="size-4 shrink-0" aria-hidden="true" />
+            Previous
           </a>
         )
       }
@@ -62,7 +65,8 @@ const description =
             href={page.url.next}
             class="text-muted-foreground link-underline link-hover-muted font-ui inline-flex min-h-10 items-center"
           >
-            Next →
+            Next
+            <ArrowRight class="size-4 shrink-0" aria-hidden="true" />
           </a>
         )
       }
