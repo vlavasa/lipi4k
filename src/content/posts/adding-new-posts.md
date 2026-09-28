@@ -46,7 +46,7 @@ Every post needs a frontmatter block at the top of the file, delimited by `---`.
 
 `updated` is optional. When present, Lipi4k uses this date instead of `published` in post metadata, article OG images, and post ordering. Use it when you revise a post substantially enough that existing readers should know the text has changed. An update can move an older post to the top of the home page.
 
-`tags` is optional. An array of strings used to group related posts and help select related reading. Tags are lowercased and deduplicated automatically, then displayed in English alphabetical order. They link to tag archives from post listings and the article header. On a tag archive, the matching tag is non-clickable text in the accent color. Other tags brighten on hover without underlining, like breadcrumbs.
+`tags` is optional. An array of strings used to group related posts and help select related reading. Tags are lowercased and deduplicated automatically, then displayed in English alphabetical order. They link to tag archives from post listings and the article header. On a tag archive, the matching tag is non-clickable text in the accent colour without an underline. Other tags have a fine underline and brighten to the foreground colour on hover or keyboard focus, like breadcrumbs.
 
 `cover` is optional. A plain path relative to `src/content/`, such as `posts/my-post/attachments/cover.jpg`. Store the image in an `attachments/` directory. It appears above the article content; the Open Graph card is generated separately from the post title. See the [image guide](../adding-images/) for the folder structure.
 

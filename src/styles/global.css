@@ -61,7 +61,7 @@ html {
 
   a,
   button {
-    @apply outline-accent outline-offset-1 focus-visible:no-underline focus-visible:outline-2 focus-visible:outline-dashed;
+    @apply outline-ring outline-offset-1 focus-visible:outline-2 focus-visible:outline-dashed;
   }
   button:not(:disabled) {
     @apply active:scale-[0.96] transition-transform duration-150;
@@ -90,10 +90,6 @@ html {
   @apply max-w-app mx-auto w-full px-4;
 }
 
-@utility active-nav {
-  @apply underline underline-offset-6 decoration-[1.5px];
-}
-
 @utility content-layout {
   @apply max-w-3xl mx-auto w-full px-4;
 }
@@ -109,7 +105,12 @@ html {
 
 
 @utility link-hover {
-  @apply hover:text-primary transition-colors duration-200 ease-fluid;
+  @apply hover:text-primary focus-visible:text-primary transition-colors duration-200 ease-fluid;
+}
+
+/* Highlight only the title inside a link that covers an entire row. */
+@utility link-group-hover {
+  @apply group-hover:text-primary group-focus-visible:text-primary transition-colors duration-200 ease-fluid;
 }
 
 @utility link-underline {
@@ -122,9 +123,14 @@ html {
 @utility link-hover-muted {
   @apply transition-colors duration-200 ease-fluid;
 
-  &:not([aria-current="page"]) {
-    @apply hover:text-foreground;
+  &:not([aria-current="page"]):not([aria-current="location"]) {
+    @apply hover:text-foreground focus-visible:text-foreground;
   }
+}
+
+@utility navigation-link {
+  @apply text-muted-foreground link-underline link-hover-muted;
+  @apply aria-[current=page]:text-primary aria-[current=page]:no-underline;
 }
 
 @utility metadata {
@@ -171,17 +177,15 @@ html {
   }
 
   .nav-link {
-    @apply inline-flex min-h-10 items-center link-underline text-muted-foreground;
-    @apply link-hover-muted;
-    @apply aria-[current=page]:text-primary aria-[current=page]:no-underline;
+    @apply inline-flex min-h-10 items-center navigation-link;
   }
 
   .footer-nav-link {
-    @apply inline-flex min-h-11 items-center link-hover-muted underline decoration-1;
-    @apply aria-[current=page]:text-primary aria-[current=page]:no-underline;
-    text-decoration-color: color-mix(in srgb, currentColor 45%, transparent);
-    text-underline-offset: 0.24em;
-    text-decoration-skip-ink: auto;
+    @apply inline-flex min-h-11 items-center navigation-link;
+  }
+
+  .footer-note a {
+    @apply link-underline link-hover-muted;
   }
 
   .divider {
@@ -193,15 +197,22 @@ html {
   }
 
   .heading-anchor {
-    @apply text-muted-foreground hover:text-foreground w-4 inline-block text-center ms-2 no-underline opacity-0 transition-opacity duration-200;
+    @apply text-muted-foreground link-hover-muted w-4 inline-block text-center ms-2 no-underline opacity-0 transition-opacity duration-200;
   }
 
   .heading-anchor:empty::before {
     content: "↗";
   }
 
-  :is(h2, h3, h4):hover .heading-anchor {
+  :is(h1, h2, h3, h4, h5, h6):hover .heading-anchor,
+  .heading-anchor:focus-visible {
     @apply opacity-100;
+  }
+
+  @media (hover: none) {
+    .heading-anchor {
+      @apply opacity-100;
+    }
   }
 
   @keyframes content-enter {

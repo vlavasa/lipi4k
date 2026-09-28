@@ -20,7 +20,7 @@ The annotation typeface is **Caveat**, a handwritten face used for the optional 
 
 Lipi4k's visual and typographic character is inspired by the [Kami](https://kami.tw93.fun) design language. The guiding principles are: warm over cool, constrained over expansive, quiet over assertive.
 
-The base colour scale is a single warm neutral ramp of eleven steps, from a near-white parchment (`#F5F4ED`) to a near-black (`#141413`). There is one brand colour, a terracotta (`#E85D2A`), used sparingly: links on hover, the reading progress bar, the drop capital, the CTA on the featured post. The scale is not cold grey and it is not blue. It reads like a printed page rather than a screen.
+The base colour scale is a single warm neutral ramp of eleven steps, from a near-white parchment (`#F5F4ED`) to a near-black (`#141413`). There is one brand colour, a terracotta (`#E85D2A`), used sparingly: current navigation items, full-contrast links on hover or keyboard focus, the reading progress bar, the drop capital, and annotations. Muted links brighten to the foreground colour. Fine underlines identify text links even without hover; current navigation items use the accent without an underline. The scale is not cold grey and it is not blue. It reads like a printed page rather than a screen.
 
 The reading measure is held at 68 characters per line. The paragraph spacing is generous. Headings are tracked tightly and balanced with `text-wrap: balance`. Images carry a hairline inset border that separates them from the parchment ground. There is a subtle paper texture applied to the entire page via a CSS noise filter at 3% opacity: present enough to soften the backlit quality of a screen, invisible enough to go unnoticed by most readers.
 

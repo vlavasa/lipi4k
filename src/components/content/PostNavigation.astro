@@ -1,7 +1,5 @@
 ---
 import { type Post, getPostUrl } from "@/utils/content";
-import ArrowLeft from "@/assets/arrow-left.svg";
-import ArrowRight from "@/assets/arrow-right.svg";
 
 interface Props {
   prevPost?: Post;
@@ -28,10 +26,10 @@ const { prevPost, nextPost } = Astro.props;
                 )}
 	              class="group flex flex-1 flex-col gap-1 no-underline transition-colors"
             >
-              <div class="flex items-center justify-start gap-2 group inline-cta text-muted-foreground">
+              <div class="flex items-center justify-start gap-2 inline-cta text-muted-foreground">
                 Previous Article
               </div>
-              <span class="text-base md:text-lg font font-medium font-content leading-snug text-foreground link-underline link-hover group-hover:text-primary">
+              <span class="text-base md:text-lg font-medium font-content leading-snug text-foreground link-underline link-group-hover">
                 {prevPost.data.title}
               </span>
             </a>
@@ -45,10 +43,10 @@ const { prevPost, nextPost } = Astro.props;
                 )}
 	              class="group flex flex-1 flex-col gap-1 text-right no-underline transition-colors"
             >
-              <div class="flex items-center justify-end gap-2 group inline-cta text-muted-foreground">
+              <div class="flex items-center justify-end gap-2 inline-cta text-muted-foreground">
                 Next Article
               </div>  
-              <span class="text-base md:text-lg font-medium font-content leading-snug text-foreground link-underline link-hover group-hover:text-primary">
+              <span class="text-base md:text-lg font-medium font-content leading-snug text-foreground link-underline link-group-hover">
                 {nextPost.data.title}
               </span>
             </a>

@@ -42,7 +42,7 @@ Rich text uses the same semantic tokens. In `src/styles/typography.css`, `.app-p
 
 ## Changing the Accent Colour
 
-The brand colour (`--brand`) drives the primary accent: the link hover colour, the reading progress bar, the featured post CTA, and the initial drop capital on each post. To change the accent, update `--brand` in the `:root` block:
+The brand colour (`--brand`) drives the primary accent: current navigation items, full-contrast links on hover or keyboard focus, the reading progress bar, annotations, and the initial drop capital on each post. Muted links brighten to the foreground colour instead. To change the accent, update `--brand` in the `:root` block:
 
 ```css
 :root {
@@ -77,7 +77,9 @@ Lipi4k uses four font slots, each mapped to a CSS variable:
 
 Post metadata and page update dates share the `metadata` utility in `src/styles/global.css`. It uses `font-ui` (Manrope by default), regular weight, and the same small text size throughout the site. `PostMeta` applies it directly, while `PageHeader` applies it to page metadata, so individual layouts do not need their own font settings.
 
-Post listings and article headers show metadata in the order **date · reading time · tags**. The date uses `updated` when available, otherwise `published`. Tags are sorted using English alphabetical order. Links brighten on hover like breadcrumbs, without underlining; the current tag on a tag archive is non-clickable text in the accent color. Missing tags or disabled reading time leave no empty separators. Article OG images use the same metadata at the bottom, above the site address. The compact "More like this" list shows article titles on the left and **date · reading time** on the right, without tags. The shared footer uses the same compact top spacing on every page (`mt-10`, or `2.5rem`), matching the space below the previous/next article titles.
+Post listings and article headers show metadata in the order **date · reading time · tags**. The date uses `updated` when available, otherwise `published`. Tags are sorted using English alphabetical order. Tag links have a fine underline and brighten to the foreground colour on hover or keyboard focus; the current tag on a tag archive is non-clickable accent-coloured text without an underline. Missing tags or disabled reading time leave no empty separators. Article OG images use the same metadata at the bottom, above the site address. The compact "More like this" list shows article titles on the left and **date · reading time** on the right, without tags. Each row is clickable, with only its title underlined. The shared footer uses the same compact top spacing on every page (`mt-10`, or `2.5rem`), matching the space below the previous/next article titles.
+
+Text links share the fine underline defined by `link-underline` in `src/styles/global.css`. Main and footer menus use the shared `navigation-link` style: inactive items are underlined, while the current page or section is accent-coloured, not underlined, and not clickable. The table of contents uses the accent for the current heading too, but keeps the heading link functional. The `/tags` index has compact whole-row links with underlined names and plain counts, in two columns on desktop and one on mobile, without separator lines. Normal post previews retain separate title and tag links.
 
 
 Archive year labels and article counts on `/posts` and `/tags/*`, article counts in the `/tags` index, and gallery photo counts also use `font-ui`. These use `text-sm` and `tabular-nums`, giving the year and counts the same size and aligning their digits. Article counts are displayed in uppercase (`1 POST`, `7 POSTS`); photo counts use lowercase (`1 photo`, `3 photos`).

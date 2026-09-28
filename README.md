@@ -172,6 +172,16 @@ The colour system is a single warm neutral scale (`--base-50` through `--base-95
 
 To create a named colour scheme, add a `[data-theme="name"]` block and set the `data-theme` attribute on `<html>`.
 
+### Links and navigation
+
+Text links have a fine underline in both themes, so they remain recognisable without hover. Full-contrast links (article titles and body text) turn the primary accent colour on hover or keyboard focus. Muted links (navigation, breadcrumbs, metadata tags, pagination, and “All posts”) brighten to the foreground colour. Keyboard focus also has a visible outline.
+
+The current page or section is marked with the primary accent, without an underline. Main and footer menus render that item as non-clickable text; matching works for internal URLs, including nested routes and a configured base path. Breadcrumbs and the current metadata tag also use non-clickable text. The active table-of-contents entry stays a working heading link and uses the same accent treatment, without a vertical marker.
+
+Normal post previews keep separate links for the title and tags. Each “More like this” row is a single link covering its title and metadata; only the title is underlined. The `/tags` index also uses whole-row links, with an underlined name and an unadorned count, arranged in two compact columns on desktop and one on mobile, without row separators. Logos, gallery images, and heading permalink arrows do not use text underlines. Permalink arrows appear on heading hover, keyboard focus, or devices without hover.
+
+Shared link styles live in `src/styles/global.css`: `link-underline` defines the 1px underline at 45% of the text colour, offset by `0.24em`; `link-hover` and `link-hover-muted` define the two colour responses; `link-group-hover` highlights a title inside a larger link; and `navigation-link` shares the menu and current-page styling. The article typography, footer note, and search results reuse the underline definition.
+
 ### Typefaces
 
 Fonts are configured in `astro.config.mjs` under the `fonts` array. Swap the `name` field to any typeface available on Fontsource.
@@ -205,7 +215,7 @@ Archive years and counts use tabular figures to keep digits aligned. Article cou
 | `lang` | string | No | Document language, e.g. `cs`; defaults to `en` |
 | `annotation` | string | No | Centered handwritten note below the article content, before previous/next navigation; no global fallback |
 
-Post listings and article headers show metadata in the order **date · reading time · tags**. The date uses `updated` when available, otherwise `published`. Tags are sorted using English alphabetical order. Links brighten on hover like breadcrumbs, without underlining; the current tag on a tag archive is non-clickable text in the accent color. Missing tags or disabled reading time leave no empty separators. Article OG images use the same metadata at the bottom, above the site address. The compact "More like this" list shows article titles on the left and **date · reading time** on the right, without tags. The shared footer uses the same compact top spacing on every page (`mt-10`, or `2.5rem`), matching the space below the previous/next article titles.
+Post listings and article headers show metadata in the order **date · reading time · tags**. The date uses `updated` when available, otherwise `published`. Tags are sorted using English alphabetical order. Tag links have a fine underline and brighten to the foreground colour on hover or keyboard focus; the current tag on a tag archive is non-clickable accent-coloured text without an underline. Missing tags or disabled reading time leave no empty separators. Article OG images use the same metadata at the bottom, above the site address. The compact "More like this" list shows article titles on the left and **date · reading time** on the right, without tags. Each row is clickable, with only its title underlined. The shared footer uses the same compact top spacing on every page (`mt-10`, or `2.5rem`), matching the space below the previous/next article titles.
 
 ### Pages (`src/content/pages/`)
 

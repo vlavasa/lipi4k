@@ -40,9 +40,9 @@ const breadcrumbs = segments.map(
     >
       <a
         href={getAssetPath("/")}
-        class="flex gap-1 items-center link-underline hover:text-foreground transition-colors"
+        class="flex gap-1 items-center link-underline link-hover-muted"
       >
-        <HomeIcon class="text-muted-forground size-4"/>
+        <HomeIcon class="size-4"/>
         Home
       </a>
 
@@ -72,7 +72,7 @@ const breadcrumbs = segments.map(
               ) : (
                 <a
                   href={getAssetPath(crumb.href)}
-                  class="link-underline hover:text-foreground transition-colors"
+                  class="link-underline link-hover-muted"
                 >
                   {crumb.label}
                 </a>

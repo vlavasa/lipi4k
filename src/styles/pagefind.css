@@ -164,7 +164,8 @@ html:has(.search-dialog[open]) {
   line-height: 1.4;
 }
 
-.search-results a:hover .search-result-title {
+.search-results a:hover .search-result-title,
+.search-results a:focus .search-result-title {
   color: var(--primary);
 }
 

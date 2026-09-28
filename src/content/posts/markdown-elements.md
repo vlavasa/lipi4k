@@ -32,7 +32,7 @@ Inline `code` marks technical terms, file paths, configuration values, and comma
 
 #### Links and References
 
-[The shape of a link](https://example.com) inside a paragraph is a small interruption. The underline signals that the text is a pointer, not just a word. Lipi4k uses a muted border-colour underline at rest, and shifts to the primary accent on hover. The goal is that links are findable without being distracting.
+[The shape of a link](https://example.com) inside a paragraph is a small interruption. The underline signals that the text is a pointer, not just a word. Lipi4k uses a fine underline in a muted version of the text colour, and shifts body links to the primary accent on hover or keyboard focus. The goal is that links are findable without being distracting.
 
 ---
 

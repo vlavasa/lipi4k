@@ -17,7 +17,7 @@ const titleSlug = slugify(post.data.title.replaceAll(".", "-"));
 >
   <h2
     class="text-base md:text-lg font-medium text-balance leading-snug text-foreground link-underline
-    transition-colors duration-150 group-hover:text-primary group-focus-visible:text-primary ease-fluid"
+    link-group-hover"
     transition:name={titleSlug}
   >
     {post.data.title}

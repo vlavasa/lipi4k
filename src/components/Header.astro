@@ -121,6 +121,7 @@ const isActive = (url: string) => isActiveNavUrl(url, Astro.url.pathname);
     id="mobile-drawer"
     class="mobile-drawer sm:hidden"
     aria-hidden="true"
+    inert
   >
     <div class="border-t border-border">
       {
@@ -131,7 +132,7 @@ const isActive = (url: string) => isActiveNavUrl(url, Astro.url.pathname);
             <Tag
               href={active ? undefined : getAssetPath(item.url)}
               class="flex items-center justify-between px-4 py-3.5 border-b border-border
-                font-ui text-base text-muted-foreground link-underline link-hover-muted aria-[current=page]:text-primary aria-[current=page]:no-underline
+                font-ui text-base navigation-link
                 last:border-b-0"
               aria-current={active ? "page" : undefined}
             >
@@ -156,6 +157,7 @@ const isActive = (url: string) => isActiveNavUrl(url, Astro.url.pathname);
       toggle.setAttribute('aria-expanded', String(next));
       drawer.classList.toggle('open', next);
       drawer.setAttribute('aria-hidden', String(!next));
+      drawer.inert = !next;
     });
   }
 
@@ -179,16 +181,12 @@ const isActive = (url: string) => isActiveNavUrl(url, Astro.url.pathname);
   }
 
   .header-action:hover,
-  .header-action:focus-visible:not(#search-toggle) {
+  .header-action:focus-visible {
     color: var(--primary);
   }
 
   .header-action:disabled {
     opacity: 0.45;
-  }
-
-  #search-toggle {
-    outline: none;
   }
 
   @media (min-width: 40rem) {
