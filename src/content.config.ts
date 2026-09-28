@@ -12,6 +12,8 @@ function removeDupsAndLowerCase(array: string[]) {
 	return Array.from(distinctItems);
 }
 
+const illuminationImage = z.string().trim().regex(/^\.\.?\//, 'Use an image path relative to the post, starting with ./ or ../');
+
 const postsCollection = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: `./${POSTS_PATH}` }),
   schema: z.object({
@@ -21,6 +23,10 @@ const postsCollection = defineCollection({
     updated: z.coerce.date().optional(),
     tags: z.array(z.string()).transform(removeDupsAndLowerCase).optional(),
     cover: z.string().optional(),
+    illumination: z.union([
+      illuminationImage,
+      z.object({ light: illuminationImage, dark: illuminationImage }),
+    ]).optional(),
     draft: z.boolean().default(false),
     lang: z.string().optional(),
     annotation: z.string().optional(),

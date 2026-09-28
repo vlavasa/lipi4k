@@ -44,6 +44,8 @@ Fonts are loaded through **Astro's font API**, which optimises loading, subsets 
 
 **The drop capital** on the first paragraph of each post is applied with `initial-letter`, with a floated, enlarged first letter as a fallback in browsers that do not support it. It is scoped to viewports at least 768px wide, where the layout has enough room for it to work. On mobile, the first paragraph renders normally. No JavaScript is involved.
 
+Posts can optionally replace that drop capital with an **illuminated initial** by supplying an `illumination` image in frontmatter, with separate `light` and `dark` variants if desired. The image occupies a two-line square on mobile and a three-line square on screens at least 768px wide, while the original letter stays available to assistive technology and search. Print layouts show the original text.
+
 **Print continuity** means that Cmd+P produces a result close to the screen layout: the parchment background is preserved, the type scale holds, and the page does not collapse into a plain-text dump. Lipi4k is one of few web templates where printing is considered rather than ignored.
 
 **The reading progress bar** along the left edge of each post page follows your progress through the page. It uses CSS scroll-driven animations where supported, with a small JavaScript fallback for other browsers. It is hidden when reduced motion is preferred.

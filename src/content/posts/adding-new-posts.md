@@ -50,6 +50,8 @@ Every post needs a frontmatter block at the top of the file, delimited by `---`.
 
 `cover` is optional. A plain path relative to `src/content/`, such as `posts/my-post/attachments/cover.jpg`. Store the image in an `attachments/` directory. It appears above the article content; the Open Graph card is generated separately from the post title. See the [image guide](../adding-images/) for the folder structure.
 
+`illumination` is optional. An image of an illuminated initial that replaces the opening letter, two lines high on mobile and three lines high on screens at least 768px wide. Use a local image path relative to this Markdown or MDX file, starting with `./` or `../`, for example `./attachments/initial-p.png`, or an object with `light` and `dark` image paths. See [Illuminated Initials](#illuminated-initials) below.
+
 `draft` is optional and defaults to `false`. Set it to `true` to exclude the post from production builds, including listings and its public URL. During development (`npm run dev`), drafts and posts with future publication dates are included in listings and have accessible post pages.
 
 `lang` is optional and defaults to `en`. Sets the document's HTML language for this post, for example `cs` for Czech, `en` for English, or `de` for German. It also formats the post's date in that language, both in the article and in listings on the home page, posts archive, and tag pages, as well as in generated Open Graph images. The same field is supported in content page frontmatter for setting the document language and formatting the update date. Browsers and assistive technology use it to interpret the text, and Pagefind searches content in that language. The template's interface labels remain in English.
@@ -92,6 +94,30 @@ Editor-specific wiki links (`[[Page]]`), embeds (`![[photo.jpg]]`), comments (`%
 The first paragraph of the post receives a drop capital in the published layout on larger screens. This is applied automatically. You do not need to mark it up differently.
 
 Articles with at least two H2 or H3 headings automatically get a table of contents. It stays in the left margin on wide screens and opens from the header's Contents button on smaller screens. The article title and H4–H6 headings are omitted. Links use the headings' generated anchors, including accents and repeated heading names.
+
+### Illuminated Initials
+
+To open a post with a medieval-style illuminated letter, place your artwork next to the article, for example in `attachments/initial-p.png`, and set:
+
+```yaml
+illumination: ./attachments/initial-p.png
+```
+
+That single image is used in both themes. To provide different artwork for light and dark mode, specify both paths instead:
+
+```yaml
+illumination:
+  light: ./attachments/initial-p-light.png
+  dark: ./attachments/initial-p-dark.png
+```
+
+The image follows the active site theme immediately, including when the reader changes it manually. Both variants should depict the same opening letter.
+
+Write the complete opening word as usual: `Pages hold the stories we return to.` The artwork should depict **P** in this example. Lipi4k keeps the original letter in the document for screen readers, search, and copying text, and displays the image in its place on screen. No browser JavaScript is needed. In print, the paragraph displays ordinary text. Omitting `illumination` keeps the automatic text drop capital.
+
+The artwork fits inside a square two lines high on mobile and three lines high on screens at least 768px wide, with text wrapping alongside it. Use a square or nearly square image with little empty padding; transparent PNG or WebP works well in light and dark themes. Astro processes local images and reports missing files during the build.
+
+The first regular top-level paragraph is used; headings, blockquotes, and standalone image galleries are skipped. An opening letter inside Markdown emphasis or a link is supported, as are accented letters and opening punctuation in the same text node. Paragraphs beginning with code, an inline image, raw HTML, or an MDX expression retain their normal rendering.
 
 ### Czech and Other European Languages
 

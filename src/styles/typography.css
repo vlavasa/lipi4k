@@ -266,8 +266,49 @@
     @apply outline-accent outline-2 outline-dashed outline-offset-4;
   }
 
+  .post-content :is(.illumination-image, .illumination-image--light, .illumination-image--dark) {
+    display: none;
+  }
+
+  @media screen {
+    .post-content > p.has-illumination {
+      display: flow-root;
+    }
+
+    .post-content :is(.illumination-image, .illumination-image--light, .illumination-image--dark) {
+      display: block;
+      float: inline-start;
+      width: 2lh;
+      height: 2lh;
+      margin: 0;
+      margin-inline-end: 0.65em;
+      border-radius: 0;
+      object-fit: contain;
+    }
+
+    .post-content .illumination-letter {
+      @apply sr-only;
+    }
+
+    .post-content .illumination-image--dark,
+    html[data-theme="dark"] .post-content .illumination-image--light {
+      display: none;
+    }
+
+    html[data-theme="dark"] .post-content .illumination-image--dark {
+      display: block;
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    .post-content :is(.illumination-image, .illumination-image--light, .illumination-image--dark) {
+      width: 3lh;
+      height: 3lh;
+    }
+  }
+
   @media (min-width: 768px) {
-    .post-content > p:first-of-type::first-letter {
+    .post-content > p:first-of-type:not(.has-illumination)::first-letter {
       @apply text-primary font-content font-semibold;
       initial-letter: 3;
       margin-inline-end: 0.25em;
@@ -275,7 +316,7 @@
 
     /* Approximate a three-line initial where initial-letter is unsupported. */
     @supports not (initial-letter: 3) {
-      .post-content > p:first-of-type::first-letter {
+      .post-content > p:first-of-type:not(.has-illumination)::first-letter {
         float: left;
         font-size: 5.5em;
         line-height: 0.7;

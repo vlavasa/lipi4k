@@ -12,6 +12,7 @@ import { rawFonts } from "./src/plugins/rawFonts";
 import { unified } from '@astrojs/markdown-remark';
 import { remarkImageProcessing } from './src/plugins/remark-image-processing';
 import { remarkExternalLinks } from './src/plugins/remark-external-links.ts';
+import { remarkIllumination } from './src/plugins/remark-illumination.ts';
 
 const base = process.env.BASE_PATH ?? "/";
 
@@ -127,6 +128,7 @@ export default defineConfig({
       remarkPlugins: [
         remarkExternalLinks,
         remarkImageProcessing,
+        remarkIllumination,
       ],
       rehypePlugins: [
         rehypeSlug,

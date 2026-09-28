@@ -30,6 +30,7 @@ The visual design takes its cues from the [Kami](https://kami.tw93.fun) design l
 
 - **Literata** body type, **Manrope** for UI and counts, **Fira Code** for code and small labels, **Caveat** for annotations
 - Light and dark themes via CSS custom properties, no JavaScript required for switching
+- Optional illuminated initials with separate light and dark artwork — two lines high on mobile, three on desktop
 - Warm neutral colour scale with a single brand accent — fully customisable in one file
 - Paginated posts grouped by year
 - Tag pages and tag-driven related posts
@@ -211,11 +212,24 @@ Archive years and counts use tabular figures to keep digits aligned. Article cou
 | `updated` | date | No | Replaces the publication date in metadata and post ordering |
 | `tags` | string[] | No | Links to tag archives and helps select related posts |
 | `cover` | string | No | Article cover in an `attachments/` directory; plain path relative to `src/content/` |
+| `illumination` | string or `{ light, dark }` | No | Image replacing the opening letter; paths relative to the post, starting with `./` or `../` |
 | `draft` | boolean | No | Excluded from production builds |
 | `lang` | string | No | Document language, e.g. `cs`; defaults to `en` |
 | `annotation` | string | No | Centered handwritten note below the article content, before previous/next navigation; no global fallback |
 
 Post listings and article headers show metadata in the order **date · reading time · tags**. The date uses `updated` when available, otherwise `published`. Tags are sorted using English alphabetical order. Tag links have a fine underline and brighten to the foreground colour on hover or keyboard focus; the current tag on a tag archive is non-clickable accent-coloured text without an underline. Missing tags or disabled reading time leave no empty separators. Article OG images use the same metadata at the bottom, above the site address. The compact "More like this" list shows article titles on the left and **date · reading time** on the right, without tags. Each row is clickable, with only its title underlined. The shared footer uses the same compact top spacing on every page (`mt-10`, or `2.5rem`), matching the space below the previous/next article titles.
+
+To use an illuminated initial, add `illumination: ./attachments/initial-p.png` to the post's frontmatter. Supply an image containing the opening letter and keep the complete first word in the Markdown or MDX source. The image occupies a two-line square on mobile and a three-line square on screens at least 768px wide, with text flowing beside it. Transparent PNG or WebP images work well with both themes. Local images are processed by Astro; a missing file fails the build. In print, the original letter appears as normal text. Without this field, the existing drop capital remains. See the [authoring guide](src/content/posts/adding-new-posts.md#illuminated-initials) for details.
+
+For separate artwork in each theme, supply both paths:
+
+```yaml
+illumination:
+  light: ./attachments/initial-p-light.png
+  dark: ./attachments/initial-p-dark.png
+```
+
+The displayed image follows the site's active theme, including manual theme changes. A single path uses the same artwork in both themes.
 
 ### Pages (`src/content/pages/`)
 
