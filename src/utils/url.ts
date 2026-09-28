@@ -37,7 +37,7 @@ export function stripBasePath(pathname: string): string {
     : pathname;
 }
 
-/** Use the same current-page matching for header and footer navigation. */
+/** Match only the current page so parent navigation links remain clickable. */
 export function isActiveNavUrl(url: string, pathname: string): boolean {
   if (isExternal(url) || url.startsWith("#") || url.startsWith("?")) {
     return false;
@@ -47,7 +47,7 @@ export function isActiveNavUrl(url: string, pathname: string): boolean {
     .replace(/\/+$/, "") || "/";
   const current = stripBasePath(pathname).replace(/\/+$/, "") || "/";
 
-  return current === target || (target !== "/" && current.startsWith(`${target}/`));
+  return current === target;
 }
 
 export function absoluteUrl(
