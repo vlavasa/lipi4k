@@ -35,6 +35,11 @@
   padding-right: 0.75rem;
 }
 
+.contents-sidebar .contents-title > h2 {
+  /* Offset the shared heading's trailing letter spacing to align with the links. */
+  margin-right: -0.15em;
+}
+
 .contents-list,
 .contents-list ul {
   list-style: none;
